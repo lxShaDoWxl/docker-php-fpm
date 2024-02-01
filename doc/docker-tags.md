@@ -84,7 +84,7 @@ The following table shows a more complete overview about the offered Docker imag
  <tbody>
 
   <tr>
-   <td rowspan="13"><strong>base</strong></td>
+   <td rowspan="14"><strong>base</strong></td>
    <td><code>devilbox/php-fpm:5.2-base</code></td>
    <td><code>devilbox/php-fpm:5.2-base-&lt;git-tag&gt;</code></td>
   </tr>
@@ -136,9 +136,13 @@ The following table shows a more complete overview about the offered Docker imag
    <td><code>devilbox/php-fpm:8.2-base</code></td>
    <td><code>devilbox/php-fpm:8.2-base-&lt;git-tag&gt;</code></td>
   </tr>
+  <tr>
+   <td><code>devilbox/php-fpm:8.3-base</code></td>
+   <td><code>devilbox/php-fpm:8.3-base-&lt;git-tag&gt;</code></td>
+  </tr>
 
   <tr>
-   <td rowspan="13"><strong>mods</strong></td>
+   <td rowspan="14"><strong>mods</strong></td>
    <td><code>devilbox/php-fpm:5.2-mods</code></td>
    <td><code>devilbox/php-fpm:5.2-mods-&lt;git-tag&gt;</code></td>
   </tr>
@@ -190,9 +194,13 @@ The following table shows a more complete overview about the offered Docker imag
    <td><code>devilbox/php-fpm:8.2-mods</code></td>
    <td><code>devilbox/php-fpm:8.2-mods-&lt;git-tag&gt;</code></td>
   </tr>
+  <tr>
+   <td><code>devilbox/php-fpm:8.3-mods</code></td>
+   <td><code>devilbox/php-fpm:8.3-mods-&lt;git-tag&gt;</code></td>
+  </tr>
 
   <tr>
-   <td rowspan="13"><strong>prod</strong></td>
+   <td rowspan="14"><strong>prod</strong></td>
    <td><code>devilbox/php-fpm:5.2-prod</code></td>
    <td><code>devilbox/php-fpm:5.2-prod-&lt;git-tag&gt;</code></td>
   </tr>
@@ -244,9 +252,13 @@ The following table shows a more complete overview about the offered Docker imag
    <td><code>devilbox/php-fpm:8.2-prod</code></td>
    <td><code>devilbox/php-fpm:8.2-prod-&lt;git-tag&gt;</code></td>
   </tr>
+  <tr>
+   <td><code>devilbox/php-fpm:8.3-prod</code></td>
+   <td><code>devilbox/php-fpm:8.3-prod-&lt;git-tag&gt;</code></td>
+  </tr>
 
   <tr>
-   <td rowspan="13"><strong>slim</strong></td>
+   <td rowspan="14"><strong>slim</strong></td>
    <td><code>devilbox/php-fpm:5.2-slim</code></td>
    <td><code>devilbox/php-fpm:5.2-slim-&lt;git-tag&gt;</code></td>
   </tr>
@@ -298,9 +310,13 @@ The following table shows a more complete overview about the offered Docker imag
    <td><code>devilbox/php-fpm:8.2-slim</code></td>
    <td><code>devilbox/php-fpm:8.2-slim-&lt;git-tag&gt;</code></td>
   </tr>
+  <tr>
+   <td><code>devilbox/php-fpm:8.3-slim</code></td>
+   <td><code>devilbox/php-fpm:8.3-slim-&lt;git-tag&gt;</code></td>
+  </tr>
 
   <tr>
-   <td rowspan="13"><strong>work</strong></td>
+   <td rowspan="14"><strong>work</strong></td>
    <td><code>devilbox/php-fpm:5.2-work</code></td>
    <td><code>devilbox/php-fpm:5.2-work-&lt;git-tag&gt;</code></td>
   </tr>
@@ -351,6 +367,10 @@ The following table shows a more complete overview about the offered Docker imag
   <tr>
    <td><code>devilbox/php-fpm:8.2-work</code></td>
    <td><code>devilbox/php-fpm:8.2-work-&lt;git-tag&gt;</code></td>
+  </tr>
+  <tr>
+   <td><code>devilbox/php-fpm:8.3-work</code></td>
+   <td><code>devilbox/php-fpm:8.3-work-&lt;git-tag&gt;</code></td>
   </tr>
 
  </tbody>

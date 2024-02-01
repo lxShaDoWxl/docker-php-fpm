@@ -41,7 +41,7 @@ all:
 
 ## Second level defines
 
-The following keys can be added below: `all`, `8.2`, `8.1`, `8.0`, `7.4`, ...
+The following keys can be added below: `all`, `8.3`,`8.2`, `8.1`, `8.0`, `7.4`, ...
 
 | Yaml key    | Required | Supports<br/>Shell code | Description |
 |-------------|----------|-------------------------|-------------|
