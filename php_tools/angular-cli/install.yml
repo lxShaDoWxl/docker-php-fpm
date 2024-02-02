@@ -11,3 +11,7 @@ all:
   run_dep: []
   pre:
   post:
+
+7.0:
+  type: npm
+  version: 16

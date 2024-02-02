@@ -30,7 +30,7 @@ RUN set -eux \
 ### Add apt repositories
 ###
 RUN set -eux \
-	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138	\
+	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131	\
 	&& echo "deb http://ftp.debian.org/debian buster-backports main" > /etc/apt/sources.list.d/backports.list \
 	&& curl -sS -L --fail "https://packages.blackfire.io/gpg.key" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add -	\
 	&& echo "deb http://packages.blackfire.io/debian any main" > /etc/apt/sources.list.d/blackfire.list \

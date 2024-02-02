@@ -65,6 +65,9 @@ tools_available:
       run_dep: []
       pre:
       post:
+    7.0:
+      type: npm
+      version: 16
   asgardcms:
     disabled: [5.2, 5.3, 5.4]
     check: asgardcms --version 2>/dev/null | grep -Ei 'AsgardCMS\sInstaller\s[0-9][.0-9]+' || (asgardcms --version; false)
@@ -385,6 +388,9 @@ tools_available:
         && if [ -f /usr/local/etc/php/conf.d/docker-php-ext-psr.ini ]; then \
           echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
         fi \
+    7.4:
+      type: composer
+      version: 5.0.x-dev -W
     7.1:
       type: composer
       version: 3.4.11
@@ -480,6 +486,12 @@ tools_available:
       run_dep: []
       pre: PHP_UNIT_VERSION=""
       post: chmod +x /usr/local/bin/phpunit
+    7.4:
+      type: custom
+      pre: PHP_UNIT_VERSION="9"
+    7.3:
+      type: custom
+      pre: PHP_UNIT_VERSION="9"
     7.2:
       type: custom
       pre: PHP_UNIT_VERSION="8"

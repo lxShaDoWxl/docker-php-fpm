@@ -274,7 +274,7 @@ RUN set -eux \
 	# Type:         Custom extension
 	&& EXTENSION_DIR="$( php -i | grep ^extension_dir | awk -F '=>' '{print $2}' | xargs )" \
 && if [ ! -d "${EXTENSION_DIR}" ]; then mkdir -p "${EXTENSION_DIR}"; fi \
-&& curl -sS --fail -k https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_$(dpkg-architecture --query DEB_HOST_GNU_CPU | sed 's/_/-/g').tar.gz -L -o ioncube.tar.gz \
+&& curl -sS --fail -k https://downloads2.ioncube.com/loader_downloads/ioncube_loaders_lin_$(dpkg-architecture --query DEB_HOST_GNU_CPU | sed 's/_/-/g').tar.gz -L -o ioncube.tar.gz \
 && tar xvfz ioncube.tar.gz \
 && cd ioncube \
 && cp "ioncube_loader_lin_7.4.so" "${EXTENSION_DIR}/ioncube.so" \
@@ -545,10 +545,10 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: pdo_sqlsrv --------------------
 RUN set -eux \
-	# Installation: Generic
+	# Installation: Version specific
 	# Type:         PECL extension
 	# Default:      Pecl command
-	&& pecl install pdo_sqlsrv \
+	&& pecl install pdo_sqlsrv-5.10.1 \
 	# Enabling
 	&& docker-php-ext-enable pdo_sqlsrv \
 	&& true
@@ -633,10 +633,10 @@ phpize \
 
 # -------------------- Installing PHP Extension: sqlsrv --------------------
 RUN set -eux \
-	# Installation: Generic
+	# Installation: Version specific
 	# Type:         PECL extension
 	# Default:      Pecl command
-	&& pecl install sqlsrv \
+	&& pecl install sqlsrv-5.10.1 \
 	# Enabling
 	&& docker-php-ext-enable sqlsrv \
 	&& true
@@ -644,18 +644,12 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: phalcon --------------------
 RUN set -eux \
-	# Installation: Generic
+	# Installation: Version specific
 	# Type:         GIT extension
 	&& git clone https://github.com/phalcon/cphalcon /tmp/phalcon \
 	&& cd /tmp/phalcon \
 	# Custom:       Branch
-	&& git checkout $(git for-each-ref --format='%(*creatordate:raw)%(creatordate:raw) %(refname)' refs/tags \
-  | sort -V \
-  | sed 's/^.*tags\///g' \
-  | grep -E '^v[.0-9]+$' \
-  | tail -1 \
-) \
- \
+	&& git checkout v5.4.0 \
 	# Custom:       Install command
 	&& cd build && ./install \
 	# Enabling
@@ -1233,7 +1227,7 @@ RUN set -eux \
 RUN set -eux \
 	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini || true \
 	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-psr.ini || true \
-	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini || true \
+	&& rm -f /usr/local/etc/php/conf.d/docker-php-ext-xhprof.ini || true
 
 
 ###
