@@ -12,7 +12,7 @@
 ###
 ### Installs all cli tools required to run Devilbox and its intranet
 ###
-FROM devilbox/php-fpm:7.3-prod as devilbox-slim-base-builder
+FROM johnea/php-fpm:7.3-prod as devilbox-slim-base-builder
 
 ###
 ### Install apt Tools
@@ -295,7 +295,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM devilbox/php-fpm:7.3-prod as devilbox-slim-base
+FROM johnea/php-fpm:7.3-prod as devilbox-slim-base
 ARG ARCH
 
 ###

@@ -1,21 +1,21 @@
 # vi: ft=dockerfile
 {{ edit_comment_base }}
 {% if php_version == 5.2 %}
-FROM devilbox/php-fpm-5.2
+FROM {{ docker_user }}/php-fpm-5.2
 {% elif php_version == 5.3 %}
-FROM devilbox/php-fpm-5.3
+FROM {{ docker_user }}/php-fpm-5.3
 {% elif php_version == 5.4 %}
-FROM devilbox/php-fpm-5.4
+FROM {{ docker_user }}/php-fpm-5.4
 {% elif php_version == 5.5 %}
-FROM devilbox/php-fpm-5.5
+FROM {{ docker_user }}/php-fpm-5.5
 {% elif php_version == 8.0 %}
-FROM devilbox/php-fpm-8.0
+FROM {{ docker_user }}/php-fpm-8.0
 {% elif php_version == 8.1 %}
-FROM devilbox/php-fpm-8.1
+FROM {{ docker_user }}/php-fpm-8.1
 {% elif php_version == 8.2 %}
-FROM devilbox/php-fpm-8.2
+FROM {{ docker_user }}/php-fpm-8.2
 {% elif php_version == 8.3 %}
-FROM devilbox/php-fpm-8.3
+FROM {{ docker_user }}/php-fpm-8.3
 {% else %}
 FROM php:{{ php_version }}-fpm
 {% endif %}

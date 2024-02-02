@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM devilbox/php-fpm:7.2-base as builder
+FROM johnea/php-fpm:7.2-base as builder
 
 
 ###
@@ -924,7 +924,7 @@ RUN set -eux \
 
 
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM devilbox/php-fpm:7.2-base as final
+FROM johnea/php-fpm:7.2-base as final
 MAINTAINER "cytopia" <cytopia@everythingcli.org>
 
 ###
