@@ -136,6 +136,9 @@ extensions_available:
     7.0:
       type: pecl
       version: 1.11.0
+    5.6:
+      type: pecl
+      version: 1.9.3
     5.5:
       type: pecl
       version: 1.9.3
