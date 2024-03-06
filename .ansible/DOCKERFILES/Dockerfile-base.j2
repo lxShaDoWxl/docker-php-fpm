@@ -8,14 +8,6 @@ FROM {{ docker_user }}/php-fpm-5.3
 FROM {{ docker_user }}/php-fpm-5.4
 {% elif php_version == 5.5 %}
 FROM {{ docker_user }}/php-fpm-5.5
-{% elif php_version == 8.0 %}
-FROM {{ docker_user }}/php-fpm-8.0
-{% elif php_version == 8.1 %}
-FROM {{ docker_user }}/php-fpm-8.1
-{% elif php_version == 8.2 %}
-FROM {{ docker_user }}/php-fpm-8.2
-{% elif php_version == 8.3 %}
-FROM {{ docker_user }}/php-fpm-8.3
 {% else %}
 FROM php:{{ php_version }}-fpm
 {% endif %}
