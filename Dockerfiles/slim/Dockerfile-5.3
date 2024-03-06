@@ -143,7 +143,11 @@ RUN set -eux \
 	    mongo --version; \
 	  fi \
 	else \
-	  mongo --version; \
+	  if echo '5.3' | grep -E '^(5.6|7.0)$' >/dev/null; then \
+	    mongo --version; \
+	  else \
+	    mongosh --version; \
+	  fi \
 	fi \
 	\
 	&& true
@@ -211,8 +215,8 @@ RUN set -eux \
 	&& mkdir /tmp/usr-lib-gnu \
 	\
 	&& LIB_GNU="libreadline" \
-	&& USR_LIB="libsnappy libtcmalloc libv8" \
-	&& USR_LIB_GNU="liblua libpq libpcrecpp libboost libjemalloc libunwind libhiredis libedit libyaml-cpp libstemmer libsnappy libpcap libbsd liblzf" \
+	&& USR_LIB="libsnappy libtcmalloc libv8 libncurses" \
+	&& USR_LIB_GNU="liblua libpq libpcrecpp libboost libjemalloc libunwind libhiredis libedit libyaml-cpp libstemmer libsnappy libpcap libbsd liblzf libncurses" \
 	\
 	&& for lib in ${LIB_GNU}; do \
 		if ls -1 "${LIB_GNU_DIR}/" | grep "^${lib}" >/dev/null; then \
@@ -512,7 +516,11 @@ RUN set -eux \
 	    mongo --version; \
 	  fi \
 	else \
-	  mongo --version; \
+	  if echo '5.3' | grep -E '^(5.6|7.0)$' >/dev/null; then \
+	    mongo --version; \
+	  else \
+	    mongosh --version; \
+	  fi \
 	fi \
 	\
 	&& true

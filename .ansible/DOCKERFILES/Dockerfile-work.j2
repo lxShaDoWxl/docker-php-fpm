@@ -358,7 +358,11 @@ RUN set -eux \
 		{%- if fn.get_type(php_version, tool, tools_available) == 'pip' -%}
 			{%- set pip_package = fn.tool_pip_get_package(php_version, tool, tools_available) -%}
 			{%- set pip_version = fn.tool_pip_get_version(php_version, tool, tools_available) -%}
-			{{ "\n\t" }}&& pip install --no-cache-dir --no-compile --force-reinstall {{ pip_package }}{{ pip_version }} \
+            {%- if php_version in [7.3, 7.4, 8.0, 8.1, 8.2, 8.3] -%}
+                {{ "\n\t" }}&& pip install --no-cache-dir --no-compile --force-reinstall --break-system-packages {{ pip_package }}{{ pip_version }} \
+            {% else %}
+                {{ "\n\t" }}&& pip install --no-cache-dir --no-compile --force-reinstall {{ pip_package }}{{ pip_version }} \
+            {%- endif -%}
 		{%- endif -%}
 		{#- -#}
 		{#- [POST] -#}

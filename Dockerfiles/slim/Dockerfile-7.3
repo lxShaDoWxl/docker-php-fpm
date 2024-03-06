@@ -30,7 +30,7 @@ RUN set -eux \
 ### Add apt repositories
 ###
 RUN set -eux \
-	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138	\
+	&& apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388	\
 	&& echo "deb http://ftp.debian.org/debian bullseye-backports main" > /etc/apt/sources.list.d/backports.list \
 	&& curl -sS -L --fail "https://packages.blackfire.io/gpg.key" | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add -	\
 	&& echo "deb http://packages.blackfire.io/debian any main" > /etc/apt/sources.list.d/blackfire.list \
@@ -123,13 +123,13 @@ RUN set -eux \
 
 # -------------------- mongo_client --------------------
 RUN set -eux \
-	&& APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 20691EEC35216C63CAF66CE1656408E390CFB1F5 \
-	&& echo "deb http://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" > /etc/apt/sources.list.d/mongo.list \
+	&& APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E162F504A20CDF15827F718D4B7C549A058F8B6B \
+	&& echo "deb http://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongo.list \
 	&& apt-get update \
 	\
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 	  mongodb-org-tools \
-	  mongodb-org-shell \
+	  mongodb-mongosh \
 	\
 	&& rm -rf /var/lib/apt/lists/*	\
 	&& if echo '7.3' | grep -E '^(5.2|5.3|5.4|5.5|5.6|7.0)$' >/dev/null; then \
@@ -145,7 +145,11 @@ RUN set -eux \
 	    mongo --version; \
 	  fi \
 	else \
-	  mongo --version; \
+	  if echo '7.3' | grep -E '^(5.6|7.0)$' >/dev/null; then \
+	    mongo --version; \
+	  else \
+	    mongosh --version; \
+	  fi \
 	fi \
 	\
 	&& true
@@ -209,8 +213,8 @@ RUN set -eux \
 	&& mkdir /tmp/usr-lib-gnu \
 	\
 	&& LIB_GNU="libreadline" \
-	&& USR_LIB="libsnappy libtcmalloc libv8" \
-	&& USR_LIB_GNU="liblua libpq libpcrecpp libboost libjemalloc libunwind libhiredis libedit libyaml-cpp libstemmer libsnappy libpcap libbsd liblzf" \
+	&& USR_LIB="libsnappy libtcmalloc libv8 libncurses" \
+	&& USR_LIB_GNU="liblua libpq libpcrecpp libboost libjemalloc libunwind libhiredis libedit libyaml-cpp libstemmer libsnappy libpcap libbsd liblzf libncurses" \
 	\
 	&& for lib in ${LIB_GNU}; do \
 		if ls -1 "${LIB_GNU_DIR}/" | grep "^${lib}" >/dev/null; then \
@@ -510,7 +514,11 @@ RUN set -eux \
 	    mongo --version; \
 	  fi \
 	else \
-	  mongo --version; \
+	  if echo '7.3' | grep -E '^(5.6|7.0)$' >/dev/null; then \
+	    mongo --version; \
+	  else \
+	    mongosh --version; \
+	  fi \
 	fi \
 	\
 	&& true

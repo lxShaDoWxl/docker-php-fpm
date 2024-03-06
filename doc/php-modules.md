@@ -139,10 +139,10 @@ The following PHP modules are available on the `base` flavour:
   <td class="ext_base_ffi_7.2"></td>
   <td class="ext_base_ffi_7.3"></td>
   <td class="ext_base_ffi_7.4"></td>
-  <td class="ext_base_ffi_8.0">✓</td>
-  <td class="ext_base_ffi_8.1">✓</td>
-  <td class="ext_base_ffi_8.2">✓</td>
-  <td class="ext_base_ffi_8.3">✓</td>
+  <td class="ext_base_ffi_8.0"></td>
+  <td class="ext_base_ffi_8.1"></td>
+  <td class="ext_base_ffi_8.2"></td>
+  <td class="ext_base_ffi_8.3"></td>
  </tr>
  <tr>
   <td><a href="../php_modules/fileinfo">fileinfo</a></td>
@@ -192,8 +192,8 @@ The following PHP modules are available on the `base` flavour:
   <td class="ext_base_ftp_7.4">✓</td>
   <td class="ext_base_ftp_8.0">✓</td>
   <td class="ext_base_ftp_8.1">✓</td>
-  <td class="ext_base_ftp_8.2">✓</td>
-  <td class="ext_base_ftp_8.3">✓</td>
+  <td class="ext_base_ftp_8.2"></td>
+  <td class="ext_base_ftp_8.3"></td>
  </tr>
  <tr>
   <td><a href="../php_modules/hash">hash</a></td>
@@ -671,7 +671,7 @@ The following PHP modules are available on the `base` flavour:
   <td class="ext_base_zlib_8.2">✓</td>
   <td class="ext_base_zlib_8.3">✓</td>
  </tr>
-<table>
+</table>
 
 
 
@@ -1019,8 +1019,8 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_ftp_7.4">✓</td>
   <td class="ext_mods_ftp_8.0">✓</td>
   <td class="ext_mods_ftp_8.1">✓</td>
-  <td class="ext_mods_ftp_8.2">✓</td>
-  <td class="ext_mods_ftp_8.3">✓</td>
+  <td class="ext_mods_ftp_8.2"></td>
+  <td class="ext_mods_ftp_8.3"></td>
  </tr>
  <tr>
   <td><a href="../php_modules/gd">gd</a></td>
@@ -2518,4 +2518,4 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_zstd_8.2">✓</td>
   <td class="ext_mods_zstd_8.3">✓</td>
  </tr>
-<table>
+</table>

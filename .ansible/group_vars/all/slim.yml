@@ -12,19 +12,20 @@
 ### Define operating system versions
 ###
 os_release:
-  # Bullseye (Ubuntu: focal, groovy, hirsute, impish)
+  # Bookworm (Ubuntu: jammy, kinetic, lunar, mantic)
   all:
-    debian: bullseye
-    ubuntu: focal
+    debian: bookworm
+    ubuntu: jammy
   8.3:
-    debian: bullseye
-    ubuntu: focal
+    debian: bookworm
+    ubuntu: jammy
   8.2:
-    debian: bullseye
-    ubuntu: focal
+    debian: bookworm
+    ubuntu: jammy
   8.1:
-    debian: bullseye
-    ubuntu: focal
+    debian: bookworm
+    ubuntu: jammy
+  # Bullseye (Ubuntu: focal, groovy, hirsute, impish)
   8.0:
     debian: bullseye
     ubuntu: focal
@@ -110,17 +111,29 @@ base_apt_repositories_available:
     # [Bullseye]
     all:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
+      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
       deb: deb http://ftp.debian.org/debian {{ os_release['all'].debian }}-backports main
     # [Buster]
+    8.0:
+      type: repo
+      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
+      deb: deb http://ftp.debian.org/debian {{ os_release[8.0].debian }}-backports main
+    7.4:
+      type: repo
+      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
+      deb: deb http://ftp.debian.org/debian {{ os_release[7.4].debian }}-backports main
+    7.3:
+      type: repo
+      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
+      deb: deb http://ftp.debian.org/debian {{ os_release[7.3].debian }}-backports main
     7.2:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131
+      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131 6A26B1AE64C3C388
       deb: deb http://ftp.debian.org/debian {{ os_release[7.2].debian }}-backports main
     # [Buster]
     7.1:
       type: repo
-      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131
+      pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131 6A26B1AE64C3C388
       deb: deb http://ftp.debian.org/debian {{ os_release[7.1].debian }}-backports main
     # [Stretch]
     7.0:
@@ -131,7 +144,7 @@ base_apt_repositories_available:
     5.6:
       type: repo
       pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
-      deb: deb http://ftp.debian.org/debian {{ os_release[5.6].debian }}-backports main
+      deb: deb http://archive.debian.org/debian {{ os_release[5.6].debian }}-backports main
     # [Jessie]
     5.5:
       type: repo
@@ -185,8 +198,8 @@ base_apt_repositories_available:
     all:
       type: repo
       # gpg --dry-run --with-fingerprint < <(curl https://www.mongodb.org/static/pgp/server-4.4.asc) | grep fingerprint | sed 's/.*=//g' | sed 's/ //g'
-      deb: deb http://repo.mongodb.org/apt/ubuntu {{ os_release['all'].ubuntu }}/mongodb-org/4.4 multiverse
-      key: 20691EEC35216C63CAF66CE1656408E390CFB1F5
+      deb: deb http://repo.mongodb.org/apt/ubuntu {{ os_release['all'].ubuntu }}/mongodb-org/6.0 multiverse
+      key: E162F504A20CDF15827F718D4B7C549A058F8B6B
     # [Buster] Ubuntu repository required for arm64 support instead
     7.2:
       type: repo
@@ -363,18 +376,22 @@ base_software_available:
           mongo --version; \
         fi \
       else \
-        mongo --version; \
+        if echo '{{ php_version }}' | grep -E '^(5.6|7.0)$' >/dev/null; then \
+          mongo --version; \
+        else \
+          mongosh --version; \
+        fi \
       fi \
     all:
       type: custom
       pre: |
-        APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 20691EEC35216C63CAF66CE1656408E390CFB1F5 \
-        && echo "deb http://repo.mongodb.org/apt/ubuntu {{ os_release[php_version].ubuntu }}/mongodb-org/4.4 multiverse" > /etc/apt/sources.list.d/mongo.list \
+        APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E162F504A20CDF15827F718D4B7C549A058F8B6B \
+        && echo "deb http://repo.mongodb.org/apt/ubuntu {{ os_release[php_version].ubuntu }}/mongodb-org/6.0 multiverse" > /etc/apt/sources.list.d/mongo.list \
         && apt-get update \
       command: |
         apt-get install -y --no-install-recommends --no-install-suggests \
           mongodb-org-tools \
-          mongodb-org-shell \
+          mongodb-mongosh \
       post: rm -rf /var/lib/apt/lists/*
       build_dep: [libsnappy-dev]  # Required to copy libsnappy.so to next stage
     7.0:

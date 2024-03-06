@@ -15,3 +15,7 @@ all:
 7.0:
   type: npm
   version: 16
+
+5.6:
+  type: npm
+  version: 16
