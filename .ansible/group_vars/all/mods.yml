@@ -448,11 +448,10 @@ extensions_available:
         && sed -i'' 's|.*<policy domain="delegate".*pattern="gs".*||g' /etc/ImageMagick-6/policy.xml \
     8.3:
       type: git
-      run_dep: [libmagickwand-6.q16-6, libwebp6, ghostscript]
       git_url: https://github.com/Imagick/imagick/
       git_ref: master
       command: |
-        && phpize \
+        phpize \
         && ./configure \
         && make \
         && make install \
