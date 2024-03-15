@@ -218,10 +218,18 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: imagick --------------------
 RUN set -eux \
-	# Installation: Generic
-	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install imagick \
+	# Installation: Version specific
+	# Type:         GIT extension
+	&& git clone https://github.com/Imagick/imagick/ /tmp/imagick \
+	&& cd /tmp/imagick \
+	# Custom:       Branch
+	&& git checkout master \
+	# Custom:       Install command
+	&& && phpize \
+&& ./configure \
+&& make \
+&& make install \
+ \
 	# Enabling
 	&& docker-php-ext-enable imagick \
 	# Generic post-command
@@ -870,6 +878,7 @@ RUN set -eux \
 	libsybdb5 \
 	libtidy5deb1 \
 	libvpx7 \
+	libwebp6 \
 	libwebp7 \
 	libxpm4 \
 	libxslt1.1 \
