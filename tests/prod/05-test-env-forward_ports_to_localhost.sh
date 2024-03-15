@@ -24,7 +24,7 @@ TAG="${5}"
 ###
 ### Socat forwarding
 ###
-CONTAINER="devilbox/mysql:mysql-8.0"
+CONTAINER="johnea/mysql:mysql-8.0"
 
 # Pull Container
 print_h2 "Pulling MySQL"

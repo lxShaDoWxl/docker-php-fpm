@@ -27,6 +27,16 @@ on:
         description: 'The ref build matrix as JSON string (list of git refs to build/deploy).'
         required: true
         type: boolean
+      default_branch:
+        description: 'The default branch of this repository to fetch latest tags from.'
+        required: false
+        default: ${{ github.event.repository.default_branch }}
+        type: string
+      tag:
+        description: 'The name for the "latest" Docker tag.'
+        required: false
+        default: 'latest'
+        type: string
     ###
     ### Secrets
     ###
@@ -76,12 +86,9 @@ jobs:
       - name: "[SETUP] Determine Docker tag"
         id: tag
         uses: cytopia/docker-tag-action@v0.4.22
-        env:
-          DEFAULT_BRANCH: ${{ vars.DEFAULT_BRANCH == '' && 'master' || vars.DEFAULT_BRANCH }}
-          TAG: ${{ vars.TAG == '' && 'latest' || vars.TAG }}
         with:
-          latest_git_branch: ${{ env.DEFAULT_BRANCH }}
-          latest_docker_tag_name: ${{ env.TAG }}
+          latest_git_branch: ${{ inputs.default_branch }}
+          latest_docker_tag_name: ${{ inputs.tag }}
 
       - name: "[SETUP] Set artifact names"
         id: set-artifact-name

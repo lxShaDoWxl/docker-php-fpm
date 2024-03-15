@@ -3,7 +3,7 @@
 # -------------------------------------------------------------------------------------------------
 # Job Name
 # -------------------------------------------------------------------------------------------------
-name: manual
+name: 🤞 Manual Build
 
 
 # -------------------------------------------------------------------------------------------------
@@ -13,15 +13,99 @@ on:
   push:
   # Dispatch: allows for manual trigger via GH UI
   workflow_dispatch:
+    inputs:
+      run-name:
+        description: 'Name of workflow'
+        required: true
+        default: '🤞 Manual Build'
+        type: string
+      version:
+        description: 'Comma separated list of version (example: "8.0", "8.1")'
+        required: true
+        default: '"8.3"'
+        type: string
+      arch:
+        description: 'Comma separated list of Arch platform (example: "linux/amd64", "linux/arm64")'
+        required: true
+        default: '"linux/amd64", "linux/arm64"'
+        type: string
+      default_branch:
+        description: 'The default branch of this repository to fetch latest tags from. Default: my-image'
+        required: false
+        default: 'my-image'
+        type: string
+      tag:
+        description: 'The name for the "latest" Docker tag (default: latest).'
+        required: false
+        default: 'latest'
+        type: string
+      branches:
+        description: 'Comma separated list of branches to create build matrix for. Default: my-image'
+        required: false
+        default: 'my-image'
+        type: string
+      enabled:
+        description: 'Enable'
+        type: boolean
+        required: true
+        default: true
+      deploy:
+        description: 'Deploy image'
+        type: boolean
+        required: true
+        default: false
+
+
+# -------------------------------------------------------------------------------------------------
+# Custom Variables
+# -------------------------------------------------------------------------------------------------
+env:
+  VERSIONS: >-
+    [
+      {
+        "NAME":    ${{ format('"{0}"', inputs.name) }},
+        "VERSION": ${{ format('[{0}]', inputs.version) }},
+        "ARCH":    ${{ format('[{0}]', inputs.arch) }}
+      }
+    ]
+  REFS: >
+    {
+        "DEFAULT_BRANCH": ${{ github.event.repository.default_branch }},
+        "BRANCHES": ${{ format('[{0}]', inputs.version) }},
+        "NUM_LATEST_TAGS": 0
+    }
+
+# -------------------------------------------------------------------------------------------------
+# Custom name of workflow
+# -------------------------------------------------------------------------------------------------
+run-name: ${{ inputs.run-name }} 🚀
 
 
 jobs:
-
+  # (1/10) Determine env
+  set-env:
+    name: Compute env
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ env.VERSIONS }}
+      refs: ${{ env.REFS }}
+#      versions: ${{ steps.variables.outputs.versions }}
+    steps:
+      - name: Print inputs passed to the reusable workflow
+        id: variables
+        if: false
+        run: echo
+#        run: |
+#          echo "versions=${{ env.VERSIONS }}" >> $GITHUB_OUTPUT
   # -----------------------------------------------------------------------------------------------
   # (1/9) Determine parameter settings
   # -----------------------------------------------------------------------------------------------
   params:
+    name: Compute params
     uses: ./.github/workflows/params.yml
+    with:
+      versions: ${{ needs.set-env.outputs.versions }}
+      refs: ${{ needs.set-env.outputs.refs }}
 
 
   # -----------------------------------------------------------------------------------------------
@@ -31,8 +115,8 @@ jobs:
     needs: [params]
     uses: ./.github/workflows/docker-multistage-configure.yml
     with:
-      enabled: ${{ vars.ENABLED_BUILD == '' && true || fromJSON(vars.ENABLED_BUILD) }}
-      can_deploy: ${{ vars.DEPLOY == '' && true || fromJSON(vars.DEPLOY) }}
+      enabled: ${{ inputs.enabled }}
+      can_deploy: ${{ inputs.deploy }}
       versions: ${{ needs.params.outputs.versions }}
       refs: ${{ needs.params.outputs.refs }}
     secrets:
@@ -56,6 +140,8 @@ jobs:
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: base
       stage_prev: ''
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
 
   test-base:
     needs:
@@ -85,6 +171,8 @@ jobs:
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: mods
       stage_prev: base
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
 
   test-mods:
     needs:
@@ -114,6 +202,8 @@ jobs:
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: prod
       stage_prev: mods
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
 
   test-prod:
     needs:
@@ -143,6 +233,8 @@ jobs:
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: slim
       stage_prev: prod
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
 
   test-slim:
     needs:
@@ -172,6 +264,8 @@ jobs:
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: work
       stage_prev: slim
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
 
   test-work:
     needs:
@@ -203,6 +297,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: base
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -222,6 +318,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: mods
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -241,6 +339,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: prod
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -260,6 +360,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: slim
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -279,6 +381,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: work
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -298,6 +402,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_deploy }}
       versions: ${{ needs.configure.outputs.versions }}
       stage: base
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -313,6 +419,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_deploy }}
       versions: ${{ needs.configure.outputs.versions }}
       stage: mods
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -328,6 +436,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_deploy }}
       versions: ${{ needs.configure.outputs.versions }}
       stage: prod
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -343,6 +453,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_deploy }}
       versions: ${{ needs.configure.outputs.versions }}
       stage: slim
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
@@ -358,6 +470,8 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_deploy }}
       versions: ${{ needs.configure.outputs.versions }}
       stage: work
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}

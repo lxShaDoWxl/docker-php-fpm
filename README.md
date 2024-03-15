@@ -1,5 +1,9 @@
 # PHP-FPM Docker images
 
+[![Nightly](https://img.shields.io/github/actions/workflow/status/john-ea/docker-php-fpm/action-schedule_master.yml?style=for-the-badge&logo=github&event=schedule&label=Nightly)](https://github.com/john-ea/docker-php-fpm/actions/workflows/action-schedule_master.yml)
+[![Build](https://img.shields.io/github/actions/workflow/status/john-ea/docker-php-fpm/action.yml?style=for-the-badge&logo=github&label=Build)](https://github.com/john-ea/docker-php-fpm/actions/workflows/action.yml)
+[![Docker pulls](https://img.shields.io/docker/pulls/johnea/php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/johnea/php-fpm/tags)
+
 [![Release](https://img.shields.io/github/release/devilbox/docker-php-fpm.svg?colorB=orange)](https://github.com/devilbox/docker-php-fpm/releases)
 [![](https://img.shields.io/badge/github-devilbox%2Fdocker--php--fpm-red.svg)](https://github.com/devilbox/docker-php-fpm "github.com/devilbox/docker-php-fpm")
 [![lint](https://github.com/devilbox/docker-php-fpm/workflows/lint/badge.svg)](https://github.com/devilbox/docker-php-fpm/actions?workflow=lint)
@@ -10,9 +14,13 @@
 [![Discord](https://img.shields.io/discord/1051541389256704091?color=8c9eff&label=Discord&logo=discord)](https://discord.gg/2wP3V6kBj4)
 [![Discourse](https://img.shields.io/discourse/https/devilbox.discourse.group/status.svg?colorB=%234CB697&label=Discourse&logo=discourse)](https://devilbox.discourse.group)
 
+
 **Available Architectures:**  `amd64`, `arm64`
 
 [![](https://img.shields.io/docker/pulls/devilbox/php-fpm.svg)](https://hub.docker.com/r/devilbox/php-fpm)
+
+> ##### 🐱 GitHub Fork: [john-ea/docker-php-fpm](https://github.com/john-ea/docker-php-fpm)
+> ##### 🐱 GitHub original “upstream” repository: [devilbox/docker-php-fpm](https://github.com/devilbox/docker-php-fpm)
 
 This repository will provide you fully functional PHP-FPM Docker images in different flavours,
 versions and packed with different types of integrated PHP modules. It also solves the problem of **[syncronizing file permissions](doc/syncronize-file-permissions.md)** of mounted volumes between the host and the container.
@@ -34,7 +42,7 @@ This repository also allows you to quickly generate and **build your own custom 
 [![](https://img.shields.io/docker/pulls/devilbox/php-fpm.svg)](https://hub.docker.com/r/devilbox/php-fpm)
 
 ```bash
-docker pull devilbox/php-fpm:<tag>
+docker pull johnea/php-fpm:<tag>
 ```
 
 * [`5.2-base`](Dockerfiles/base/Dockerfile-5.2), [`5.3-base`](Dockerfiles/base/Dockerfile-5.3), [`5.4-base`](Dockerfiles/base/Dockerfile-5.4), [`5.5-base`](Dockerfiles/base/Dockerfile-5.5), [`5.6-base`](Dockerfiles/base/Dockerfile-5.6), [`7.0-base`](Dockerfiles/base/Dockerfile-7.0), [`7.1-base`](Dockerfiles/base/Dockerfile-7.1), [`7.2-base`](Dockerfiles/base/Dockerfile-7.2), [`7.3-base`](Dockerfiles/base/Dockerfile-7.3), [`7.4-base`](Dockerfiles/base/Dockerfile-7.4), [`8.0-base`](Dockerfiles/base/Dockerfile-8.0), [`8.1-base`](Dockerfiles/base/Dockerfile-8.1), [`8.2-base`](Dockerfiles/base/Dockerfile-8.2), [`8.3-base`](Dockerfiles/base/Dockerfile-8.3)
@@ -352,7 +360,7 @@ Apart from the provided tools, you will also be able to use the container simila
 ```shell
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
-    devilbox/php-fpm:7.2-prod
+    johnea/php-fpm:7.2-prod
 ```
 
 #### Alter PHP-FPM and system timezone
@@ -360,7 +368,7 @@ docker run -d -it \
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e TIMEZONE=Europe/Berlin \
-    devilbox/php-fpm:7.2-prod
+    johnea/php-fpm:7.2-prod
 ```
 
 #### Load custom PHP configuration
@@ -378,7 +386,7 @@ echo "xdebug.mode = debug" > config/xdebug.ini
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -v config:/etc/php-custom.d \
-    devilbox/php-fpm:7.2-prod
+    johnea/php-fpm:7.2-prod
 ```
 
 #### MySQL connect via 127.0.0.1 (via port-forward)
@@ -388,7 +396,7 @@ Forward MySQL Port from `172.168.0.30` (or any other IP address/hostname) and Po
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e FORWARD_PORTS_TO_LOCALHOST='3306:172.168.0.30:3306' \
-    devilbox/php-fpm:7.2-prod
+    johnea/php-fpm:7.2-prod
 ```
 
 #### MySQL and Redis connect via 127.0.0.1 (via port-forward)
@@ -398,7 +406,7 @@ Forward MySQL Port from `172.168.0.30:3306` and Redis port from `redis:6379` to 
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e FORWARD_PORTS_TO_LOCALHOST='3306:172.168.0.30:3306, 6379:redis:6379' \
-    devilbox/php-fpm:7.2-prod
+    johnea/php-fpm:7.2-prod
 ```
 
 #### Launch Postfix for mail-catching
@@ -409,7 +417,7 @@ docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -v /tmp/mail:/var/mail \
     -e ENABLE_MAIL=2 \
-    devilbox/php-fpm:7.2-prod
+    johnea/php-fpm:7.2-prod
 ```
 
 #### Webserver and PHP-FPM
@@ -420,7 +428,7 @@ docker run -d -it \
 docker run -d -it \
     -v ~/my-host-www:/var/www/default/htdocs \
     --name php \
-    devilbox/php-fpm:7.2-prod
+    johnea/php-fpm:7.2-prod
 
 # Start webserver and link with PHP-FPM
 docker run -d -it \
@@ -430,7 +438,7 @@ docker run -d -it \
     -e PHP_FPM_SERVER_ADDR=php \
     -e PHP_FPM_SERVER_PORT=9000 \
     --link php \
-    devilbox/nginx-mainline
+    johnea/nginx-mainline
 ```
 
 #### Create MySQL Backups
@@ -447,7 +455,7 @@ docker run -d -it \
     -e MYSQL_BACKUP_HOST=mysql \
     -v ~/backups:/shared/backups \
     --name php \
-    devilbox/php-fpm:7.2-work
+    johnea/php-fpm:7.2-work
 
 # Run database dump
 docker exec -it php mysqldump-secure

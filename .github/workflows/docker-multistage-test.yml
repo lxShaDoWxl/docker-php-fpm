@@ -94,7 +94,7 @@ jobs:
       - name: Test
         uses: cytopia/shell-command-retry-action@v0.1.6
         with:
-          retries: 3
+          retries: 5
           pause: 5
           command: |
             make test VERSION=${{ matrix.VERSION }} STAGE=${{ inputs.stage }} FLAVOUR=${{ matrix.FLAVOUR }} ARCH=${{ matrix.ARCH }}

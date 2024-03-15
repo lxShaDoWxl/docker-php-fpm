@@ -14,15 +14,15 @@ env:
     [
       {
         "NAME":    "PHP",
-        "VERSION": ${{ format('[{0}]', vars.VERSION || '"5.3", "5.4", "5.5", "5.6", "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1", "8.2", "8.3"') }},
+        "VERSION": ["5.6", "7.0", "7.1", "7.2", "7.3", "7.4", "8.0", "8.1", "8.2", "8.3"],
         "FLAVOUR": ["default"],
-        "ARCH":    ${{ format('[{0}]', vars.ARCH || '"linux/amd64", "linux/arm64"') }}
+        "ARCH":    ["linux/amd64", "linux/arm64"]
       }
     ]
   REFS: >
     {
-        "DEFAULT_BRANCH": ${{ format('"{0}"', vars.DEFAULT_BRANCH || 'master') }},
-        "BRANCHES": ${{ format('"{0}"', vars.BRANCHES || '') }},
+        "DEFAULT_BRANCH": ${{ github.event.repository.default_branch }},
+        "BRANCHES": ${{ github.event.repository.default_branch }},
         "NUM_LATEST_TAGS": 0
     }
 
@@ -42,6 +42,15 @@ on:
       refs:
         description: "JSON string for refs. Use via: fromJson(needs.params.refs)"
         value: ${{ jobs.params.outputs.refs }}
+    inputs:
+      versions:
+        description: 'The version build versions as JSON string ( list of objects: [{NAME, VERSION[], ARCH[]}] ).'
+        required: false
+        type: string
+      refs:
+        description: 'The ref build matrix as JSON string (list of git refs to build/deploy: {BRANCH, NUM_LATEST_TAGS}).'
+        required: false
+        type: string
 
 jobs:
   params:
@@ -52,14 +61,24 @@ jobs:
       refs: ${{ steps.set-refs.outputs.refs }}
 
     steps:
+      - name: "[DEBUG] Workflow Inputs"
+        shell: bash
+        run: |
+          echo 'versions: ${{ inputs.versions }} '
+          echo 'refs: ${{ inputs.refs }} '
+
       - name: "[Set-Output] jsonify VERSIONS"
         id: set-versions
+        env:
+          VERSIONS: ${{ inputs.versions || env.VERSIONS }}
         run: |
           VERSIONS="$( echo '${{ env.VERSIONS }}' | jq -M -c )"
           echo "versions=${VERSIONS}" >> $GITHUB_OUTPUT
 
       - name: "[Set-Output] jsonify REFS"
         id: set-refs
+        env:
+          REFS: ${{ inputs.refs || env.REFS }}
         run: |
           REFS="$( echo '${{ env.REFS }}' | jq -M -c )"
           echo "refs=${REFS}" >> $GITHUB_OUTPUT
