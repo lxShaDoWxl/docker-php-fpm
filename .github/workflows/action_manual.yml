@@ -62,7 +62,7 @@ env:
   VERSIONS: >-
     [
       {
-        "NAME":    ${{ format('"{0}"', inputs.name) }},
+        "NAME":    "PHP",
         "VERSION": ${{ format('[{0}]', inputs.version) }},
         "ARCH":    ${{ format('[{0}]', inputs.arch) }}
       }
