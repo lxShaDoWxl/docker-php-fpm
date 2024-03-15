@@ -399,7 +399,7 @@ RUN set -eux \
 	# Generic pre-command
 	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
 && ORACLE_HREF="$( \
-    curl -sS https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/ \
+    curl -sS https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/${ARCH}/ \
     | tac \
     | tac \
     | grep -Eo 'href="getPackage/oracle-instantclient.+basiclite.+rpm"' \
@@ -408,11 +408,11 @@ RUN set -eux \
 && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
 && ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
 \
-&& rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol7 \
+&& rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol8 \
 && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
-https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
+https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
 && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
-https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
+https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
 && alien \
   -v \
   --target=$( dpkg --print-architecture ) \
@@ -432,7 +432,7 @@ https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPack
 	# Generic post-command
 	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
 && ORACLE_HREF="$( \
-    curl -sS https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/ \
+    curl -sS https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/${ARCH}/ \
     | tac \
     | tac \
     | grep -Eo 'href="getPackage/oracle-instantclient.+basiclite.+rpm"' \
@@ -494,7 +494,7 @@ RUN set -eux \
 	# Generic pre-command
 	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
 && ORACLE_HREF="$( \
-    curl -sS https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/ \
+    curl -sS https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/${ARCH}/ \
     | tac \
     | tac \
     | grep -Eo 'href="getPackage/oracle-instantclient.+basiclite.+rpm"' \
@@ -503,11 +503,11 @@ RUN set -eux \
 && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
 && ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
 \
-&& rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol7 \
+&& rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol8 \
 && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
-https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
+https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
 && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
-https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
+https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/${ARCH}/getPackage/oracle-instantclient${ORACLE_VERSION_MAJOR}-devel-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
 && alien \
   -v \
   --target=$( dpkg --print-architecture ) \
@@ -989,7 +989,7 @@ RUN set -eux \
 	# ---------- oci8 ----------
 	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
 && ORACLE_HREF="$( \
-    curl -sS https://yum.oracle.com/repo/OracleLinux/OL7/oracle/instantclient/${ARCH}/ \
+    curl -sS https://yum.oracle.com/repo/OracleLinux/OL8/oracle/instantclient/${ARCH}/ \
     | tac \
     | tac \
     | grep -Eo 'href="getPackage/oracle-instantclient.+basiclite.+rpm"' \
