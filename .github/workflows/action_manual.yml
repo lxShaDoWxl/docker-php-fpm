@@ -69,8 +69,8 @@ env:
     ]
   REFS: >
     {
-        "DEFAULT_BRANCH": inputs.default_branch,
-        "BRANCHES": inputs.branches,
+        "DEFAULT_BRANCH": ${{ format('"{0}"', inputs.default_branch) }},
+        "BRANCHES": ${{ format('"{0}"', inputs.branches) }},
         "NUM_LATEST_TAGS": 0
     }
 
