@@ -64,6 +64,7 @@ env:
       {
         "NAME":    "PHP",
         "VERSION": ${{ format('[{0}]', inputs.version) }},
+        "FLAVOUR": ["default"],
         "ARCH":    ${{ format('[{0}]', inputs.arch) }}
       }
     ]
