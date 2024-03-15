@@ -101,6 +101,7 @@ jobs:
   # -----------------------------------------------------------------------------------------------
   params:
     name: Compute params
+    needs: [set-env]
     uses: ./.github/workflows/params.yml
     with:
       versions: ${{ needs.set-env.outputs.versions }}
