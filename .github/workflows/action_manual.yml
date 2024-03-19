@@ -18,6 +18,18 @@ on:
         required: true
         default: '🤞 Manual Build'
         type: string
+      stage:
+        description: 'Build stage'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - base
+          - mods
+          - prod
+          - slim
+          - work
+          - all
       version:
         description: 'Comma separated list of version (example: "8.0", "8.1")'
         required: true
@@ -143,6 +155,25 @@ jobs:
       stage_prev: ''
       default_branch: ${{ inputs.default_branch }}
       tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'all' }}
+
+  build-base-manual:
+    needs:
+      - configure
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-build.yml@master
+    with:
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      run_tests: true
+      upload_artifact: true
+      pull_base_image: true
+      push_image: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_build }}
+      artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
+      stage: base
+      stage_prev: ''
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'base' }}
 
   test-base:
     needs:
@@ -154,6 +185,7 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: base
+    if: ${{ inputs.stage == 'all' }}
 
 
   # -----------------------------------------------------------------------------------------------
@@ -174,6 +206,25 @@ jobs:
       stage_prev: base
       default_branch: ${{ inputs.default_branch }}
       tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'all' }}
+
+  build-mods-manual:
+    needs:
+      - configure
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-build.yml@master
+    with:
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      run_tests: true
+      upload_artifact: true
+      pull_base_image: true
+      push_image: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_build }}
+      artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
+      stage: mods
+      stage_prev: ''
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'mods' }}
 
   test-mods:
     needs:
@@ -185,6 +236,7 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: mods
+    if: ${{ inputs.stage == 'all' }}
 
 
   # -----------------------------------------------------------------------------------------------
@@ -205,6 +257,25 @@ jobs:
       stage_prev: mods
       default_branch: ${{ inputs.default_branch }}
       tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'all' }}
+
+  build-prod-manual:
+    needs:
+      - configure
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-build.yml@master
+    with:
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      run_tests: true
+      upload_artifact: true
+      pull_base_image: true
+      push_image: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_build }}
+      artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
+      stage: prod
+      stage_prev: ''
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'prod' }}
 
   test-prod:
     needs:
@@ -216,6 +287,7 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: prod
+    if: ${{ inputs.stage == 'all' }}
 
 
   # -----------------------------------------------------------------------------------------------
@@ -236,6 +308,25 @@ jobs:
       stage_prev: prod
       default_branch: ${{ inputs.default_branch }}
       tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'all' }}
+
+  build-slim-manual:
+    needs:
+      - configure
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-build.yml@master
+    with:
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      run_tests: true
+      upload_artifact: true
+      pull_base_image: true
+      push_image: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_build }}
+      artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
+      stage: slim
+      stage_prev: ''
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'slim' }}
 
   test-slim:
     needs:
@@ -247,6 +338,7 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: slim
+    if: ${{ inputs.stage == 'all' }}
 
 
   # -----------------------------------------------------------------------------------------------
@@ -267,6 +359,25 @@ jobs:
       stage_prev: slim
       default_branch: ${{ inputs.default_branch }}
       tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'all' }}
+
+  build-work-manual:
+    needs:
+      - configure
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-build.yml@master
+    with:
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      run_tests: true
+      upload_artifact: true
+      pull_base_image: true
+      push_image: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_build }}
+      artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
+      stage: work
+      stage_prev: ''
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    if: ${{ inputs.stage == 'work' }}
 
   test-work:
     needs:
@@ -278,6 +389,7 @@ jobs:
       matrix: ${{ needs.configure.outputs.matrix_build }}
       artifact_prefix: ${{ needs.configure.outputs.artifact_prefix }}
       stage: work
+    if: ${{ inputs.stage == 'all' }}
 
 
   # -----------------------------------------------------------------------------------------------
@@ -303,6 +415,7 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
 
   push-mods:
     needs:
@@ -324,6 +437,7 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
 
   push-prod:
     needs:
@@ -345,6 +459,7 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
 
   push-slim:
     needs:
@@ -366,6 +481,7 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
 
   push-work:
     needs:
@@ -387,6 +503,7 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
 
 
   # -----------------------------------------------------------------------------------------------
@@ -408,6 +525,25 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
+
+  manifest-base-manual:
+    needs:
+      - configure
+      - build-base-manual
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    with:
+      can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_deploy }}
+      versions: ${{ needs.configure.outputs.versions }}
+      stage: base
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'base' }}
 
   manifest-mods:
     needs:
@@ -425,6 +561,25 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
+
+  manifest-mods-manual:
+    needs:
+      - configure
+      - build-mods-manual
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    with:
+      can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_deploy }}
+      versions: ${{ needs.configure.outputs.versions }}
+      stage: mods
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'mods' }}
 
   manifest-prod:
     needs:
@@ -442,6 +597,25 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
+
+  manifest-prod-manual:
+    needs:
+      - configure
+      - build-prod-manual
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    with:
+      can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_deploy }}
+      versions: ${{ needs.configure.outputs.versions }}
+      stage: prod
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'prod' }}
 
   manifest-slim:
     needs:
@@ -459,6 +633,25 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
+
+  manifest-slim-manual:
+    needs:
+      - configure
+      - build-slim-manual
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    with:
+      can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_deploy }}
+      versions: ${{ needs.configure.outputs.versions }}
+      stage: slim
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'slim' }}
 
   manifest-work:
     needs:
@@ -476,3 +669,22 @@ jobs:
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'all' }}
+
+  manifest-work-manual:
+    needs:
+      - configure
+      - build-work-manual
+    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    with:
+      can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
+      has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
+      matrix: ${{ needs.configure.outputs.matrix_deploy }}
+      versions: ${{ needs.configure.outputs.versions }}
+      stage: work
+      default_branch: ${{ inputs.default_branch }}
+      tag: ${{ inputs.tag }}
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_password: ${{ secrets.DOCKERHUB_PASSWORD }}
+    if: ${{ inputs.stage == 'work' }}
