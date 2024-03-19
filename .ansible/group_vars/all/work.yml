@@ -774,6 +774,38 @@ tools_available:
       run_dep: []
       # pre:
       # post:
+    7.2:
+      type: pip
+      pre: |
+        DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+        && if [ [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+          pip install "cython<3.0" --no-build-isolation; \
+        fi \
+      build_dep: [python-pip,python-wheel]
+    7.1:
+      type: pip
+      pre: |
+        DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+        && if [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+          pip install "cython<3.0" --no-build-isolation; \
+        fi \
+      build_dep: [python-pip,python-wheel]
+    7.0:
+      type: pip
+      pre: |
+        DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+        && if [ [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+          pip install "cython<3.0" --no-build-isolation; \
+        fi \
+      build_dep: [python-pip,python-wheel]
+    5.6:
+      type: pip
+      pre: |
+        DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
+        && if [ [ "${DEB_HOST_ARCH}" = "arm64" ]; then \
+          pip install "cython<3.0" --no-build-isolation; \
+        fi \
+      build_dep: [python-pip,python-wheel]
   yq:
     disabled: []
     check: yq --version 2>&1 | grep -E '[0-9][.0-9]+' || (yq --version; false)
