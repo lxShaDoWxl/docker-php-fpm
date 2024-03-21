@@ -7,8 +7,33 @@ all:
   version:
   build_dep: []
   run_dep: []
+  flags:
   # pre:
   # post:
+
+8.3:
+  type: pip
+  flags: --break-system-packages
+
+8.2:
+  type: pip
+  flags: --break-system-packages
+
+8.1:
+  type: pip
+  flags: --break-system-packages
+
+8.0:
+  type: pip
+  flags: --break-system-packages
+
+7.4:
+  type: pip
+  flags: --break-system-packages
+
+7.3:
+  type: pip
+  flags: --break-system-packages
 
 7.2:
   type: pip
@@ -45,6 +70,7 @@ all:
 
 5.6:
   type: pip
+  flags:
   pre: |
     DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
     && if [ "${DEB_HOST_ARCH}" = "arm64" ]; then \

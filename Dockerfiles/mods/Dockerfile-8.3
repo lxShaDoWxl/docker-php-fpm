@@ -16,6 +16,7 @@ RUN set -eux \
 		libaio-dev \
 		libavif-dev \
 		libbz2-dev \
+		libc-ares-dev \
 		libc-client-dev \
 		libcurl4-openssl-dev \
 		libenchant-2-dev \
@@ -34,6 +35,7 @@ RUN set -eux \
 		libmagickwand-dev \
 		libmariadb-dev \
 		libmemcached-dev \
+		libnghttp2-dev \
 		libpcre3-dev \
 		libpng-dev \
 		libpq-dev \
@@ -53,6 +55,7 @@ RUN set -eux \
 		libyaml-dev \
 		libzip-dev \
 		libzstd-dev \
+		re2c \
 		snmp \
 		unixodbc-dev \
 		uuid-dev \
@@ -123,6 +126,21 @@ RUN set -eux \
 	# Installation: Generic
 	# Type:         Built-in extension
 	&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) bcmath \
+	&& true
+
+
+# -------------------- Installing PHP Extension: blackfire --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         Custom extension
+	&& ARCH="$(dpkg-architecture --query DEB_HOST_GNU_CPU)" \
+&& version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+&& curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/${ARCH}/$version \
+&& mkdir -p /tmp/blackfire \
+&& tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp/blackfire \
+&& mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
+&& rm -rf /tmp/blackfire /tmp/blackfire-probe.tar.gz \
+ \
 	&& true
 
 
@@ -455,7 +473,7 @@ ORACLE_HREF="$( \
 # -------------------- Installing PHP Extension: opcache --------------------
 RUN set -eux \
 	# Version specific pre-command
-	&& curl -sS https://raw.githubusercontent.com/php/php-src/php-8.0.6/ext/opcache/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h \
+	&& curl -sS https://raw.githubusercontent.com/php/php-src/PHP-8.3/Zend/Optimizer/zend_dfg.h > /usr/local/include/php/Zend/Optimizer/zend_dfg.h \
 	# Installation: Version specific
 	# Type:         Built-in extension
 	# Installation
@@ -661,6 +679,27 @@ RUN set -eux \
 	&& true
 
 
+# -------------------- Installing PHP Extension: phalcon --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         GIT extension
+	&& git clone https://github.com/phalcon/cphalcon /tmp/phalcon \
+	&& cd /tmp/phalcon \
+	# Custom:       Branch
+	&& git checkout $(git for-each-ref --format='%(*creatordate:raw)%(creatordate:raw) %(refname)' refs/tags \
+  | sort -V \
+  | sed 's/^.*tags\///g' \
+  | grep -E '^v[.0-9]+$' \
+  | tail -1 \
+) \
+ \
+	# Custom:       Install command
+	&& cd build && ./install \
+	# Enabling
+	&& docker-php-ext-enable phalcon \
+	&& true
+
+
 # -------------------- Installing PHP Extension: pspell --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -726,6 +765,17 @@ RUN set -eux \
 	&& true
 
 
+# -------------------- Installing PHP Extension: solr --------------------
+RUN set -eux \
+	# Installation: Generic
+	# Type:         PECL extension
+	# Default:      Pecl command
+	&& pecl install solr \
+	# Enabling
+	&& docker-php-ext-enable solr \
+	&& true
+
+
 # -------------------- Installing PHP Extension: zip --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -733,6 +783,17 @@ RUN set -eux \
 	# Custom:       configure command
 	&& docker-php-ext-configure zip --with-zip \
 	&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) zip \
+	&& true
+
+
+# -------------------- Installing PHP Extension: swoole --------------------
+RUN set -eux \
+	# Installation: Version specific
+	# Type:         PECL extension
+	# Custom:       Pecl command
+	&& pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl enable-cares="yes" with-postgres="yes"' swoole \
+	# Enabling
+	&& docker-php-ext-enable swoole \
 	&& true
 
 
@@ -893,6 +954,7 @@ RUN set -eux \
 	libaio1 \
 	libaspell15 \
 	libavif15 \
+	libc-ares2 \
 	libc-client2007e \
 	libenchant-2-2 \
 	libevent-2.1-7 \
@@ -906,6 +968,7 @@ RUN set -eux \
 	libmagickwand-6.q16-6 \
 	libmariadbd19 \
 	libmemcachedutil2 \
+	libnghttp2-14 \
 	libpng16-16 \
 	libpq5 \
 	librabbitmq4 \
@@ -1106,6 +1169,8 @@ RUN set -eux \
 	&& php-fpm -m | grep -oiE '^sqlite3$' \
 	&& php -m | grep -oiE '^sqlsrv$' \
 	&& php-fpm -m | grep -oiE '^sqlsrv$' \
+	&& php -m | grep -oiE '^phalcon$' \
+	&& php-fpm -m | grep -oiE '^phalcon$' \
 	&& php -m | grep -oiE '^phar$' \
 	&& php-fpm -m | grep -oiE '^phar$' \
 	&& php -m | grep -oiE '^posix$' \
@@ -1131,12 +1196,16 @@ RUN set -eux \
 	&& php-fpm -m | grep -oiE '^sockets$' \
 	&& php -m | grep -oiE '^sodium$' \
 	&& php-fpm -m | grep -oiE '^sodium$' \
+	&& php -m | grep -oiE '^solr$' \
+	&& php-fpm -m | grep -oiE '^solr$' \
 	&& php -m | grep -oiE '^spl$' \
 	&& php-fpm -m | grep -oiE '^spl$' \
 	&& php -m | grep -oiE '^xml$' \
 	&& php-fpm -m | grep -oiE '^xml$' \
 	&& php -m | grep -oiE '^zip$' \
 	&& php-fpm -m | grep -oiE '^zip$' \
+	&& php -m | grep -oiE '^swoole$' \
+	&& php-fpm -m | grep -oiE '^swoole$' \
 	&& php -m | grep -oiE '^sysvmsg$' \
 	&& php-fpm -m | grep -oiE '^sysvmsg$' \
 	&& php -m | grep -oiE '^sysvsem$' \

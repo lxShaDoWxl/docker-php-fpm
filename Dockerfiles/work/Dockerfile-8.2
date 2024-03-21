@@ -452,6 +452,14 @@ RUN set -eux \
 	&& netstat --version | grep net-tools || (netstat --version; false)	\
 	&& true
 
+# -------------------- (custom) php-cs-fixer --------------------
+RUN set -eux \
+	&& PHP_CS_FIXER_URL="https://cs.symfony.com/download/php-cs-fixer-v3.phar"	\
+	&& curl -sS -k -L --fail -L "${PHP_CS_FIXER_URL}" -o /usr/local/bin/php-cs-fixer	\
+	&& chmod +x /usr/local/bin/php-cs-fixer	\
+	&& php-cs-fixer --version 2>&1 | grep -E 'Fixer\s+(version\s*)?[-_.0-9]+\s+' || (php-cs-fixer --version; false)	\
+	&& true
+
 # -------------------- (custom) phpcbf --------------------
 RUN set -eux \
 	&& PHPCBF_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar"	\
@@ -499,7 +507,6 @@ RUN set -eux \
 # -------------------- (pip) pwncat --------------------
 RUN set -eux \
 	&& pip install --no-cache-dir --no-compile --force-reinstall --break-system-packages pwncat \
-            
 	&& ln -s pwncat /usr/local/bin/netcat \
 	\
 	&& pwncat --version 2>&1 | grep -E 'Version [0-9][.0-9]+' || (pwncat --version; false)	\
@@ -621,14 +628,12 @@ RUN set -eux \
 # -------------------- (pip) yamllint --------------------
 RUN set -eux \
 	&& pip install --no-cache-dir --no-compile --force-reinstall --break-system-packages yamllint \
-            
 	&& yamllint --version 2>&1 | grep -E '[0-9][.0-9]+' || (yamllint --version; false)	\
 	&& true
 
 # -------------------- (pip) yq --------------------
 RUN set -eux \
 	&& pip install --no-cache-dir --no-compile --force-reinstall --break-system-packages yq \
-            
 	&& yq --version 2>&1 | grep -E '[0-9][.0-9]+' || (yq --version; false)	\
 	&& true
 
@@ -841,6 +846,11 @@ RUN set -eux \
 # -------------------- (apt) net-tools --------------------
 RUN set -eux \
 	&& netstat --version | grep net-tools || (netstat --version; false)	\
+	&& true
+
+# -------------------- (custom) php-cs-fixer --------------------
+RUN set -eux \
+	&& php-cs-fixer --version 2>&1 | grep -E 'Fixer\s+(version\s*)?[-_.0-9]+\s+' || (php-cs-fixer --version; false)	\
 	&& true
 
 # -------------------- (custom) phpcbf --------------------
