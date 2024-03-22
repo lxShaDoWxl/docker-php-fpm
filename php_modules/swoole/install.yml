@@ -14,7 +14,7 @@ all:
 
 8.3:
   type: pecl
-  command: pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl enable-cares="yes" with-postgres="yes"' swoole
+  command: pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl=" " enable-cares="yes" with-postgres="yes"' swoole
   version: 4.8.12
 
 7.4:
