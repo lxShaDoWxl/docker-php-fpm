@@ -4,6 +4,8 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/john-ea/docker-php-fpm/action.yml?style=for-the-badge&logo=github&label=Build)](https://github.com/john-ea/docker-php-fpm/actions/workflows/action.yml)
 [![Docker pulls](https://img.shields.io/docker/pulls/johnea/php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/johnea/php-fpm/tags)
 
+___
+
 [![Release](https://img.shields.io/github/release/devilbox/docker-php-fpm.svg?colorB=orange)](https://github.com/devilbox/docker-php-fpm/releases)
 [![](https://img.shields.io/badge/github-devilbox%2Fdocker--php--fpm-red.svg)](https://github.com/devilbox/docker-php-fpm "github.com/devilbox/docker-php-fpm")
 [![lint](https://github.com/devilbox/docker-php-fpm/workflows/lint/badge.svg)](https://github.com/devilbox/docker-php-fpm/actions?workflow=lint)
@@ -45,11 +47,11 @@ This repository also allows you to quickly generate and **build your own custom 
 docker pull johnea/php-fpm:<tag>
 ```
 
-* [`5.2-base`](Dockerfiles/base/Dockerfile-5.2), [`5.3-base`](Dockerfiles/base/Dockerfile-5.3), [`5.4-base`](Dockerfiles/base/Dockerfile-5.4), [`5.5-base`](Dockerfiles/base/Dockerfile-5.5), [`5.6-base`](Dockerfiles/base/Dockerfile-5.6), [`7.0-base`](Dockerfiles/base/Dockerfile-7.0), [`7.1-base`](Dockerfiles/base/Dockerfile-7.1), [`7.2-base`](Dockerfiles/base/Dockerfile-7.2), [`7.3-base`](Dockerfiles/base/Dockerfile-7.3), [`7.4-base`](Dockerfiles/base/Dockerfile-7.4), [`8.0-base`](Dockerfiles/base/Dockerfile-8.0), [`8.1-base`](Dockerfiles/base/Dockerfile-8.1), [`8.2-base`](Dockerfiles/base/Dockerfile-8.2), [`8.3-base`](Dockerfiles/base/Dockerfile-8.3)
-* [`5.2-mods`](Dockerfiles/mods/Dockerfile-5.2), [`5.3-mods`](Dockerfiles/mods/Dockerfile-5.3), [`5.4-mods`](Dockerfiles/mods/Dockerfile-5.4), [`5.5-mods`](Dockerfiles/mods/Dockerfile-5.5), [`5.6-mods`](Dockerfiles/mods/Dockerfile-5.6), [`7.0-mods`](Dockerfiles/mods/Dockerfile-7.0), [`7.1-mods`](Dockerfiles/mods/Dockerfile-7.1), [`7.2-mods`](Dockerfiles/mods/Dockerfile-7.2), [`7.3-mods`](Dockerfiles/mods/Dockerfile-7.3), [`7.4-mods`](Dockerfiles/mods/Dockerfile-7.4), [`8.0-mods`](Dockerfiles/mods/Dockerfile-8.0), [`8.1-mods`](Dockerfiles/mods/Dockerfile-8.1), [`8.2-mods`](Dockerfiles/mods/Dockerfile-8.2), [`8.3-mods`](Dockerfiles/mods/Dockerfile-8.3)
-* [`5.2-prod`](Dockerfiles/prod/Dockerfile-5.2), [`5.3-prod`](Dockerfiles/prod/Dockerfile-5.3), [`5.4-prod`](Dockerfiles/prod/Dockerfile-5.4), [`5.5-prod`](Dockerfiles/prod/Dockerfile-5.5), [`5.6-prod`](Dockerfiles/prod/Dockerfile-5.6), [`7.0-prod`](Dockerfiles/prod/Dockerfile-7.0), [`7.1-prod`](Dockerfiles/prod/Dockerfile-7.1), [`7.2-prod`](Dockerfiles/prod/Dockerfile-7.2), [`7.3-prod`](Dockerfiles/prod/Dockerfile-7.3), [`7.4-prod`](Dockerfiles/prod/Dockerfile-7.4), [`8.0-prod`](Dockerfiles/prod/Dockerfile-8.0), [`8.1-prod`](Dockerfiles/prod/Dockerfile-8.1), [`8.2-prod`](Dockerfiles/prod/Dockerfile-8.2), [`8.3-prod`](Dockerfiles/prod/Dockerfile-8.3)
-* [`5.2-slim`](Dockerfiles/slim/Dockerfile-5.2), [`5.3-slim`](Dockerfiles/slim/Dockerfile-5.3), [`5.4-slim`](Dockerfiles/slim/Dockerfile-5.4), [`5.5-slim`](Dockerfiles/slim/Dockerfile-5.5), [`5.6-slim`](Dockerfiles/slim/Dockerfile-5.6), [`7.0-slim`](Dockerfiles/slim/Dockerfile-7.0), [`7.1-slim`](Dockerfiles/slim/Dockerfile-7.1), [`7.2-slim`](Dockerfiles/slim/Dockerfile-7.2), [`7.3-slim`](Dockerfiles/slim/Dockerfile-7.3), [`7.4-slim`](Dockerfiles/slim/Dockerfile-7.4), [`8.0-slim`](Dockerfiles/slim/Dockerfile-8.0), [`8.1-slim`](Dockerfiles/slim/Dockerfile-8.1), [`8.2-slim`](Dockerfiles/slim/Dockerfile-8.2), [`8.3-slim`](Dockerfiles/slim/Dockerfile-8.3)
-* [`5.2-work`](Dockerfiles/work/Dockerfile-5.2), [`5.3-work`](Dockerfiles/work/Dockerfile-5.3), [`5.4-work`](Dockerfiles/work/Dockerfile-5.4), [`5.5-work`](Dockerfiles/work/Dockerfile-5.5), [`5.6-work`](Dockerfiles/work/Dockerfile-5.6), [`7.0-work`](Dockerfiles/work/Dockerfile-7.0), [`7.1-work`](Dockerfiles/work/Dockerfile-7.1), [`7.2-work`](Dockerfiles/work/Dockerfile-7.2), [`7.3-work`](Dockerfiles/work/Dockerfile-7.3), [`7.4-work`](Dockerfiles/work/Dockerfile-7.4), [`8.0-work`](Dockerfiles/work/Dockerfile-8.0), [`8.1-work`](Dockerfiles/work/Dockerfile-8.1), [`8.2-work`](Dockerfiles/work/Dockerfile-8.2), [`8.3-work`](Dockerfiles/work/Dockerfile-8.3)
+* [`5.6-base`](Dockerfiles/base/Dockerfile-5.6), [`7.0-base`](Dockerfiles/base/Dockerfile-7.0), [`7.1-base`](Dockerfiles/base/Dockerfile-7.1), [`7.2-base`](Dockerfiles/base/Dockerfile-7.2), [`7.3-base`](Dockerfiles/base/Dockerfile-7.3), [`7.4-base`](Dockerfiles/base/Dockerfile-7.4), [`8.0-base`](Dockerfiles/base/Dockerfile-8.0), [`8.1-base`](Dockerfiles/base/Dockerfile-8.1), [`8.2-base`](Dockerfiles/base/Dockerfile-8.2), [`8.3-base`](Dockerfiles/base/Dockerfile-8.3)
+* [`5.6-mods`](Dockerfiles/mods/Dockerfile-5.6), [`7.0-mods`](Dockerfiles/mods/Dockerfile-7.0), [`7.1-mods`](Dockerfiles/mods/Dockerfile-7.1), [`7.2-mods`](Dockerfiles/mods/Dockerfile-7.2), [`7.3-mods`](Dockerfiles/mods/Dockerfile-7.3), [`7.4-mods`](Dockerfiles/mods/Dockerfile-7.4), [`8.0-mods`](Dockerfiles/mods/Dockerfile-8.0), [`8.1-mods`](Dockerfiles/mods/Dockerfile-8.1), [`8.2-mods`](Dockerfiles/mods/Dockerfile-8.2), [`8.3-mods`](Dockerfiles/mods/Dockerfile-8.3)
+* [`5.6-prod`](Dockerfiles/prod/Dockerfile-5.6), [`7.0-prod`](Dockerfiles/prod/Dockerfile-7.0), [`7.1-prod`](Dockerfiles/prod/Dockerfile-7.1), [`7.2-prod`](Dockerfiles/prod/Dockerfile-7.2), [`7.3-prod`](Dockerfiles/prod/Dockerfile-7.3), [`7.4-prod`](Dockerfiles/prod/Dockerfile-7.4), [`8.0-prod`](Dockerfiles/prod/Dockerfile-8.0), [`8.1-prod`](Dockerfiles/prod/Dockerfile-8.1), [`8.2-prod`](Dockerfiles/prod/Dockerfile-8.2), [`8.3-prod`](Dockerfiles/prod/Dockerfile-8.3)
+* [`5.6-slim`](Dockerfiles/slim/Dockerfile-5.6), [`7.0-slim`](Dockerfiles/slim/Dockerfile-7.0), [`7.1-slim`](Dockerfiles/slim/Dockerfile-7.1), [`7.2-slim`](Dockerfiles/slim/Dockerfile-7.2), [`7.3-slim`](Dockerfiles/slim/Dockerfile-7.3), [`7.4-slim`](Dockerfiles/slim/Dockerfile-7.4), [`8.0-slim`](Dockerfiles/slim/Dockerfile-8.0), [`8.1-slim`](Dockerfiles/slim/Dockerfile-8.1), [`8.2-slim`](Dockerfiles/slim/Dockerfile-8.2), [`8.3-slim`](Dockerfiles/slim/Dockerfile-8.3)
+* [`5.6-work`](Dockerfiles/work/Dockerfile-5.6), [`7.0-work`](Dockerfiles/work/Dockerfile-7.0), [`7.1-work`](Dockerfiles/work/Dockerfile-7.1), [`7.2-work`](Dockerfiles/work/Dockerfile-7.2), [`7.3-work`](Dockerfiles/work/Dockerfile-7.3), [`7.4-work`](Dockerfiles/work/Dockerfile-7.4), [`8.0-work`](Dockerfiles/work/Dockerfile-8.0), [`8.1-work`](Dockerfiles/work/Dockerfile-8.1), [`8.2-work`](Dockerfiles/work/Dockerfile-8.2), [`8.3-work`](Dockerfiles/work/Dockerfile-8.3)
 
 :information_source: For details see **[Documentation: Docker Tags](doc/docker-tags.md)**<br/>
 :information_source: For details see **[Documentation: Supported Architectures](doc/supported-architectures.md)**
@@ -60,7 +62,7 @@ docker pull johnea/php-fpm:<tag>
 
 The following PHP versions are provided by this repository.
 
-* `PHP 5.2`, `PHP 5.3`, `PHP 5.4`, `PHP 5.5`, `PHP 5.6`
+* `PHP 5.6`
 * `PHP 7.0`, `PHP 7.1`, `PHP 7.2`, `PHP 7.3`, `PHP 7.4`
 * `PHP 8.0`, `PHP 8.1`, `PHP 8.2`, `PHP 8.3`
 
@@ -647,3 +649,5 @@ Ansible: [cytopia](https://galaxy.ansible.com/cytopia)
 **[MIT License](LICENSE.md)**
 
 Copyright (c) 2017 [cytopia](https://github.com/cytopia)
+
+Thanks to [cytopia](https://github.com/cytopia) and the [devilbox](https://github.com/devilbox) project.
