@@ -8,13 +8,6 @@ ini_set('display_errors', 1);
 error_reporting(-1);
 
 
-// Only available since 5.4.0
-if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-	echo 'SKIP';
-	exit(0);
-}
-
-
 // Create a blank image and add some text
 if ( ($im = imagecreatetruecolor(120, 20)) === FALSE ) {
 	echo 'FAIL: imagecreatetruecolor()';

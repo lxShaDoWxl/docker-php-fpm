@@ -225,40 +225,37 @@ if run "docker logs ${name} 2>&1 | grep '/var/www/default/fail.php'"; then
 	exit 1
 fi
 
-# PHP-FPM 5.2 does not show access logs
-if [ "${VERSION}" != "5.2" ]; then
-	# Test access and error file for correct content
-	print_h2 "Test access logs in php-fpm.access (ok.php)"
-	if ! run "grep 'GET /ok.php' ${LOG_DIR_HOST}/php-fpm.access"; then
-		echo "Error no access log string for 'GET /ok.php' found in: ${LOG_DIR_HOST}/php-fpm.access"
-		run "cat ${LOG_DIR_HOST}/php-fpm.access"
-		run "cat ${LOG_DIR_HOST}/php-fpm.error"
-		docker_logs "${nginx_name}" || true
-		docker_logs "${name}"       || true
-		docker_stop "${nginx_name}" || true
-		docker_stop "${name}"       || true
-		rm -rf "${LOG_DIR_HOST}"
-		rm -rf "${CFG_DIR_HOST}"
-		rm -rf "${WWW_DIR_HOST}"
-		echo "Failed"
-		exit 1
-	fi
+# Test access and error file for correct content
+print_h2 "Test access logs in php-fpm.access (ok.php)"
+if ! run "grep 'GET /ok.php' ${LOG_DIR_HOST}/php-fpm.access"; then
+  echo "Error no access log string for 'GET /ok.php' found in: ${LOG_DIR_HOST}/php-fpm.access"
+  run "cat ${LOG_DIR_HOST}/php-fpm.access"
+  run "cat ${LOG_DIR_HOST}/php-fpm.error"
+  docker_logs "${nginx_name}" || true
+  docker_logs "${name}"       || true
+  docker_stop "${nginx_name}" || true
+  docker_stop "${name}"       || true
+  rm -rf "${LOG_DIR_HOST}"
+  rm -rf "${CFG_DIR_HOST}"
+  rm -rf "${WWW_DIR_HOST}"
+  echo "Failed"
+  exit 1
+fi
 
-	print_h2 "Test access logs in php-fpm.access (fail.php)"
-	if ! run "grep 'GET /fail.php' ${LOG_DIR_HOST}/php-fpm.access"; then
-		echo "Error no access log string for 'GET /fail.php' found in: ${LOG_DIR_HOST}/php-fpm.access"
-		run "cat ${LOG_DIR_HOST}/php-fpm.access"
-		run "cat ${LOG_DIR_HOST}/php-fpm.error"
-		docker_logs "${nginx_name}" || true
-		docker_logs "${name}"       || true
-		docker_stop "${nginx_name}" || true
-		docker_stop "${name}"       || true
-		rm -rf "${LOG_DIR_HOST}"
-		rm -rf "${CFG_DIR_HOST}"
-		rm -rf "${WWW_DIR_HOST}"
-		echo "Failed"
-		exit 1
-	fi
+print_h2 "Test access logs in php-fpm.access (fail.php)"
+if ! run "grep 'GET /fail.php' ${LOG_DIR_HOST}/php-fpm.access"; then
+  echo "Error no access log string for 'GET /fail.php' found in: ${LOG_DIR_HOST}/php-fpm.access"
+  run "cat ${LOG_DIR_HOST}/php-fpm.access"
+  run "cat ${LOG_DIR_HOST}/php-fpm.error"
+  docker_logs "${nginx_name}" || true
+  docker_logs "${name}"       || true
+  docker_stop "${nginx_name}" || true
+  docker_stop "${name}"       || true
+  rm -rf "${LOG_DIR_HOST}"
+  rm -rf "${CFG_DIR_HOST}"
+  rm -rf "${WWW_DIR_HOST}"
+  echo "Failed"
+  exit 1
 fi
 
 print_h2 "Ensiure error message is present in php-fpm.error"

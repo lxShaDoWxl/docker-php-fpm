@@ -34,7 +34,7 @@ help_software_enabled:
 # disabled: [optional] Array of PHP versions for which to disable this module
 # check:    [optional] Include a check command to test if it was installed successfully
 #
-# all, 7.2, 7.1, 7.0, 5.6, 5.5, 5.4:
+# all, 7.2, 7.1, 7.0, 5.6:
 #   pre:       [optional] Run command before 'command:' statement
 #   command:   Command to execute
 #   post:      [optional] Run command after 'command:' statement
@@ -45,7 +45,7 @@ help_software_available:
   ### Composer
   ###
   composer:
-    disabled: [5.2]
+    disabled: []
     check: composer --version 2>/dev/null | grep -Ei '(composer|version)\s*[0-9][.0-9]+'
     all:
       type: custom
@@ -75,23 +75,6 @@ help_software_available:
       pre: |
         COMPOSER_1_VERSION="latest-1.x" \
         && COMPOSER_2_VERSION="latest-2.2.x" \
-    5.5:
-      type: custom
-      pre: |
-        COMPOSER_1_VERSION="latest-1.x" \
-        && COMPOSER_2_VERSION="latest-2.2.x" \
-    5.4:
-      type: custom
-      pre: |
-        COMPOSER_1_VERSION="latest-1.x" \
-        && COMPOSER_2_VERSION="latest-2.2.x" \
-    5.3:
-      type: custom
-      pre: |
-        COMPOSER_1_VERSION="latest-1.x" \
-        && COMPOSER_2_VERSION="latest-2.2.x" \
-      post: |
-        ln -sf /usr/local/bin/composer-1 /usr/local/bin/composer \
 
   ###
   ### nvm
@@ -145,22 +128,6 @@ help_software_available:
       type: custom
       pre: |
         NODE_VERSION="17" \
-    5.5:
-      type: custom
-      pre: |
-        NODE_VERSION="17" \
-    5.4:
-      type: custom
-      pre: |
-        NODE_VERSION="17" \
-    5.3:
-      type: custom
-      pre: |
-        NODE_VERSION="17" \
-    5.2:
-      type: custom
-      pre: |
-        NODE_VERSION="17" \
 
   ###
   ### Python pip
@@ -209,30 +176,6 @@ help_software_available:
       run_dep: []
       build_dep: [libpython-dev]
     5.6:
-      type: custom
-      command: |
-        curl -sS -L --fail https://bootstrap.pypa.io/pip/2.7/get-pip.py | python \
-      run_dep: []
-      build_dep: [libpython-dev]
-    5.5:
-      type: custom
-      command: |
-        curl -sS -L --fail https://bootstrap.pypa.io/pip/2.7/get-pip.py | python \
-      run_dep: []
-      build_dep: [libpython-dev]
-    5.4:
-      type: custom
-      command: |
-        curl -sS -L --fail https://bootstrap.pypa.io/pip/2.7/get-pip.py | python \
-      run_dep: []
-      build_dep: [libpython-dev]
-    5.3:
-      type: custom
-      run_dep: []
-      build_dep: [libpython-dev]
-      command: |
-        curl -sS -L --fail https://bootstrap.pypa.io/pip/2.7/get-pip.py | python \
-    5.2:
       type: custom
       command: |
         curl -sS -L --fail https://bootstrap.pypa.io/pip/2.7/get-pip.py | python \

@@ -149,49 +149,46 @@ if ! run_fail "test -f ${LOG_DIR_HOST}/php-fpm.error"; then
 	exit 1
 fi
 
-###
-### PHP 5.2 still does not show any errors
-###
-if [ "${VERSION}" != "5.2" ]; then
-	print_h2 "Ensure stderr access logging is enabled"
-	if ! run "docker logs ${name} 2>&1 | grep 'GET /ok.php'"; then
-		echo "Error no access log string for 'GET /ok.php' found in stderr"
-		docker_logs "${nginx_name}" || true
-		docker_logs "${name}"       || true
-		docker_stop "${nginx_name}" || true
-		docker_stop "${name}"       || true
-		rm -rf "${LOG_DIR_HOST}"
-		rm -rf "${CFG_DIR_HOST}"
-		rm -rf "${WWW_DIR_HOST}"
-		echo "Failed"
-		exit 1
-	fi
-	print_h2 "Ensure stderr access logging is enabled"
-	if ! run "docker logs ${name} 2>&1 | grep 'GET /fail.php'"; then
-		echo "Error no access log string for 'GET /fail.php' found in stderr"
-		docker_logs "${nginx_name}" || true
-		docker_logs "${name}"       || true
-		docker_stop "${nginx_name}" || true
-		docker_stop "${name}"       || true
-		rm -rf "${LOG_DIR_HOST}"
-		rm -rf "${CFG_DIR_HOST}"
-		rm -rf "${WWW_DIR_HOST}"
-		echo "Failed"
-		exit 1
-	fi
-	print_h2 "Ensure errors are logged to stderr"
-	if ! run "docker logs ${name} 2>&1 | grep '/var/www/default/fail.php'"; then
-		echo "Error no error message found in stderr"
-		docker_logs "${nginx_name}" || true
-		docker_logs "${name}"       || true
-		docker_stop "${nginx_name}" || true
-		docker_stop "${name}"       || true
-		rm -rf "${LOG_DIR_HOST}"
-		rm -rf "${CFG_DIR_HOST}"
-		rm -rf "${WWW_DIR_HOST}"
-		echo "Failed"
-		exit 1
-	fi
+print_h2 "Ensure stderr access logging is enabled"
+if ! run "docker logs ${name} 2>&1 | grep 'GET /ok.php'"; then
+  echo "Error no access log string for 'GET /ok.php' found in stderr"
+  docker_logs "${nginx_name}" || true
+  docker_logs "${name}"       || true
+  docker_stop "${nginx_name}" || true
+  docker_stop "${name}"       || true
+  rm -rf "${LOG_DIR_HOST}"
+  rm -rf "${CFG_DIR_HOST}"
+  rm -rf "${WWW_DIR_HOST}"
+  echo "Failed"
+  exit 1
+fi
+
+print_h2 "Ensure stderr access logging is enabled"
+if ! run "docker logs ${name} 2>&1 | grep 'GET /fail.php'"; then
+  echo "Error no access log string for 'GET /fail.php' found in stderr"
+  docker_logs "${nginx_name}" || true
+  docker_logs "${name}"       || true
+  docker_stop "${nginx_name}" || true
+  docker_stop "${name}"       || true
+  rm -rf "${LOG_DIR_HOST}"
+  rm -rf "${CFG_DIR_HOST}"
+  rm -rf "${WWW_DIR_HOST}"
+  echo "Failed"
+  exit 1
+fi
+
+print_h2 "Ensure errors are logged to stderr"
+if ! run "docker logs ${name} 2>&1 | grep '/var/www/default/fail.php'"; then
+  echo "Error no error message found in stderr"
+  docker_logs "${nginx_name}" || true
+  docker_logs "${name}"       || true
+  docker_stop "${nginx_name}" || true
+  docker_stop "${name}"       || true
+  rm -rf "${LOG_DIR_HOST}"
+  rm -rf "${CFG_DIR_HOST}"
+  rm -rf "${WWW_DIR_HOST}"
+  echo "Failed"
+  exit 1
 fi
 
 

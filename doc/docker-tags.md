@@ -84,23 +84,7 @@ The following table shows a more complete overview about the offered Docker imag
  <tbody>
 
   <tr>
-   <td rowspan="14"><strong>base</strong></td>
-   <td><code>devilbox/php-fpm:5.2-base</code></td>
-   <td><code>devilbox/php-fpm:5.2-base-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.3-base</code></td>
-   <td><code>devilbox/php-fpm:5.3-base-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.4-base</code></td>
-   <td><code>devilbox/php-fpm:5.4-base-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.5-base</code></td>
-   <td><code>devilbox/php-fpm:5.5-base-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
+   <td rowspan="10"><strong>base</strong></td>
    <td><code>devilbox/php-fpm:5.6-base</code></td>
    <td><code>devilbox/php-fpm:5.6-base-&lt;git-tag&gt;</code></td>
   </tr>
@@ -142,23 +126,7 @@ The following table shows a more complete overview about the offered Docker imag
   </tr>
 
   <tr>
-   <td rowspan="14"><strong>mods</strong></td>
-   <td><code>devilbox/php-fpm:5.2-mods</code></td>
-   <td><code>devilbox/php-fpm:5.2-mods-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.3-mods</code></td>
-   <td><code>devilbox/php-fpm:5.3-mods-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.4-mods</code></td>
-   <td><code>devilbox/php-fpm:5.4-mods-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.5-mods</code></td>
-   <td><code>devilbox/php-fpm:5.5-mods-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
+   <td rowspan="10"><strong>mods</strong></td>
    <td><code>devilbox/php-fpm:5.6-mods</code></td>
    <td><code>devilbox/php-fpm:5.6-mods-&lt;git-tag&gt;</code></td>
   </tr>
@@ -200,23 +168,7 @@ The following table shows a more complete overview about the offered Docker imag
   </tr>
 
   <tr>
-   <td rowspan="14"><strong>prod</strong></td>
-   <td><code>devilbox/php-fpm:5.2-prod</code></td>
-   <td><code>devilbox/php-fpm:5.2-prod-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.3-prod</code></td>
-   <td><code>devilbox/php-fpm:5.3-prod-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.4-prod</code></td>
-   <td><code>devilbox/php-fpm:5.4-prod-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.5-prod</code></td>
-   <td><code>devilbox/php-fpm:5.5-prod-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
+   <td rowspan="10"><strong>prod</strong></td>
    <td><code>devilbox/php-fpm:5.6-prod</code></td>
    <td><code>devilbox/php-fpm:5.6-prod-&lt;git-tag&gt;</code></td>
   </tr>
@@ -258,23 +210,7 @@ The following table shows a more complete overview about the offered Docker imag
   </tr>
 
   <tr>
-   <td rowspan="14"><strong>slim</strong></td>
-   <td><code>devilbox/php-fpm:5.2-slim</code></td>
-   <td><code>devilbox/php-fpm:5.2-slim-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.3-slim</code></td>
-   <td><code>devilbox/php-fpm:5.3-slim-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.4-slim</code></td>
-   <td><code>devilbox/php-fpm:5.4-slim-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.5-slim</code></td>
-   <td><code>devilbox/php-fpm:5.5-slim-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
+   <td rowspan="10"><strong>slim</strong></td>
    <td><code>devilbox/php-fpm:5.6-slim</code></td>
    <td><code>devilbox/php-fpm:5.6-slim-&lt;git-tag&gt;</code></td>
   </tr>
@@ -316,23 +252,7 @@ The following table shows a more complete overview about the offered Docker imag
   </tr>
 
   <tr>
-   <td rowspan="14"><strong>work</strong></td>
-   <td><code>devilbox/php-fpm:5.2-work</code></td>
-   <td><code>devilbox/php-fpm:5.2-work-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.3-work</code></td>
-   <td><code>devilbox/php-fpm:5.3-work-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.4-work</code></td>
-   <td><code>devilbox/php-fpm:5.4-work-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
-   <td><code>devilbox/php-fpm:5.5-work</code></td>
-   <td><code>devilbox/php-fpm:5.5-work-&lt;git-tag&gt;</code></td>
-  </tr>
-  <tr>
+   <td rowspan="10"><strong>work</strong></td>
    <td><code>devilbox/php-fpm:5.6-work</code></td>
    <td><code>devilbox/php-fpm:5.6-work-&lt;git-tag&gt;</code></td>
   </tr>

@@ -19,10 +19,6 @@ Versions |
 
 | Version          | Architecture    | Flavours                                                                                                                                                                                   |
 |------------------|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 🐘 **`PHP 5.2`** | 💻 amd64        | 📂 [base](../Dockerfiles/base/Dockerfile-5.2), 📂 [mods](../Dockerfiles/mods/Dockerfile-5.2), 📂 [slim](../Dockerfiles/slim/Dockerfile-5.2), 📂 [work](../Dockerfiles/work/Dockerfile-5.2) |
-| 🐘 **`PHP 5.3`** | 💻 amd64, arm64 | 📂 [base](../Dockerfiles/base/Dockerfile-5.3), 📂 [mods](../Dockerfiles/mods/Dockerfile-5.3), 📂 [slim](../Dockerfiles/slim/Dockerfile-5.3), 📂 [work](../Dockerfiles/work/Dockerfile-5.3) |
-| 🐘 **`PHP 5.4`** | 💻 amd64, arm64 | 📂 [base](../Dockerfiles/base/Dockerfile-5.4), 📂 [mods](../Dockerfiles/mods/Dockerfile-5.4), 📂 [slim](../Dockerfiles/slim/Dockerfile-5.4), 📂 [work](../Dockerfiles/work/Dockerfile-5.4) |
-| 🐘 **`PHP 5.5`** | 💻 amd64, arm64 | 📂 [base](../Dockerfiles/base/Dockerfile-5.5), 📂 [mods](../Dockerfiles/mods/Dockerfile-5.5), 📂 [slim](../Dockerfiles/slim/Dockerfile-5.5), 📂 [work](../Dockerfiles/work/Dockerfile-5.5) |
 | 🐘 **`PHP 5.6`** | 💻 amd64, arm64 | 📂 [base](../Dockerfiles/base/Dockerfile-5.6), 📂 [mods](../Dockerfiles/mods/Dockerfile-5.6), 📂 [slim](../Dockerfiles/slim/Dockerfile-5.6), 📂 [work](../Dockerfiles/work/Dockerfile-5.6) |
 | 🐘 **`PHP 7.0`** | 💻 amd64, arm64 | 📂 [base](../Dockerfiles/base/Dockerfile-7.0), 📂 [mods](../Dockerfiles/mods/Dockerfile-7.0), 📂 [slim](../Dockerfiles/slim/Dockerfile-7.0), 📂 [work](../Dockerfiles/work/Dockerfile-7.0) |
 | 🐘 **`PHP 7.1`** | 💻 amd64, arm64 | 📂 [base](../Dockerfiles/base/Dockerfile-7.1), 📂 [mods](../Dockerfiles/mods/Dockerfile-7.1), 📂 [slim](../Dockerfiles/slim/Dockerfile-7.1), 📂 [work](../Dockerfiles/work/Dockerfile-7.1) |

@@ -28,7 +28,7 @@ already_avail: "{{ php_all_versions }}"
 
 **Example:** Overwriting `git_ref` for a specific version
 ```yaml
-already_avail: [5.2]
+already_avail: [5.6]
 
 all:
   type: git
@@ -114,7 +114,7 @@ all:
   build_dep: [librabbitmq-dev]
   run_dep: [librabbitmq4]
 
-5.5:
+5.6:
   type: pecl
   version: 1.9.3
   run_dep: [librabbitmq1]
@@ -132,7 +132,7 @@ all:
 
 **Example:**
 ```yaml
-already_avail: [5.2]
+already_avail: [5.6]
 
 # Default for all PHP versions if no overwrite exists
 all:

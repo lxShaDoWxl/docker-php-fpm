@@ -31,8 +31,8 @@ Add PHP versions to exclude from building/installing this extension. This could 
 
 Example:
 ```yaml
-# Exclude PHP 5.2 and PHP 5.3
-exclude: [5.2, 5.3]
+# Exclude PHP 5.6 and PHP 7.0
+exclude: [5.6, 7.0]
 ```
 
 **Note:** If this extension is already present, do not exclude it in here, but rather use `already_avail` in `install.yml`.

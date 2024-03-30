@@ -1,16 +1,6 @@
 # vi: ft=dockerfile
 {{ edit_comment_base }}
-{% if php_version == 5.2 %}
-FROM {{ docker_user }}/php-fpm-5.2
-{% elif php_version == 5.3 %}
-FROM {{ docker_user }}/php-fpm-5.3
-{% elif php_version == 5.4 %}
-FROM {{ docker_user }}/php-fpm-5.4
-{% elif php_version == 5.5 %}
-FROM {{ docker_user }}/php-fpm-5.5
-{% else %}
 FROM php:{{ php_version }}-fpm
-{% endif %}
 MAINTAINER "cytopia" <cytopia@everythingcli.org>
 
 
@@ -50,7 +40,7 @@ RUN set -eux \
 	&& groupadd -g ${MY_GID} -r ${MY_GROUP} \
 	&& useradd -u ${MY_UID} -m -s /bin/bash -g ${MY_GROUP} ${MY_USER}
 
-{% if php_version in [5.2 ,5.2, 5.4, 5.5, 5.6, 7.0] %}
+{% if php_version in [5.6, 7.0] %}
 
 ###
 ### Fix end of support in Debian

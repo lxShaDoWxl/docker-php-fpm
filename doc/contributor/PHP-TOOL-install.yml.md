@@ -32,8 +32,8 @@ all:
   post:
 
 
-# PHP 5.2 is overwriting the version of yq to install
-5.2:
+# PHP 5.6 is overwriting the version of yq to install
+5.6:
   type: pip
   version: 0.1.0
 ```
@@ -66,7 +66,7 @@ all:
   type: apt
   package: netcat
 
-5.3:
+5.6:
   type: apt
   package: netcat.traditional
 ```

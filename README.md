@@ -4,6 +4,8 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/john-ea/docker-php-fpm/action.yml?style=for-the-badge&logo=github&label=Build)](https://github.com/john-ea/docker-php-fpm/actions/workflows/action.yml)
 [![Docker pulls](https://img.shields.io/docker/pulls/johnea/php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/johnea/php-fpm/tags)
 
+![PHP](https://img.shields.io/badge/PHP-5.6--8.3-blue?style=for-the-badge&logo=php)
+
 ___
 
 [![Release](https://img.shields.io/github/release/devilbox/docker-php-fpm.svg?colorB=orange)](https://github.com/devilbox/docker-php-fpm/releases)
@@ -524,7 +526,7 @@ See the reference implementation below:
 [cytopia]: https://github.com/cytopia
 [devilbox_build]: https://github.com/devilbox/docker-php-fpm-community/workflows/devilbox_build/badge.svg
 [devilbox_nightly]: https://github.com/devilbox/docker-php-fpm-community/workflows/devilbox_nightly/badge.svg
-> <sup> :information_source: `<V>` in the Docker tag above stands for the PHP version. E.g.: `5.4` or `8.1`, etc</sup>
+> <sup> :information_source: `<V>` in the Docker tag above stands for the PHP version. E.g.: `5.6` or `8.1`, etc</sup>
 <!-- PROJECTS_END -->
 
 

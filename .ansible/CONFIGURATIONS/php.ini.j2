@@ -27,10 +27,7 @@ max_file_uploads          = {{ item.cfg[item.key].max_file_uploads    | default(
 
 ; Vars
 variables_order           = {{ item.cfg[item.key].variables_order         | default(item.cfg[item.alt].variables_order) }}
-{# Only available since PHP >=5.4 #}
-{% if not (php_version == 5.2 or php_version == 5.3 ) %}
 max_input_vars            = {{ item.cfg[item.key].max_input_vars          | default(item.cfg[item.alt].max_input_vars) }}
-{% endif %}
 max_input_nesting_level   = {{ item.cfg[item.key].max_input_nesting_level | default(item.cfg[item.alt].max_input_nesting_level) }}
 
 
@@ -42,7 +39,7 @@ report_memleaks           = {{ item.cfg[item.key].report_memleaks        | defau
 display_errors            = {{ item.cfg[item.key].display_errors         | default(item.cfg[item.alt].display_errors) }}
 display_startup_errors    = {{ item.cfg[item.key].display_startup_errors | default(item.cfg[item.alt].display_startup_errors) }}
 {# Only available before PHP 7.2 #}
-{% if php_version == 5.2 or php_version == 5.3 or php_version == 5.4 or php_version == 5.5 or php_version == 5.6 or php_version == 7.0 or php_version == 7.1 %}
+{% if php_version == 5.6 or php_version == 7.0 or php_version == 7.1 %}
 track_errors              = {{ item.cfg[item.key].track_errors | default(item.cfg[item.alt].track_errors) }}
 {% endif %}
 log_errors                = {{ item.cfg[item.key].log_errors   | default(item.cfg[item.alt].log_errors) }}
@@ -50,7 +47,7 @@ html_errors               = {{ item.cfg[item.key].html_errors  | default(item.cf
 
 
 ; Xdebug settings
-{% if php_version == 5.2 or php_version == 5.3 or php_version == 5.4 or php_version == 5.5 or php_version == 5.6 or php_version == 7.0 or php_version == 7.1 %}
+{% if php_version == 5.6 or php_version == 7.0 or php_version == 7.1 %}
 xdebug.default_enable     = {{ item.cfg[item.key].xdebug2_default_enable   | default(item.cfg[item.alt].xdebug2_default_enable) }}
 xdebug.profiler_enable    = {{ item.cfg[item.key].xdebug2_profiler_enable  | default(item.cfg[item.alt].xdebug2_profiler_enable) }}
 xdebug.remote_enable      = {{ item.cfg[item.key].xdebug2_remote_enable    | default(item.cfg[item.alt].xdebug2_remote_enable) }}
