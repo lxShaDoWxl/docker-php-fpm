@@ -235,6 +235,15 @@ _gen-readme-main:
 	git diff --quiet || { echo "Build Changes"; git diff; git status; false; }
 	@echo
 
+.PHONY: gen-available-docs
+gen-available-docs:
+	@echo "################################################################################"
+	@echo "# Generating doc/available-tools.md"
+	@echo "################################################################################"
+	./bin/gen-docs-php-tools.py
+	@echo
+
+
 ###
 ### Generate Dockerfiles
 ###
