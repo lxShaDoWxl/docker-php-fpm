@@ -559,10 +559,8 @@ fi \
 RUN set -eux \
 	# Installation: Version specific
 	# Type:         GIT extension
-	&& git clone https://github.com/phalcon/cphalcon /tmp/phalcon \
+	&& git clone --depth=1 --single-branch --branch=v3.4.4 https://github.com/phalcon/cphalcon /tmp/phalcon \
 	&& cd /tmp/phalcon \
-	# Custom:       Branch
-	&& git checkout v3.4.4 \
 	# Custom:       Install command
 	&& cd build && ./install \
 	# Enabling
@@ -647,7 +645,7 @@ RUN set -eux \
 	# Installation: Version specific
 	# Type:         PECL extension
 	# Default:      Pecl command
-	&& pecl install swoole-1.9.23 \
+	&& pecl install swoole-2.0.10 \
 	# Enabling
 	&& docker-php-ext-enable swoole \
 	&& true

@@ -123,11 +123,12 @@ all:
 
 ## Second level defines for `type: git`
 
-| Yaml key    | Required | Supports<br/>Shell code | Description |
-|-------------|----------|-------------------------|-------------|
-| `git_url`   | **Yes**  | Yes                     | Git repository URL |
-| `git_ref`   | No       | Yes                     | Tag, branch, commit to check out (shell code supported to dynamically checkout) |
-| `configure` | No       | Yes                     | Add `./configure` arguments. |
+| Yaml key    | Required | Supports<br/>Shell code | Description                                                                          |
+|-------------|----------|-------------------------|--------------------------------------------------------------------------------------|
+| `git_url`   | **Yes**  | Yes                     | Git repository URL                                                                   |
+| `git_ref`   | No       | Yes                     | Tag, branch, commit to check out (shell code supported to dynamically checkout)      |
+| `flags`     | No       | Yes                     | Add git flags to `git clone`                                                         |
+| `configure` | No       | Yes                     | Add `./configure` arguments.                                                         |
 | `command`   | No       | Yes                     | Overwrite default command (default: `phpize && ./configure && make && make install`) |
 
 **Example:**

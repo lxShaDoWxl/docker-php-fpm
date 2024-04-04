@@ -311,10 +311,13 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Generic
 	# Type:         GIT extension
-	&& git clone https://github.com/kjdev/php-ext-lz4 /tmp/lz4 \
+	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-lz4 \
+  | sed 's/^.*tags\///g' \
+  | grep -E '^[.0-9]+$' \
+  | tr '-' '~' | sort -V | tail -1 \
+) \
+  https://github.com/kjdev/php-ext-lz4 /tmp/lz4 \
 	&& cd /tmp/lz4 \
-	# Custom:       Branch
-	&& git checkout $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1) \
 	# Default:      Install command
 	&& phpize \
 	&& ./configure  --enable-lz4 --with-lz4-includedir=/usr \
@@ -614,10 +617,13 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Generic
 	# Type:         GIT extension
-	&& git clone https://github.com/kjdev/php-ext-zstd /tmp/zstd \
+	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-zstd \
+  | sed 's/^.*tags\///g' \
+  | grep -E '^[.0-9]+$' \
+  | tr '-' '~' | sort -V | tail -1 \
+) \
+  https://github.com/kjdev/php-ext-zstd /tmp/zstd \
 	&& cd /tmp/zstd \
-	# Custom:       Branch
-	&& git checkout $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1) \
 	# Default:      Install command
 	&& phpize \
 	&& ./configure  --enable-zstd --with-libzstd \
@@ -637,10 +643,13 @@ fi \
  \
 	# Installation: Generic
 	# Type:         GIT extension
-	&& git clone https://github.com/phpredis/phpredis /tmp/redis \
+	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phpredis/phpredis \
+  | sed 's/^.*tags\///g' \
+  | grep -E '^[.0-9]+$' \
+  | tr '-' '~' | sort -V | tail -1 \
+) \
+  https://github.com/phpredis/phpredis /tmp/redis \
 	&& cd /tmp/redis \
-	# Custom:       Branch
-	&& git checkout $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1) \
 	# Custom:       Install command
 	&& REDIS_ARGS=""; \
 if php -m | grep -q "igbinary"; then \
@@ -683,16 +692,13 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Generic
 	# Type:         GIT extension
-	&& git clone https://github.com/phalcon/cphalcon /tmp/phalcon \
-	&& cd /tmp/phalcon \
-	# Custom:       Branch
-	&& git checkout $(git for-each-ref --format='%(*creatordate:raw)%(creatordate:raw) %(refname)' refs/tags \
-  | sort -V \
+	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phalcon/cphalcon \
   | sed 's/^.*tags\///g' \
   | grep -E '^v[.0-9]+$' \
-  | tail -1 \
+  | tr '-' '~' | sort -V | tail -1 \
 ) \
- \
+  https://github.com/phalcon/cphalcon /tmp/phalcon \
+	&& cd /tmp/phalcon \
 	# Custom:       Install command
 	&& cd build && ./install \
 	# Enabling

@@ -272,6 +272,12 @@ RUN set -eux \
 	&& DEBIAN_FRONTEND=noninteractive apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
 		# ---------- build_deps ----------
+		gettext \
+		libcurl4-gnutls-dev \
+		libexpat1-dev \
+		libghc-zlib-dev \
+		libssl-dev \
+		libz-dev \
 		ruby-dev \
 		# ---------- run_deps ----------
 		dos2unix \
@@ -288,7 +294,6 @@ RUN set -eux \
 		xfonts-encodings \
 		xfonts-utils \
 		# ---------- type: apt ----------
-		git \
 		jq \
 		mupdf-tools \
 		net-tools \
@@ -319,8 +324,14 @@ RUN set -eux \
 	&& eslint -v | grep -E '[0-9][.0-9]+' || (eslint -v; false)	\
 	&& true
 
-# -------------------- (apt) git --------------------
+# -------------------- (custom) git --------------------
 RUN set -eux \
+	&& git clone --depth=1 --single-branch https://github.com/git/git /tmp/git \
+	&& cd /tmp/git \
+	&& make prefix=/usr/local all \
+	&& make prefix=/usr/local install \
+	&& cd / && rm -rf /tmp/git \
+	\
 	&& git --version 2>&1 | grep -E '[0-9][.0-9]+' || (git --version; false)	\
 	&& true
 
@@ -376,7 +387,7 @@ RUN set -eux \
 
 # -------------------- (custom) git-flow --------------------
 RUN set -eux \
-	&& git clone https://github.com/petervanderdoes/gitflow-avh /tmp/gitflow \
+	&& git clone --depth=1 --single-branch https://github.com/CJ-Systems/gitflow-cjs /tmp/gitflow \
 	&& cd /tmp/gitflow \
 	&& make install \
 	&& cd / && rm -rf /tmp/gitflow \
@@ -679,7 +690,6 @@ RUN set -eux \
 		xfonts-encodings \
 		xfonts-utils \
 		# ---------- type: apt ----------
-		git \
 		jq \
 		mupdf-tools \
 		net-tools \
@@ -746,7 +756,7 @@ RUN set -eux \
 	&& eslint -v | grep -E '[0-9][.0-9]+' || (eslint -v; false)	\
 	&& true
 
-# -------------------- (apt) git --------------------
+# -------------------- (custom) git --------------------
 RUN set -eux \
 	&& git --version 2>&1 | grep -E '[0-9][.0-9]+' || (git --version; false)	\
 	&& true

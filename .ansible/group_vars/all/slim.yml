@@ -95,7 +95,7 @@ base_apt_repositories_available:
   ### Backports
   ###
   backports:
-    # [Bullseye]
+    # [Bookworm]
     all:
       type: repo
       pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
@@ -157,7 +157,7 @@ base_apt_repositories_available:
     # 7.0: mongodb-clients & mongo-tools (amd64, arm64)
     # 5.6: mongodb-clients & mongo-tools (amd64, arm64)
     disabled: [5.6, 7.0]  # TODO: Why were those disabled?
-    # [Bullseye] Ubuntu repository required for arm64 support instead
+    # [Bookworm] Ubuntu repository required for arm64 support instead
     all:
       type: repo
       # gpg --dry-run --with-fingerprint < <(curl https://www.mongodb.org/static/pgp/server-4.4.asc) | grep fingerprint | sed 's/.*=//g' | sed 's/ //g'
@@ -180,7 +180,7 @@ base_apt_repositories_available:
   ### PostgrSQL (currently obsolete)
   ###
   pgsql:
-    # [Bullseye]
+    # [Bookworm]
     all:
       type: repo
       deb: deb http://apt.postgresql.org/pub/repos/apt/ {{ os_release['all'].debian }}-pgdg main

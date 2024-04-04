@@ -140,7 +140,11 @@ RUN set -eux \
 			-#}
 			{%- elif extensions_available[ext][php_version]['type'] == 'git' -%}
 				{{- "\n\t" }}# Type:         GIT extension
-				{{- "\n\t" }}&& git clone {{ extensions_available[ext][php_version]['git_url'] }} /tmp/{{ ext }} \
+                {%- if 'flags' in extensions_available[ext][php_version] -%}
+                    {{- "\n\t" }}&& git clone {{ extensions_available[ext][php_version]['flags'] }} {{ extensions_available[ext][php_version]['git_url'] }} /tmp/{{ ext }} \
+                {%- else -%}
+                    {{- "\n\t" }}&& git clone {{ extensions_available[ext][php_version]['git_url'] }} /tmp/{{ ext }} \
+                {%- endif -%}
 				{{- "\n\t" }}&& cd /tmp/{{ ext }} \
 				{%- if 'git_ref' in extensions_available[ext][php_version] -%}
 					{{- "\n\t" }}# Custom:       Branch
@@ -201,7 +205,11 @@ RUN set -eux \
 			-#}
 			{%- elif extensions_available[ext]['all']['type'] == 'git' -%}
 				{{- "\n\t" }}# Type:         GIT extension
-				{{- "\n\t" }}&& git clone {{ extensions_available[ext]['all']['git_url'] }} /tmp/{{ ext }} \
+                {%- if 'flags' in extensions_available[ext]['all'] -%}
+                    {{- "\n\t" }}&& git clone {{ extensions_available[ext]['all']['flags'] }} {% if 'git_ref' in extensions_available[ext]['all'] %}--branch={{ extensions_available[ext]['all']['git_ref'] }}{% endif %} {{ extensions_available[ext]['all']['git_url'] }} /tmp/{{ ext }} \
+                {%- else -%}
+                    {{- "\n\t" }}&& git clone {{ extensions_available[ext]['all']['git_url'] }} /tmp/{{ ext }} \
+                {%- endif -%}
 				{{- "\n\t" }}&& cd /tmp/{{ ext }} \
 				{%- if 'git_ref' in extensions_available[ext]['all'] -%}
 					{{- "\n\t" }}# Custom:       Branch

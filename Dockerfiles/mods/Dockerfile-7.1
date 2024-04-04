@@ -311,10 +311,13 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Generic
 	# Type:         GIT extension
-	&& git clone https://github.com/kjdev/php-ext-lz4 /tmp/lz4 \
+	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-lz4 \
+  | sed 's/^.*tags\///g' \
+  | grep -E '^[.0-9]+$' \
+  | tr '-' '~' | sort -V | tail -1 \
+) \
+  https://github.com/kjdev/php-ext-lz4 /tmp/lz4 \
 	&& cd /tmp/lz4 \
-	# Custom:       Branch
-	&& git checkout $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1) \
 	# Default:      Install command
 	&& phpize \
 	&& ./configure  --enable-lz4 --with-lz4-includedir=/usr \
@@ -619,10 +622,13 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Generic
 	# Type:         GIT extension
-	&& git clone https://github.com/kjdev/php-ext-zstd /tmp/zstd \
+	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-zstd \
+  | sed 's/^.*tags\///g' \
+  | grep -E '^[.0-9]+$' \
+  | tr '-' '~' | sort -V | tail -1 \
+) \
+  https://github.com/kjdev/php-ext-zstd /tmp/zstd \
 	&& cd /tmp/zstd \
-	# Custom:       Branch
-	&& git checkout $(git tag | grep -E '^[.0-9]+$' | sort -V | tail -1) \
 	# Default:      Install command
 	&& phpize \
 	&& ./configure  --enable-zstd --with-libzstd \
@@ -642,10 +648,8 @@ fi \
  \
 	# Installation: Version specific
 	# Type:         GIT extension
-	&& git clone https://github.com/phpredis/phpredis /tmp/redis \
+	&& git clone --depth=1 --single-branch --branch=5.3.7 https://github.com/phpredis/phpredis /tmp/redis \
 	&& cd /tmp/redis \
-	# Custom:       Branch
-	&& git checkout 5.3.7 \
 	# Custom:       Install command
 	&& REDIS_ARGS=""; \
 if php -m | grep -q "igbinary"; then \
@@ -685,10 +689,8 @@ RUN set -eux \
 RUN set -eux \
 	# Installation: Version specific
 	# Type:         GIT extension
-	&& git clone https://github.com/phalcon/cphalcon /tmp/phalcon \
+	&& git clone --depth=1 --single-branch --branch=v3.4.4 https://github.com/phalcon/cphalcon /tmp/phalcon \
 	&& cd /tmp/phalcon \
-	# Custom:       Branch
-	&& git checkout v3.4.4 \
 	# Custom:       Install command
 	&& cd build && ./install \
 	# Enabling
@@ -795,7 +797,7 @@ RUN set -eux \
 	# Installation: Version specific
 	# Type:         PECL extension
 	# Default:      Pecl command
-	&& pecl install swoole-4.4.26 \
+	&& pecl install swoole-4.5.11 \
 	# Enabling
 	&& docker-php-ext-enable swoole \
 	&& true

@@ -4,4 +4,4 @@ A collection of Git extensions to provide high-level repository operations for V
 
 | Platform | Url                                                              |
 |----------|------------------------------------------------------------------|
-| GitHub   | https://github.com/petervanderdoes/gitflow-avh                   |
+| GitHub   | https://github.com/CJ-Systems/gitflow-cjs                 |
