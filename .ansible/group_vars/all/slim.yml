@@ -100,7 +100,7 @@ base_apt_repositories_available:
       type: repo
       pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
       deb: deb http://ftp.debian.org/debian {{ os_release['all'].debian }}-backports main
-    # [Buster]
+    # [Bullseye]
     8.0:
       type: repo
       pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
@@ -113,11 +113,11 @@ base_apt_repositories_available:
       type: repo
       pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 6A26B1AE64C3C388
       deb: deb http://ftp.debian.org/debian {{ os_release[7.3].debian }}-backports main
+    # [Buster]
     7.2:
       type: repo
       pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131 6A26B1AE64C3C388
       deb: deb http://ftp.debian.org/debian {{ os_release[7.2].debian }}-backports main
-    # [Buster]
     7.1:
       type: repo
       pre: apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 0E98404D386FA1D9 6ED0E7B82643E131 6A26B1AE64C3C388

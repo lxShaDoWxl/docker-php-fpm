@@ -47,11 +47,7 @@ RUN set -eux \
 ###
 RUN set -eux \
     && sed -i 's/^deb /# deb /g' /etc/apt/sources.list \
-{% if php_version in [5.6, 7.0] %}
     && echo "deb http://archive.debian.org/debian/ stretch main contrib non-free" > /etc/apt/sources.list
-{% else %}
-    && echo "deb http://archive.debian.org/debian/ jessie main contrib non-free" > /etc/apt/sources.list
-{% endif %}
 
 {% endif %}
 
