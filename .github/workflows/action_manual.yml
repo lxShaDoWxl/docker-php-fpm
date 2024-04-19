@@ -51,9 +51,8 @@ on:
         default: 'latest'
         type: string
       branches:
-        description: 'Comma separated list of branches to create build matrix for. Default: my-image'
+        description: 'Comma separated list of branches to create build matrix for. (example: my-image)'
         required: false
-        default: 'my-image'
         type: string
       enabled:
         description: 'Enable'
@@ -84,7 +83,7 @@ env:
     {
         "DEFAULT_BRANCH": ${{ format('"{0}"', inputs.default_branch) }},
         "BRANCHES": ${{ format('"{0}"', inputs.branches) }},
-        "NUM_LATEST_TAGS": 0
+        "NUM_LATEST_TAGS": ${{ inputs.tag != 'latest' }}
     }
 
 # -------------------------------------------------------------------------------------------------
