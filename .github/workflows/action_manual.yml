@@ -83,7 +83,7 @@ env:
     {
         "DEFAULT_BRANCH": ${{ format('"{0}"', inputs.default_branch) }},
         "BRANCHES": ${{ format('"{0}"', inputs.branches) }},
-        "NUM_LATEST_TAGS": ${{ inputs.tag != 'latest' }}
+        "NUM_LATEST_TAGS": ${{ format('{0}', inputs.tag != 'latest' && 1 || 0) }}
     }
 
 # -------------------------------------------------------------------------------------------------
