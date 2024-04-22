@@ -651,7 +651,12 @@ fi \
  \
 	# Installation: Version specific
 	# Type:         GIT extension
-	&& git clone https://github.com/phpredis/phpredis /tmp/redis \
+	&& git clone --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phpredis/phpredis \
+  | sed 's/^.*tags\///g' \
+  | grep -E '^[.0-9]+$' \
+  | tr '-' '~' | sort -V | tail -1 \
+) \
+ https://github.com/phpredis/phpredis /tmp/redis \
 	&& cd /tmp/redis \
 	# Custom:       Install command
 	&& REDIS_ARGS=""; \

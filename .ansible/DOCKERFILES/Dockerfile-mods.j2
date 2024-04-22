@@ -142,6 +142,8 @@ RUN set -eux \
 				{{- "\n\t" }}# Type:         GIT extension
                 {%- if 'flags' in extensions_available[ext][php_version] -%}
                     {{- "\n\t" }}&& git clone {{ extensions_available[ext][php_version]['flags'] }} {{ extensions_available[ext][php_version]['git_url'] }} /tmp/{{ ext }} \
+                {%- elif 'flags' in extensions_available[ext]['all'] -%}
+                    {{- "\n\t" }}&& git clone {{ extensions_available[ext]['all']['flags'] }} {{ extensions_available[ext]['all']['git_url'] }} /tmp/{{ ext }} \
                 {%- else -%}
                     {{- "\n\t" }}&& git clone {{ extensions_available[ext][php_version]['git_url'] }} /tmp/{{ ext }} \
                 {%- endif -%}
