@@ -338,7 +338,7 @@ jobs:
     needs:
       - configure
       - push-slim
-    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    uses: lxShaDoWxl/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}
@@ -353,7 +353,7 @@ jobs:
     needs:
       - configure
       - push-work
-    uses: john-ea/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
+    uses: lxShaDoWxl/devilbox-actions/.github/workflows/docker-multistage-push-manifest.yml@master
     with:
       can_deploy: ${{ needs.configure.outputs.can_login == 'true' && needs.configure.outputs.can_push == 'true' }}
       has_refs: ${{ needs.configure.outputs.has_refs == 'true' }}

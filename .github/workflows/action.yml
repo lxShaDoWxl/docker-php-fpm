@@ -55,8 +55,8 @@ jobs:
     needs: [params]
     uses: lxShaDoWxl/devilbox-actions/.github/workflows/docker-multistage-configure.yml@master
     with:
-      enabled: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && (github.event.pull_request.user.login != 'john-ea')) }}
-      can_deploy: ${{ (github.repository == 'john-ea/docker-php-fpm') && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/') || startsWith(github.ref, 'refs/heads/release-')) }}
+      enabled: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && (github.event.pull_request.user.login != 'lxShaDoWxl')) }}
+      can_deploy: ${{ (github.repository == 'lxShaDoWxl/docker-php-fpm') && (github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/') || startsWith(github.ref, 'refs/heads/release-')) }}
       versions: ${{ needs.params.outputs.versions }}
       refs: ${{ needs.params.outputs.refs }}
     secrets:
