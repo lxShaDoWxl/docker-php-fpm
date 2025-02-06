@@ -25,7 +25,7 @@ DOCKER_PULL_BASE_IMAGES_IGNORE = devilbox-slim-base devilbox-work-help devilbox-
 TAG        = latest
 
 # Makefile.docker overwrites
-DOCKER_USER       = johnea
+DOCKER_USER       = ghcr.io/lxshadowxl/docker-php-fpm
 NAME       = PHP
 #VERSION    = 5.6
 IMAGE      = $(DOCKER_USER)/php-fpm

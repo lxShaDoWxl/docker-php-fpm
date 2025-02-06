@@ -82,7 +82,7 @@ RUN set -eux \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
 		file \
 		git \
-{% if php_version in [7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3] %}
+{% if php_version in [7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4] %}
 		mariadb-client \
 {% else %}
 		mysql-client \
@@ -503,9 +503,9 @@ MAINTAINER "cytopia" <cytopia@everythingcli.org>
 #LABEL "org.opencontainers.image.revision"=""
 LABEL "maintainer"="cytopia <cytopia@everythingcli.org>"
 LABEL "org.opencontainers.image.authors"="cytopia <cytopia@everythingcli.org>"
-LABEL "org.opencontainers.image.url"="https://github.com/devilbox/docker-php-fpm"
-LABEL "org.opencontainers.image.documentation"="https://github.com/devilbox/docker-php-fpm"
-LABEL "org.opencontainers.image.source"="https://github.com/devilbox/docker-php-fpm"
+LABEL "org.opencontainers.image.url"="https://github.com/lxShaDoWxl/docker-php-fpm"
+LABEL "org.opencontainers.image.documentation"="https://github.com/lxShaDoWxl/docker-php-fpm"
+LABEL "org.opencontainers.image.source"="https://github.com/lxShaDoWxl/docker-php-fpm"
 LABEL "org.opencontainers.image.vendor"="devilbox"
 LABEL "org.opencontainers.image.licenses"="MIT"
 LABEL "org.opencontainers.image.ref.name"="{{ php_version }}-slim"

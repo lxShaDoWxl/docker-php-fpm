@@ -12,7 +12,7 @@
 ###
 ### Installs all cli tools required to install custom tools
 ###
-FROM johnea/php-fpm:7.0-slim as devilbox-work-help-builder
+FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:7.0-slim AS devilbox-work-help-builder
 
 ###
 ### Install build_dep
@@ -120,7 +120,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM johnea/php-fpm:7.0-slim as devilbox-work-help
+FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:7.0-slim AS devilbox-work-help
 
 ###
 ### Install run_dep
@@ -191,7 +191,7 @@ RUN set -eux \
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-work-help as devilbox-work-help-test
+FROM devilbox-work-help AS devilbox-work-help-test
 
 ###
 ### Devilbox required helper tools from group_vars (work-help.yml)
@@ -261,7 +261,7 @@ RUN set -eux \
 ###
 ### This stage can be easily modified by adding tools into the ./php_tools/ directory.
 ###
-FROM devilbox-work-help as devilbox-work-tools-builder
+FROM devilbox-work-help AS devilbox-work-tools-builder
 
 ###
 ### Install build_dep, run_dep or tools type: apt
@@ -696,7 +696,7 @@ RUN set -eux \
 ###
 ### This stage can be easily modified by adding tools into the ./php_tools/ directory.
 ###
-FROM devilbox-work-help as devilbox-work-tools
+FROM devilbox-work-help AS devilbox-work-tools
 
 ###
 ### Install run_dep or tools type: apt
@@ -773,7 +773,7 @@ COPY --from=devilbox-work-tools-builder /var/lib/gems /var/lib/gems
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-work-tools as devilbox-work-tools-test
+FROM devilbox-work-tools AS devilbox-work-tools-test
 
 
 # -------------------- (npm) angular-cli --------------------
@@ -1064,8 +1064,7 @@ RUN set -eux \
 ###
 ### Prepare final base image (STAGE: work)
 ###
-FROM devilbox-work-tools as work
-MAINTAINER "cytopia" <cytopia@everythingcli.org>
+FROM devilbox-work-tools AS work
 
 ###
 ### Labels
@@ -1076,9 +1075,9 @@ MAINTAINER "cytopia" <cytopia@everythingcli.org>
 #LABEL "org.opencontainers.image.revision"=""
 LABEL "maintainer"="cytopia <cytopia@everythingcli.org>"
 LABEL "org.opencontainers.image.authors"="cytopia <cytopia@everythingcli.org>"
-LABEL "org.opencontainers.image.url"="https://github.com/devilbox/docker-php-fpm"
-LABEL "org.opencontainers.image.documentation"="https://github.com/devilbox/docker-php-fpm"
-LABEL "org.opencontainers.image.source"="https://github.com/devilbox/docker-php-fpm"
+LABEL "org.opencontainers.image.url"="https://github.com/lxShaDoWxl/docker-php-fpm"
+LABEL "org.opencontainers.image.documentation"="https://github.com/lxShaDoWxl/docker-php-fpm"
+LABEL "org.opencontainers.image.source"="https://github.com/lxShaDoWxl/docker-php-fpm"
 LABEL "org.opencontainers.image.vendor"="devilbox"
 LABEL "org.opencontainers.image.licenses"="MIT"
 LABEL "org.opencontainers.image.ref.name"="7.0-work"

@@ -12,7 +12,7 @@
 ###
 ### Installs all cli tools required to run Devilbox and its intranet
 ###
-FROM johnea/php-fpm:8.1-prod as devilbox-slim-base-builder
+FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:8.1-prod as devilbox-slim-base-builder
 
 ###
 ### Install apt Tools
@@ -293,7 +293,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM johnea/php-fpm:8.1-prod as devilbox-slim-base
+FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:8.1-prod as devilbox-slim-base
 ARG ARCH
 
 ###
@@ -586,9 +586,9 @@ MAINTAINER "cytopia" <cytopia@everythingcli.org>
 #LABEL "org.opencontainers.image.revision"=""
 LABEL "maintainer"="cytopia <cytopia@everythingcli.org>"
 LABEL "org.opencontainers.image.authors"="cytopia <cytopia@everythingcli.org>"
-LABEL "org.opencontainers.image.url"="https://github.com/devilbox/docker-php-fpm"
-LABEL "org.opencontainers.image.documentation"="https://github.com/devilbox/docker-php-fpm"
-LABEL "org.opencontainers.image.source"="https://github.com/devilbox/docker-php-fpm"
+LABEL "org.opencontainers.image.url"="https://github.com/lxShaDoWxl/docker-php-fpm"
+LABEL "org.opencontainers.image.documentation"="https://github.com/lxShaDoWxl/docker-php-fpm"
+LABEL "org.opencontainers.image.source"="https://github.com/lxShaDoWxl/docker-php-fpm"
 LABEL "org.opencontainers.image.vendor"="devilbox"
 LABEL "org.opencontainers.image.licenses"="MIT"
 LABEL "org.opencontainers.image.ref.name"="8.1-slim"
