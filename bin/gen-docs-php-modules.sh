@@ -164,8 +164,8 @@ update_readme() {
 	done < <(echo "${modules_avail}")
 }
 
-
 # The following commented code is used to generate the README initially
+#MODS_IMAGE="$( get_modules_from_image "${VERSION}" "${VERSION}-${STAGE}" )"
 #echo "<table>"
 #echo " <tr>"
 #echo "   <th>Ext</th>"
@@ -179,26 +179,28 @@ update_readme() {
 #echo "   <th>PHP 8.1</th>"
 #echo "   <th>PHP 8.2</th>"
 #echo "   <th>PHP 8.3</th>"
+#echo "   <th>PHP 8.4</th>"
 #echo " </tr>"
 #
 #while read -r line; do
 #	MOD_NAME="$( echo "${line}" )"
 #	MOD_LOWER="$( echo "${MOD_NAME}" | tr '[:upper:]' '[:lower:]' )"
 #	echo " <tr>"
-#	echo "  <td><a href=\"php_modules/${MOD_LOWER}\">${MOD_NAME}</a></td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_5.6\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.0\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.1\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.2\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.3\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_7.4\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.0\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.1\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.2\">✓</td>"
-#	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.3\">✓</td>"
+#	echo "  <td><a href=\"../php_modules/${MOD_LOWER}\">${MOD_NAME}</a></td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_5.6\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_7.0\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_7.1\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_7.2\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_7.3\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_7.4\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_8.0\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_8.1\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_8.2\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_8.3\">✓</td>"
+#	echo "  <td class=\"ext_${STAGE}_${MOD_LOWER}_8.4\">✓</td>"
 #	echo " </tr>"
 #done < <(echo "${MODS_IMAGE}")
-#echo "<table>"
+#echo "</table>"
 #exit
 
 
