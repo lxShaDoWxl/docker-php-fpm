@@ -189,7 +189,7 @@ manifest-push: docker-manifest-push
 test: check-stage-is-set
 test: check-current-image-exists
 test: test-integration
-test: gen-readme
+#test: gen-readme
 
 .PHONY: test-integration
 test-integration:
