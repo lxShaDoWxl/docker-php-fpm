@@ -358,22 +358,6 @@ RUN set -eux \
 	&& codecept --version 2>/dev/null | grep -E '^Codeception(\sversion)?\s[0-9][.0-9]+$' || (codecept --version; false)	\
 	&& true
 
-# -------------------- (custom) deployer --------------------
-RUN set -eux \
-	&& TAG_VERSION="$( \
-	  curl -sSL 'https://github.com/deployphp/deployer/releases/latest' \
-	  | grep -Eo '/deployphp/deployer/releases/tag/["-.0-9v"]+' \
-	  | grep -Eo '[-.0-9v]+' \
-	  | head -1 \
-	)" \
-	\
-	&& DEP_URL="https://github.com/deployphp/deployer/releases/download/${TAG_VERSION}/deployer.phar" \
-	&& curl -sS -k -L --fail -L -o /usr/local/bin/dep "${DEP_URL}" \
-	\
-	&& chmod +x /usr/local/bin/dep	\
-	&& dep --version 2>/dev/null | grep -Ei 'deployer\s*(version\s*)?[0-9][.0-9]+' || (dep --version; false)	\
-	&& true
-
 # -------------------- (custom) git-flow --------------------
 RUN set -eux \
 	&& git clone --depth=1 --single-branch https://github.com/CJ-Systems/gitflow-cjs /tmp/gitflow \
@@ -808,11 +792,6 @@ RUN set -eux \
 # -------------------- (composer) codeception --------------------
 RUN set -eux \
 	&& codecept --version 2>/dev/null | grep -E '^Codeception(\sversion)?\s[0-9][.0-9]+$' || (codecept --version; false)	\
-	&& true
-
-# -------------------- (custom) deployer --------------------
-RUN set -eux \
-	&& dep --version 2>/dev/null | grep -Ei 'deployer\s*(version\s*)?[0-9][.0-9]+' || (dep --version; false)	\
 	&& true
 
 # -------------------- (custom) git-flow --------------------
