@@ -677,7 +677,7 @@ extensions_available:
       type: pecl
       version: 1.2.3
   oci8:
-    disabled: [8.4]
+    disabled: [8.1, 8.2, 8.3, 8.4]
     all:
       type: builtin
       configure: --with-oci8=instantclient,/usr/lib/oracle/${ORACLE_VERSION_MAJOR}/client64/lib/,${ORACLE_VERSION_MAJOR}
