@@ -12,7 +12,7 @@
 ###
 ### Installs all cli tools required to run Devilbox and its intranet
 ###
-FROM johnea/php-fpm:8.0-prod as devilbox-slim-base-builder
+FROM johnea/php-fpm:8.0-prod AS devilbox-slim-base-builder
 
 ###
 ### Install apt Tools
@@ -177,7 +177,7 @@ RUN set -eux \
 # -------------------- pgsql_client --------------------
 RUN set -eux \
 	&& curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-	&& echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+	&& echo "deb https://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
 	&& apt-get update \
 	\
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
@@ -293,7 +293,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM johnea/php-fpm:8.0-prod as devilbox-slim-base
+FROM johnea/php-fpm:8.0-prod AS devilbox-slim-base
 ARG ARCH
 
 ###
@@ -451,7 +451,7 @@ RUN set -eux \
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-slim-base as devilbox-slim-base-test
+FROM devilbox-slim-base AS devilbox-slim-base-test
 RUN set -eux \
 	&& mysql --version \
 	&& redis-cli --version \
@@ -574,8 +574,7 @@ RUN set -eux \
 ###
 ### Prepare final base image (STAGE: slim)
 ###
-FROM devilbox-slim-base as slim
-MAINTAINER "cytopia" <cytopia@everythingcli.org>
+FROM devilbox-slim-base AS slim
 
 ###
 ### Labels

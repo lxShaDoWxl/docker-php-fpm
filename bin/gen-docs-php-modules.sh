@@ -179,6 +179,7 @@ update_readme() {
 #echo "   <th>PHP 8.1</th>"
 #echo "   <th>PHP 8.2</th>"
 #echo "   <th>PHP 8.3</th>"
+#echo "   <th>PHP 8.4</th>"
 #echo " </tr>"
 #
 #while read -r line; do
@@ -196,6 +197,7 @@ update_readme() {
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.1\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.2\">✓</td>"
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.3\">✓</td>"
+#	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.4\">✓</td>"
 #	echo " </tr>"
 #done < <(echo "${MODS_IMAGE}")
 #echo "<table>"
@@ -242,6 +244,7 @@ if [ "${VERSION}" = "" ]; then
 	update "8.1"
 	update "8.2"
 	update "8.3"
+	update "8.4"
 else
 	if [ "${VERSION}" != "5.6" ] \
 	&& [ "${VERSION}" != "7.0" ] \
@@ -252,7 +255,8 @@ else
 	&& [ "${VERSION}" != "8.0" ] \
 	&& [ "${VERSION}" != "8.1" ] \
 	&& [ "${VERSION}" != "8.2" ] \
-	&& [ "${VERSION}" != "8.3" ]; then
+	&& [ "${VERSION}" != "8.3" ] \
+	&& [ "${VERSION}" != "8.4" ]; then
 		# Argument does not match any of the PHP versions
 		echo "Error, invalid argument."
 		print_usage

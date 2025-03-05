@@ -10,10 +10,10 @@ name: 🕛 Nightly End-of-life (EOL)
 # When to run
 # -------------------------------------------------------------------------------------------------
 on:
-  # Nightly: At 01:00 on Monday and Thursday
+  # Nightly: At 02:00 on Wednesday and Thursday
   schedule:
     - cron: '0 2 * * 3'
-    - cron: '0 2 * * 6'
+    - cron: '0 2 * * 4'
   # Dispatch: allows for manual trigger via GH UI
   workflow_dispatch:
 

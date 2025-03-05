@@ -72,7 +72,7 @@ tools_available:
       type: npm
       version: 16
   asgardcms:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
     check: asgardcms --version 2>/dev/null | grep -Ei 'AsgardCMS\sInstaller\s[0-9][.0-9]+' || (asgardcms --version; false)
     all:
       type: composer
@@ -276,7 +276,7 @@ tools_available:
       binary: laravel
       version: 2.2.0
   laravel-lumen:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
     check: lumen --version 2>/dev/null | grep ^Lumen | grep -E '[0-9]\.[0-9]+' || (lumen --version; false)
     all:
       type: composer
@@ -333,7 +333,7 @@ tools_available:
       type: apt
       package: net-tools
   phalcon-devtools:
-    disabled: [8.2, 8.3]
+    disabled: [8.2, 8.3, 8.4]
     check: |
         if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
           echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
@@ -373,6 +373,9 @@ tools_available:
         && if [ -f /usr/local/etc/php/conf.d/docker-php-ext-psr.ini ]; then \
           echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
         fi \
+    8.4:
+      type: composer
+      version: 5.0.x-dev -W
     8.3:
       type: composer
       version: 5.0.x-dev -W
@@ -398,7 +401,7 @@ tools_available:
       type: composer
       version: 3.4.11
   php-cs-fixer:
-    disabled: []
+    disabled: [8.4]
     check: php-cs-fixer --version 2>&1 | grep -E 'Fixer\s+(version\s*)?[-_.0-9]+\s+' || (php-cs-fixer --version; false)
     all:
       type: custom
@@ -459,6 +462,9 @@ tools_available:
       run_dep: []
       pre: PHP_UNIT_VERSION=""
       post: chmod +x /usr/local/bin/phpunit
+    8.2:
+      type: custom
+      pre: PHP_UNIT_VERSION="11"
     8.1:
       type: custom
       pre: PHP_UNIT_VERSION="10"
@@ -507,6 +513,9 @@ tools_available:
       pre:
       post: |
         ln -s pwncat /usr/local/bin/netcat \
+    8.4:
+      type: pip
+      flags: --break-system-packages
     8.3:
       type: pip
       flags: --break-system-packages
@@ -624,7 +633,7 @@ tools_available:
       pre:
       post:
   wkhtmltopdf:
-    disabled: []
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
     check: wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | grep patched || (wkhtmltopdf --version; false)
     all:
       type: custom
@@ -734,6 +743,9 @@ tools_available:
       flags:
       # pre:
       # post:
+    8.4:
+      type: pip
+      flags: --break-system-packages
     8.3:
       type: pip
       flags: --break-system-packages
@@ -804,6 +816,9 @@ tools_available:
       flags:
       pre:
       post:
+    8.4:
+      type: pip
+      flags: --break-system-packages
     8.3:
       type: pip
       flags: --break-system-packages

@@ -6,8 +6,8 @@ name: ioncube
 # Exclude module build/installation for the following PHP versions
 # ioncube on amd64 is only available from 4.1 up to 7.4
 # ioncube on arm64 is only available from 5.5 up to 7.4
-# TODO: Remove some exludes, as ioncube had some recent updates
-exclude: [8.0, 8.3]
+# TODO: Remove some excludes, as ioncube had some recent updates
+exclude: [8.0, 8.4]
 
 # In order for this module to built correctly against all dependencies,
 # the following modules must have been built first.
