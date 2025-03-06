@@ -447,7 +447,7 @@ extensions_available:
       type: builtin
       run_dep: [libicu57]
   ioncube:
-    disabled: [8.0, 8.4]
+    disabled: [8.0]
     all:
       type: custom
       command: |
@@ -559,42 +559,6 @@ extensions_available:
       command: printf "\n\n\nyes\nyes\nyes\n" | pecl install memcached
       build_dep: [zlib1g-dev, libmemcached-dev, libevent-dev]
       run_dep: [libmemcachedutil2, libevent-2.1-7]
-    8.4:
-      type: git
-      git_url: https://github.com/php-memcached-dev/php-memcached
-      flags: --depth=1 --single-branch --branch=master
-      command: |
-        true \
-        # FIXME: This is a work-around to mitigate compile error with PHP 8.4
-        && sed -i'' 's/\sTSRMLS_CC//g' php_memcached_session.c \
-        && phpize \
-        && ./configure --enable-memcached \
-        && make -j$(getconf _NPROCESSORS_ONLN) \
-        && make install \
-    8.3:
-      type: git
-      git_url: https://github.com/php-memcached-dev/php-memcached
-      flags: --depth=1 --single-branch --branch=master
-      command: |
-        true \
-        # FIXME: This is a work-around to mitigate compile error with PHP 8.3
-        && sed -i'' 's/\sTSRMLS_CC//g' php_memcached_session.c \
-        && phpize \
-        && ./configure --enable-memcached \
-        && make -j$(getconf _NPROCESSORS_ONLN) \
-        && make install \
-    8.2:
-      type: git
-      git_url: https://github.com/php-memcached-dev/php-memcached
-      flags: --depth=1 --single-branch --branch=master
-      command: |
-        true \
-        # FIXME: This is a work-around to mitigate compile error with PHP 8.2
-        && sed -i'' 's/\sTSRMLS_CC//g' php_memcached_session.c \
-        && phpize \
-        && ./configure --enable-memcached \
-        && make -j$(getconf _NPROCESSORS_ONLN) \
-        && make install \
     7.2:
       type: pecl
       command: printf "\n\n\nyes\nyes\nyes\n" | pecl install memcached
@@ -1245,7 +1209,7 @@ extensions_available:
       type: builtin
       build_dep: [libsodium-dev]
   solr:
-    disabled: [5.6, 7.0, 8.4]
+    disabled: [5.6, 7.0]
     all:
       type: pecl
       build_dep: [libxml2-dev, libcurl4-openssl-dev]

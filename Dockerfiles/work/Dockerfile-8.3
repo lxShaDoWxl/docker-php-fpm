@@ -447,7 +447,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpcbf --------------------
 RUN set -eux \
-	&& PHPCBF_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar"	\
+	&& PHPCBF_URL="https://phars.phpcodesniffer.com/phpcbf.phar"	\
 	&& curl -sS -k -L --fail -L "${PHPCBF_URL}" -o /usr/local/bin/phpcbf	\
 	&& chmod +x /usr/local/bin/phpcbf	\
 	&& phpcbf --version | grep -E 'version [0-9][.0-9]+' || (phpcbf --version; false)	\
@@ -455,7 +455,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpcs --------------------
 RUN set -eux \
-	&& PHPCS_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar"	\
+	&& PHPCS_URL="https://phars.phpcodesniffer.com/phpcs.phar"	\
 	&& curl -sS -k -L --fail -L "${PHPCS_URL}" -o /usr/local/bin/phpcs	\
 	&& chmod +x /usr/local/bin/phpcs	\
 	&& phpcs --version | grep -E 'version [0-9][.0-9]+' || (phpcs --version; false)	\

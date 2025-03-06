@@ -446,7 +446,7 @@ RUN set -eux \
 	  echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
 	fi \
 	\
-	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  phalcon/devtools:5.0.x-dev -W \
+	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  phalcon/devtools:5.0.x-dev --dev -W \
 	&& ln -s /usr/local/src/composer/vendor/phalcon/devtools/phalcon /usr/local/bin/ \
 	&& rm -rf /usr/local/src/composer/cache/* \
 	&& if [ -f /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini ]; then \
@@ -486,7 +486,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpcbf --------------------
 RUN set -eux \
-	&& PHPCBF_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar"	\
+	&& PHPCBF_URL="https://phars.phpcodesniffer.com/phpcbf.phar"	\
 	&& curl -sS -k -L --fail -L "${PHPCBF_URL}" -o /usr/local/bin/phpcbf	\
 	&& chmod +x /usr/local/bin/phpcbf	\
 	&& phpcbf --version | grep -E 'version [0-9][.0-9]+' || (phpcbf --version; false)	\
@@ -494,7 +494,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpcs --------------------
 RUN set -eux \
-	&& PHPCS_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar"	\
+	&& PHPCS_URL="https://phars.phpcodesniffer.com/phpcs.phar"	\
 	&& curl -sS -k -L --fail -L "${PHPCS_URL}" -o /usr/local/bin/phpcs	\
 	&& chmod +x /usr/local/bin/phpcs	\
 	&& phpcs --version | grep -E 'version [0-9][.0-9]+' || (phpcs --version; false)	\

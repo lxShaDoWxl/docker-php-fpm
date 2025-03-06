@@ -200,7 +200,7 @@ update_readme() {
 #	echo "  <td class=\"ext_mods_${MOD_LOWER}_8.4\">✓</td>"
 #	echo " </tr>"
 #done < <(echo "${MODS_IMAGE}")
-#echo "<table>"
+#echo "</table>"
 #exit
 
 
