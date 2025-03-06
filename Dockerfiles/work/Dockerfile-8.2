@@ -12,7 +12,7 @@
 ###
 ### Installs all cli tools required to install custom tools
 ###
-FROM johnea/php-fpm:8.2-slim as devilbox-work-help-builder
+FROM johnea/php-fpm:8.2-slim AS devilbox-work-help-builder
 
 ###
 ### Install build_dep
@@ -121,7 +121,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM johnea/php-fpm:8.2-slim as devilbox-work-help
+FROM johnea/php-fpm:8.2-slim AS devilbox-work-help
 
 ###
 ### Install run_dep
@@ -193,7 +193,7 @@ RUN set -eux \
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-work-help as devilbox-work-help-test
+FROM devilbox-work-help AS devilbox-work-help-test
 
 ###
 ### Devilbox required helper tools from group_vars (work-help.yml)
@@ -263,7 +263,7 @@ RUN set -eux \
 ###
 ### This stage can be easily modified by adding tools into the ./php_tools/ directory.
 ###
-FROM devilbox-work-help as devilbox-work-tools-builder
+FROM devilbox-work-help AS devilbox-work-tools-builder
 
 ###
 ### Install build_dep, run_dep or tools type: apt
@@ -276,17 +276,9 @@ RUN set -eux \
 		# ---------- run_deps ----------
 		dos2unix \
 		file \
-		fontconfig \
 		less \
-		libfontenc1 \
-		libxfont2 \
-		libxrender1 \
 		moreutils \
 		ruby \
-		xfonts-75dpi \
-		xfonts-base \
-		xfonts-encodings \
-		xfonts-utils \
 		# ---------- type: apt ----------
 		git \
 		jq \
@@ -455,7 +447,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpcbf --------------------
 RUN set -eux \
-	&& PHPCBF_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar"	\
+	&& PHPCBF_URL="https://phars.phpcodesniffer.com/phpcbf.phar"	\
 	&& curl -sS -k -L --fail -L "${PHPCBF_URL}" -o /usr/local/bin/phpcbf	\
 	&& chmod +x /usr/local/bin/phpcbf	\
 	&& phpcbf --version | grep -E 'version [0-9][.0-9]+' || (phpcbf --version; false)	\
@@ -463,7 +455,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpcs --------------------
 RUN set -eux \
-	&& PHPCS_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar"	\
+	&& PHPCS_URL="https://phars.phpcodesniffer.com/phpcs.phar"	\
 	&& curl -sS -k -L --fail -L "${PHPCS_URL}" -o /usr/local/bin/phpcs	\
 	&& chmod +x /usr/local/bin/phpcs	\
 	&& phpcs --version | grep -E 'version [0-9][.0-9]+' || (phpcs --version; false)	\
@@ -478,7 +470,7 @@ RUN set -eux \
 
 # -------------------- (custom) phpunit --------------------
 RUN set -eux \
-	&& PHP_UNIT_VERSION=""	\
+	&& PHP_UNIT_VERSION="11"	\
 	&& if [ -n "${PHP_UNIT_VERSION}" ]; then \
 	  PHP_UNIT_URL="https://phar.phpunit.de/phpunit-${PHP_UNIT_VERSION}.phar"; \
 	else \
@@ -575,34 +567,6 @@ RUN set -eux \
 	&& webpack-cli --version | grep -E '[0-9][.0-9]+' || (webpack-cli --version; false)	\
 	&& true
 
-# -------------------- (custom) wkhtmltopdf --------------------
-RUN set -eux \
-	&& OS_RELEASE="bookworm"	\
-	&& DEB_HOST_ARCH="$( dpkg-architecture --query DEB_HOST_ARCH )" \
-	&& if [ "${OS_RELEASE}" = "bookworm" ]; then \
-	  WK_VERSION="$( \
-	    curl -sS 'https://github.com/wkhtmltopdf/packaging/releases' \
-	    | grep -Eo '/wkhtmltopdf/packaging/releases/tag/[-.0-9]+' \
-	    | grep -Eo '[-.0-9]+' \
-	    | sort -V \
-	    | tail -1 \
-	  )" \
-	  && WK_URL="https://github.com/wkhtmltopdf/packaging/releases/download/${WK_VERSION}/wkhtmltox_${WK_VERSION}.${OS_RELEASE}_${DEB_HOST_ARCH}.deb"; \
-	else \
-	  WK_URL="$( \
-	    curl -sS -k -L --fail 'https://wkhtmltopdf.org/downloads.html' \
-	    | awk -F'"' "/wkhtmltopdf.*${OS_RELEASE}_${DEB_HOST_ARCH}\.deb/{print \$(NF-1)}" \
-	    | head -1 \
-	  )"; \
-	fi \
-	&& echo "URL: ${WK_URL}" \
-	&& curl -sS -k -L --fail -o /tmp/wkhtmltopdf.deb "${WK_URL}" \
-	&& dpkg -i /tmp/wkhtmltopdf.deb \
-	&& rm -f /tmp/wkhtmltopdf.deb \
-	\
-	&& wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | grep patched || (wkhtmltopdf --version; false)	\
-	&& true
-
 # -------------------- (custom) wp-cli --------------------
 RUN set -eux \
 	&& WPCLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"	\
@@ -656,7 +620,7 @@ RUN set -eux \
 ###
 ### This stage can be easily modified by adding tools into the ./php_tools/ directory.
 ###
-FROM devilbox-work-help as devilbox-work-tools
+FROM devilbox-work-help AS devilbox-work-tools
 
 ###
 ### Install run_dep or tools type: apt
@@ -667,17 +631,9 @@ RUN set -eux \
 		# ---------- run_deps ----------
 		dos2unix \
 		file \
-		fontconfig \
 		less \
-		libfontenc1 \
-		libxfont2 \
-		libxrender1 \
 		moreutils \
 		ruby \
-		xfonts-75dpi \
-		xfonts-base \
-		xfonts-encodings \
-		xfonts-utils \
 		# ---------- type: apt ----------
 		git \
 		jq \
@@ -733,7 +689,7 @@ COPY --from=devilbox-work-tools-builder /var/lib/gems /var/lib/gems
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-work-tools as devilbox-work-tools-test
+FROM devilbox-work-tools AS devilbox-work-tools-test
 
 
 # -------------------- (npm) angular-cli --------------------
@@ -926,11 +882,6 @@ RUN set -eux \
 	&& webpack-cli --version | grep -E '[0-9][.0-9]+' || (webpack-cli --version; false)	\
 	&& true
 
-# -------------------- (custom) wkhtmltopdf --------------------
-RUN set -eux \
-	&& wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | grep patched || (wkhtmltopdf --version; false)	\
-	&& true
-
 # -------------------- (custom) wp-cli --------------------
 RUN set -eux \
 	&& wp --allow-root --version | grep -E '[0-9][.0-9]+' || (wp --allow-root --version; false)	\
@@ -1002,8 +953,7 @@ RUN set -eux \
 ###
 ### Prepare final base image (STAGE: work)
 ###
-FROM devilbox-work-tools as work
-MAINTAINER "cytopia" <cytopia@everythingcli.org>
+FROM devilbox-work-tools AS work
 
 ###
 ### Labels

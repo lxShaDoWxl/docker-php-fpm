@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 {{ edit_comment_mods }}
-FROM {{ docker_user }}/php-fpm:{{ php_version }}-base as builder
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-base AS builder
 
 
 {#
@@ -330,8 +330,7 @@ RUN set -eux \
 
 
 {{ edit_comment_mods }}
-FROM {{ docker_user }}/php-fpm:{{ php_version }}-base as final
-MAINTAINER "cytopia" <cytopia@everythingcli.org>
+FROM {{ docker_user }}/php-fpm:{{ php_version }}-base AS final
 
 ###
 ### Labels

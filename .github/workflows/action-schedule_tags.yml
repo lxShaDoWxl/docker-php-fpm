@@ -10,9 +10,9 @@ name: 🕛 Nightly tags
 # When to run
 # -------------------------------------------------------------------------------------------------
 on:
-  # Nightly: At 01:00 on Tuesday and Friday
+  # Nightly: At 01:00 on Tuesday
   schedule:
-    - cron: '0 1 * * 2,5'
+    - cron: '0 1 * * 2'
   # Dispatch: allows for manual trigger via GH UI
   workflow_dispatch:
 

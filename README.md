@@ -4,7 +4,7 @@
 [![Build](https://img.shields.io/github/actions/workflow/status/john-ea/docker-php-fpm/action.yml?style=for-the-badge&logo=github&label=Build)](https://github.com/john-ea/docker-php-fpm/actions/workflows/action.yml)
 [![Docker pulls](https://img.shields.io/docker/pulls/johnea/php-fpm.svg?style=for-the-badge&logo=docker)](https://hub.docker.com/r/johnea/php-fpm/tags)
 
-![PHP](https://img.shields.io/badge/PHP-5.6--8.3-blue?style=for-the-badge&logo=php)
+![PHP](https://img.shields.io/badge/PHP-5.6--8.4-blue?style=for-the-badge&logo=php)
 
 ___
 
@@ -49,11 +49,11 @@ This repository also allows you to quickly generate and **build your own custom 
 docker pull johnea/php-fpm:<tag>
 ```
 
-* [`5.6-base`](Dockerfiles/base/Dockerfile-5.6), [`7.0-base`](Dockerfiles/base/Dockerfile-7.0), [`7.1-base`](Dockerfiles/base/Dockerfile-7.1), [`7.2-base`](Dockerfiles/base/Dockerfile-7.2), [`7.3-base`](Dockerfiles/base/Dockerfile-7.3), [`7.4-base`](Dockerfiles/base/Dockerfile-7.4), [`8.0-base`](Dockerfiles/base/Dockerfile-8.0), [`8.1-base`](Dockerfiles/base/Dockerfile-8.1), [`8.2-base`](Dockerfiles/base/Dockerfile-8.2), [`8.3-base`](Dockerfiles/base/Dockerfile-8.3)
-* [`5.6-mods`](Dockerfiles/mods/Dockerfile-5.6), [`7.0-mods`](Dockerfiles/mods/Dockerfile-7.0), [`7.1-mods`](Dockerfiles/mods/Dockerfile-7.1), [`7.2-mods`](Dockerfiles/mods/Dockerfile-7.2), [`7.3-mods`](Dockerfiles/mods/Dockerfile-7.3), [`7.4-mods`](Dockerfiles/mods/Dockerfile-7.4), [`8.0-mods`](Dockerfiles/mods/Dockerfile-8.0), [`8.1-mods`](Dockerfiles/mods/Dockerfile-8.1), [`8.2-mods`](Dockerfiles/mods/Dockerfile-8.2), [`8.3-mods`](Dockerfiles/mods/Dockerfile-8.3)
-* [`5.6-prod`](Dockerfiles/prod/Dockerfile-5.6), [`7.0-prod`](Dockerfiles/prod/Dockerfile-7.0), [`7.1-prod`](Dockerfiles/prod/Dockerfile-7.1), [`7.2-prod`](Dockerfiles/prod/Dockerfile-7.2), [`7.3-prod`](Dockerfiles/prod/Dockerfile-7.3), [`7.4-prod`](Dockerfiles/prod/Dockerfile-7.4), [`8.0-prod`](Dockerfiles/prod/Dockerfile-8.0), [`8.1-prod`](Dockerfiles/prod/Dockerfile-8.1), [`8.2-prod`](Dockerfiles/prod/Dockerfile-8.2), [`8.3-prod`](Dockerfiles/prod/Dockerfile-8.3)
-* [`5.6-slim`](Dockerfiles/slim/Dockerfile-5.6), [`7.0-slim`](Dockerfiles/slim/Dockerfile-7.0), [`7.1-slim`](Dockerfiles/slim/Dockerfile-7.1), [`7.2-slim`](Dockerfiles/slim/Dockerfile-7.2), [`7.3-slim`](Dockerfiles/slim/Dockerfile-7.3), [`7.4-slim`](Dockerfiles/slim/Dockerfile-7.4), [`8.0-slim`](Dockerfiles/slim/Dockerfile-8.0), [`8.1-slim`](Dockerfiles/slim/Dockerfile-8.1), [`8.2-slim`](Dockerfiles/slim/Dockerfile-8.2), [`8.3-slim`](Dockerfiles/slim/Dockerfile-8.3)
-* [`5.6-work`](Dockerfiles/work/Dockerfile-5.6), [`7.0-work`](Dockerfiles/work/Dockerfile-7.0), [`7.1-work`](Dockerfiles/work/Dockerfile-7.1), [`7.2-work`](Dockerfiles/work/Dockerfile-7.2), [`7.3-work`](Dockerfiles/work/Dockerfile-7.3), [`7.4-work`](Dockerfiles/work/Dockerfile-7.4), [`8.0-work`](Dockerfiles/work/Dockerfile-8.0), [`8.1-work`](Dockerfiles/work/Dockerfile-8.1), [`8.2-work`](Dockerfiles/work/Dockerfile-8.2), [`8.3-work`](Dockerfiles/work/Dockerfile-8.3)
+* [`5.6-base`](Dockerfiles/base/Dockerfile-5.6), [`7.0-base`](Dockerfiles/base/Dockerfile-7.0), [`7.1-base`](Dockerfiles/base/Dockerfile-7.1), [`7.2-base`](Dockerfiles/base/Dockerfile-7.2), [`7.3-base`](Dockerfiles/base/Dockerfile-7.3), [`7.4-base`](Dockerfiles/base/Dockerfile-7.4), [`8.0-base`](Dockerfiles/base/Dockerfile-8.0), [`8.1-base`](Dockerfiles/base/Dockerfile-8.1), [`8.2-base`](Dockerfiles/base/Dockerfile-8.2), [`8.3-base`](Dockerfiles/base/Dockerfile-8.3), [`8.4-base`](Dockerfiles/base/Dockerfile-8.4)
+* [`5.6-mods`](Dockerfiles/mods/Dockerfile-5.6), [`7.0-mods`](Dockerfiles/mods/Dockerfile-7.0), [`7.1-mods`](Dockerfiles/mods/Dockerfile-7.1), [`7.2-mods`](Dockerfiles/mods/Dockerfile-7.2), [`7.3-mods`](Dockerfiles/mods/Dockerfile-7.3), [`7.4-mods`](Dockerfiles/mods/Dockerfile-7.4), [`8.0-mods`](Dockerfiles/mods/Dockerfile-8.0), [`8.1-mods`](Dockerfiles/mods/Dockerfile-8.1), [`8.2-mods`](Dockerfiles/mods/Dockerfile-8.2), [`8.3-mods`](Dockerfiles/mods/Dockerfile-8.3), [`8.4-mods`](Dockerfiles/mods/Dockerfile-8.4)
+* [`5.6-prod`](Dockerfiles/prod/Dockerfile-5.6), [`7.0-prod`](Dockerfiles/prod/Dockerfile-7.0), [`7.1-prod`](Dockerfiles/prod/Dockerfile-7.1), [`7.2-prod`](Dockerfiles/prod/Dockerfile-7.2), [`7.3-prod`](Dockerfiles/prod/Dockerfile-7.3), [`7.4-prod`](Dockerfiles/prod/Dockerfile-7.4), [`8.0-prod`](Dockerfiles/prod/Dockerfile-8.0), [`8.1-prod`](Dockerfiles/prod/Dockerfile-8.1), [`8.2-prod`](Dockerfiles/prod/Dockerfile-8.2), [`8.3-prod`](Dockerfiles/prod/Dockerfile-8.3), [`8.4-prod`](Dockerfiles/prod/Dockerfile-8.4)
+* [`5.6-slim`](Dockerfiles/slim/Dockerfile-5.6), [`7.0-slim`](Dockerfiles/slim/Dockerfile-7.0), [`7.1-slim`](Dockerfiles/slim/Dockerfile-7.1), [`7.2-slim`](Dockerfiles/slim/Dockerfile-7.2), [`7.3-slim`](Dockerfiles/slim/Dockerfile-7.3), [`7.4-slim`](Dockerfiles/slim/Dockerfile-7.4), [`8.0-slim`](Dockerfiles/slim/Dockerfile-8.0), [`8.1-slim`](Dockerfiles/slim/Dockerfile-8.1), [`8.2-slim`](Dockerfiles/slim/Dockerfile-8.2), [`8.3-slim`](Dockerfiles/slim/Dockerfile-8.3), [`8.4-slim`](Dockerfiles/slim/Dockerfile-8.4)
+* [`5.6-work`](Dockerfiles/work/Dockerfile-5.6), [`7.0-work`](Dockerfiles/work/Dockerfile-7.0), [`7.1-work`](Dockerfiles/work/Dockerfile-7.1), [`7.2-work`](Dockerfiles/work/Dockerfile-7.2), [`7.3-work`](Dockerfiles/work/Dockerfile-7.3), [`7.4-work`](Dockerfiles/work/Dockerfile-7.4), [`8.0-work`](Dockerfiles/work/Dockerfile-8.0), [`8.1-work`](Dockerfiles/work/Dockerfile-8.1), [`8.2-work`](Dockerfiles/work/Dockerfile-8.2), [`8.3-work`](Dockerfiles/work/Dockerfile-8.3), [`8.4-work`](Dockerfiles/work/Dockerfile-8.4)
 
 :information_source: For details see **[Documentation: Docker Tags](doc/docker-tags.md)**<br/>
 :information_source: For details see **[Documentation: Supported Architectures](doc/supported-architectures.md)**
@@ -66,7 +66,7 @@ The following PHP versions are provided by this repository.
 
 * `PHP 5.6`
 * `PHP 7.0`, `PHP 7.1`, `PHP 7.2`, `PHP 7.3`, `PHP 7.4`
-* `PHP 8.0`, `PHP 8.1`, `PHP 8.2`, `PHP 8.3`
+* `PHP 8.0`, `PHP 8.1`, `PHP 8.2`, `PHP 8.3`, `PHP 8.4`
 
 > **Note:** Unreleased PHP versions are built from custom base images.
 
@@ -364,7 +364,7 @@ Apart from the provided tools, you will also be able to use the container simila
 ```shell
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
-    johnea/php-fpm:7.2-prod
+    johnea/php-fpm:8.3-prod
 ```
 
 #### Alter PHP-FPM and system timezone
@@ -372,7 +372,7 @@ docker run -d -it \
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e TIMEZONE=Europe/Berlin \
-    johnea/php-fpm:7.2-prod
+    johnea/php-fpm:8.3-prod
 ```
 
 #### Load custom PHP configuration
@@ -390,7 +390,7 @@ echo "xdebug.mode = debug" > config/xdebug.ini
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -v config:/etc/php-custom.d \
-    johnea/php-fpm:7.2-prod
+    johnea/php-fpm:8.3-prod
 ```
 
 #### MySQL connect via 127.0.0.1 (via port-forward)
@@ -400,7 +400,7 @@ Forward MySQL Port from `172.168.0.30` (or any other IP address/hostname) and Po
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e FORWARD_PORTS_TO_LOCALHOST='3306:172.168.0.30:3306' \
-    johnea/php-fpm:7.2-prod
+    johnea/php-fpm:8.3-prod
 ```
 
 #### MySQL and Redis connect via 127.0.0.1 (via port-forward)
@@ -410,7 +410,7 @@ Forward MySQL Port from `172.168.0.30:3306` and Redis port from `redis:6379` to 
 docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -e FORWARD_PORTS_TO_LOCALHOST='3306:172.168.0.30:3306, 6379:redis:6379' \
-    johnea/php-fpm:7.2-prod
+    johnea/php-fpm:8.3-prod
 ```
 
 #### Launch Postfix for mail-catching
@@ -421,7 +421,7 @@ docker run -d -it \
     -p 127.0.0.1:9000:9000 \
     -v /tmp/mail:/var/mail \
     -e ENABLE_MAIL=2 \
-    johnea/php-fpm:7.2-prod
+    johnea/php-fpm:8.3-prod
 ```
 
 #### Webserver and PHP-FPM
@@ -432,7 +432,7 @@ docker run -d -it \
 docker run -d -it \
     -v ~/my-host-www:/var/www/default/htdocs \
     --name php \
-    johnea/php-fpm:7.2-prod
+    johnea/php-fpm:8.3-prod
 
 # Start webserver and link with PHP-FPM
 docker run -d -it \
@@ -459,7 +459,7 @@ docker run -d -it \
     -e MYSQL_BACKUP_HOST=mysql \
     -v ~/backups:/shared/backups \
     --name php \
-    johnea/php-fpm:7.2-work
+    johnea/php-fpm:8.3-work
 
 # Run database dump
 docker exec -it php mysqldump-secure

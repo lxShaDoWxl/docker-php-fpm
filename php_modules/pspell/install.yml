@@ -9,3 +9,6 @@ all:
   type: builtin
   build_dep: [libpspell-dev]
   run_dep: [libaspell15]
+
+8.4:
+  type: pecl

@@ -12,7 +12,7 @@
 ###
 ### Installs all cli tools required to run Devilbox and its intranet
 ###
-FROM johnea/php-fpm:7.2-prod as devilbox-slim-base-builder
+FROM johnea/php-fpm:7.2-prod AS devilbox-slim-base-builder
 
 ###
 ### Install apt Tools
@@ -176,12 +176,16 @@ RUN set -eux \
 
 # -------------------- pgsql_client --------------------
 RUN set -eux \
-	&& curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-	&& echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
-	&& apt-get update \
+	&& if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
+	  curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+	  && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+	  && apt-get update; \
+	fi \
 	\
-	&& apt-get install -y --no-install-recommends --no-install-suggests \
-	  postgresql-client \
+	&& if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
+	  apt-get install -y --no-install-recommends --no-install-suggests \
+	    postgresql-client; \
+	fi \
 	\
 	&& rm -rf /var/lib/apt/lists/*	\
 	&& if echo '7.2' | grep -E '^(5.6|7.0)$' >/dev/null; then \
@@ -293,7 +297,7 @@ RUN set -eux \
 ###
 ### Copies all cli tools required to run Devilbox and its intranet into a clean image
 ###
-FROM johnea/php-fpm:7.2-prod as devilbox-slim-base
+FROM johnea/php-fpm:7.2-prod AS devilbox-slim-base
 ARG ARCH
 
 ###
@@ -451,7 +455,7 @@ RUN set -eux \
 ###
 ### Test all Devilbox cli utils if copying was successful
 ###
-FROM devilbox-slim-base as devilbox-slim-base-test
+FROM devilbox-slim-base AS devilbox-slim-base-test
 RUN set -eux \
 	&& mysql --version \
 	&& redis-cli --version \
@@ -574,8 +578,7 @@ RUN set -eux \
 ###
 ### Prepare final base image (STAGE: slim)
 ###
-FROM devilbox-slim-base as slim
-MAINTAINER "cytopia" <cytopia@everythingcli.org>
+FROM devilbox-slim-base AS slim
 
 ###
 ### Labels

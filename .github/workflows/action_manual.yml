@@ -100,14 +100,11 @@ jobs:
     outputs:
       versions: ${{ env.VERSIONS }}
       refs: ${{ env.REFS }}
-#      versions: ${{ steps.variables.outputs.versions }}
     steps:
       - name: Print inputs passed to the reusable workflow
         id: variables
         if: false
         run: echo
-#        run: |
-#          echo "versions=${{ env.VERSIONS }}" >> $GITHUB_OUTPUT
   # -----------------------------------------------------------------------------------------------
   # (1/9) Determine parameter settings
   # -----------------------------------------------------------------------------------------------
