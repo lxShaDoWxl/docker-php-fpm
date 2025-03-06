@@ -999,7 +999,7 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_ioncube_8.0"></td>
   <td class="ext_mods_ioncube_8.1">✓</td>
   <td class="ext_mods_ioncube_8.2">✓</td>
-  <td class="ext_mods_ioncube_8.3"></td>
+  <td class="ext_mods_ioncube_8.3">✓</td>
   <td class="ext_mods_ioncube_8.4"></td>
  </tr>
  <tr>
@@ -1700,7 +1700,7 @@ The following PHP modules are available on the `mods`, `prod`, `slim` and `work`
   <td class="ext_mods_solr_8.1">✓</td>
   <td class="ext_mods_solr_8.2">✓</td>
   <td class="ext_mods_solr_8.3">✓</td>
-  <td class="ext_mods_solr_8.4"></td>
+  <td class="ext_mods_solr_8.4">✓</td>
  </tr>
  <tr>
   <td><a href="../php_modules/spl">SPL</a></td>
