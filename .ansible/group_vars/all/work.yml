@@ -369,7 +369,7 @@ tools_available:
       type: composer
       version: 3.4.11
   php-cs-fixer:
-    disabled: []
+    disabled: [8.4]
     check: php-cs-fixer --version 2>&1 | grep -E 'Fixer\s+(version\s*)?[-_.0-9]+\s+' || (php-cs-fixer --version; false)
     all:
       type: custom
