@@ -589,6 +589,12 @@ extensions_available:
     all:
       type: pecl
       build_dep: [libssl-dev, libsasl2-dev]
+    8.0:
+      type: pecl
+      version: 1.20.1
+    7.4:
+      type: pecl
+      version: 1.20.1
     7.3:
       type: pecl
       version: 1.16.2
@@ -892,18 +898,6 @@ extensions_available:
   zstd:
     disabled: [5.6]
     all:
-      type: git
-      git_url: https://github.com/kjdev/php-ext-zstd
-      flags: |
-        --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-zstd \
-          | sed 's/^.*tags\///g' \
-          | grep -E '^[.0-9]+$' \
-          | tr '-' '~' | sort -V | tail -1 \
-        ) \
-      configure: --enable-zstd --with-libzstd
-      build_dep: [libzstd-dev]
-      run_dep: [libzstd1]
-    7.0:
       type: pecl
       build_dep: [libzstd-dev]
       run_dep: [libzstd1]
