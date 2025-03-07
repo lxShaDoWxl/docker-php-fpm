@@ -541,11 +541,6 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: redis --------------------
 RUN set -eux \
-	# Generic pre-command
-	&& if [ -f /usr/include/liblzf/lzf.h ]; then \
-  ln -s /usr/include/liblzf/lzf.h /usr/include/; \
-fi \
- \
 	# Installation: Version specific
 	# Type:         PECL extension
 	# Default:      Pecl command

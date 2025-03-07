@@ -589,6 +589,12 @@ extensions_available:
     all:
       type: pecl
       build_dep: [libssl-dev, libsasl2-dev]
+    8.0:
+      type: pecl
+      version: 1.20.1
+    7.4:
+      type: pecl
+      version: 1.20.1
     7.3:
       type: pecl
       version: 1.16.2
@@ -892,148 +898,28 @@ extensions_available:
   zstd:
     disabled: [5.6]
     all:
-      type: git
-      git_url: https://github.com/kjdev/php-ext-zstd
-      flags: |
-        --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/kjdev/php-ext-zstd \
-          | sed 's/^.*tags\///g' \
-          | grep -E '^[.0-9]+$' \
-          | tr '-' '~' | sort -V | tail -1 \
-        ) \
-      configure: --enable-zstd --with-libzstd
-      build_dep: [libzstd-dev]
-      run_dep: [libzstd1]
-    7.0:
       type: pecl
       build_dep: [libzstd-dev]
       run_dep: [libzstd1]
   redis:
     disabled: []
     all:
-      type: git
-      git_url: https://github.com/phpredis/phpredis
-      flags: |
-        --depth=1 --single-branch --branch=$(git ls-remote --tags https://github.com/phpredis/phpredis \
-          | sed 's/^.*tags\///g' \
-          | grep -E '^[.0-9]+$' \
-          | tr '-' '~' | sort -V | tail -1 \
-        ) \
-      pre: |
-        if [ -f /usr/include/liblzf/lzf.h ]; then \
-          ln -s /usr/include/liblzf/lzf.h /usr/include/; \
-        fi \
-      command: |
-        REDIS_ARGS=""; \
-        if php -m | grep -q "igbinary"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-igbinary"; \
-        fi; \
-        if php -m | grep -q "lz4"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-lz4 --with-liblz4=/usr"; \
-        fi; \
-        if php -m | grep -q "lzf"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-lzf --with-liblzf=/usr"; \
-        fi; \
-        if php -m | grep -q "msgpack"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-msgpack"; \
-        fi; \
-        if php -m | grep -q "zstd"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-zstd"; \
-        fi; \
-        phpize \
-        && ./configure --enable-redis ${REDIS_ARGS} \
-        && make -j$(getconf _NPROCESSORS_ONLN) \
-        && make install \
-      build_dep:
-        - liblz4-dev
-        - liblzf-dev
-        - libzstd-dev
-      run_dep:
-        - liblz4-1
-        - liblzf1
-        - libzstd1
+      type: pecl
+    7.3:
+      type: pecl
+      version: 6.0.2
     7.2:
-      type: git
-      git_url: https://github.com/phpredis/phpredis
-      command: |
-        REDIS_ARGS=""; \
-        if php -m | grep -q "igbinary"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-igbinary"; \
-        fi; \
-        if php -m | grep -q "lz4"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-lz4 --with-liblz4=/usr"; \
-        fi; \
-        if php -m | grep -q "msgpack"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-msgpack"; \
-        fi; \
-        if php -m | grep -q "zstd"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-zstd"; \
-        fi; \
-        phpize \
-        && ./configure --enable-redis ${REDIS_ARGS} \
-        && make -j$(getconf _NPROCESSORS_ONLN) \
-        && make install \
-      build_dep:
-        - liblz4-dev
-        - libzstd-dev
-      run_dep:
-        - liblz4-1
-        - libzstd1
+      type: pecl
+      version: 6.0.2
     7.1:
-      type: git
-      git_url: https://github.com/phpredis/phpredis
-      flags: --depth=1 --single-branch --branch=5.3.7
-      command: |
-        REDIS_ARGS=""; \
-        if php -m | grep -q "igbinary"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-igbinary"; \
-        fi; \
-        if php -m | grep -q "lz4"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-lz4 --with-liblz4=/usr"; \
-        fi; \
-        if php -m | grep -q "msgpack"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-msgpack"; \
-        fi; \
-        if php -m | grep -q "zstd"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-zstd"; \
-        fi; \
-        phpize \
-        && ./configure --enable-redis ${REDIS_ARGS} \
-        && make -j$(getconf _NPROCESSORS_ONLN) \
-        && make install \
-      build_dep:
-        - liblz4-dev
-        - libzstd-dev
-      run_dep:
-        - liblz4-1
-        - libzstd1
+      type: pecl
+      version: 5.3.7
     7.0:
-      type: git
-      git_url: https://github.com/phpredis/phpredis
-      flags: --depth=1 --single-branch --branch=5.3.7
-      command: |
-        REDIS_ARGS=""; \
-        if php -m | grep -q "igbinary"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-igbinary"; \
-        fi; \
-        if php -m | grep -q "lz4"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-lz4 --with-liblz4=/usr"; \
-        fi; \
-        if php -m | grep -q "msgpack"; then \
-          REDIS_ARGS="${REDIS_ARGS} --enable-redis-msgpack"; \
-        fi; \
-        phpize \
-        && ./configure --enable-redis ${REDIS_ARGS} \
-        && make -j$(getconf _NPROCESSORS_ONLN) \
-        && make install \
-      build_dep:
-        - liblz4-dev
-      run_dep:
-        - liblz4-1
+      type: pecl
+      version: 5.3.7
     5.6:
       type: pecl
       version: 4.3.0
-      build_dep: []
-      run_dep: []
   sqlite3:
     disabled: []
     already_avail: "{{ php_all_versions }}"
@@ -1284,15 +1170,18 @@ extensions_available:
     8.3:
       type: pecl
       command: pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl=" " enable-cares="yes" with-postgres="yes"' swoole
+    8.0:
+      type: pecl
+      version: 5.1.7
     7.4:
       type: pecl
-      version: 4.8.12
+      version: 4.8.13
     7.3:
       type: pecl
-      version: 4.8.12
+      version: 4.8.13
     7.2:
       type: pecl
-      version: 4.8.12
+      version: 4.8.13
     7.1:
       type: pecl
       version: 4.5.11

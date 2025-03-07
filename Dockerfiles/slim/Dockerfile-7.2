@@ -176,16 +176,12 @@ RUN set -eux \
 
 # -------------------- pgsql_client --------------------
 RUN set -eux \
-	&& if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
-	  curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-	  && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
-	  && apt-get update; \
-	fi \
+	&& curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+	&& echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+	&& apt-get update \
 	\
-	&& if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
-	  apt-get install -y --no-install-recommends --no-install-suggests \
-	    postgresql-client; \
-	fi \
+	&& apt-get install -y --no-install-recommends --no-install-suggests \
+	  postgresql-client \
 	\
 	&& rm -rf /var/lib/apt/lists/*	\
 	&& if echo '7.2' | grep -E '^(5.6|7.0)$' >/dev/null; then \
