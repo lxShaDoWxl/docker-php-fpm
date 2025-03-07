@@ -426,29 +426,21 @@ base_software_available:
     7.2:
       type: custom
       pre: |
-        if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
-          curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-          && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
-          && apt-get update; \
-        fi \
+        curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && apt-get update; \
       command: |
-        if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
-          apt-get install -y --no-install-recommends --no-install-suggests \
-            postgresql-client; \
-        fi \
+        apt-get install -y --no-install-recommends --no-install-suggests \
+          postgresql-client; \
     7.1:
       type: custom
       pre: |
-        if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
-          curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-          && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
-          && apt-get update; \
-        fi \
+        curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && apt-get update; \
       command: |
-        if [ "$(dpkg-architecture --query DEB_BUILD_ARCH)" = "amd64" ]; then \
-          apt-get install -y --no-install-recommends --no-install-suggests \
-            postgresql-client; \
-        fi \
+        apt-get install -y --no-install-recommends --no-install-suggests \
+          postgresql-client; \
     7.0:
       type: custom
       pre: |
