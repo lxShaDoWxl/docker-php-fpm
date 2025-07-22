@@ -342,22 +342,22 @@ tools_available:
         fi \
     8.4:
       type: composer
-      version: 5.0.x-dev -W
+      version: 5.0.x-dev --dev -W
     8.3:
       type: composer
-      version: 5.0.x-dev -W
+      version: 5.0.x-dev --dev -W
     8.2:
       type: composer
-      version: 5.0.x-dev -W
+      version: 5.0.x-dev --dev -W
     8.1:
       type: composer
-      version: 5.0.x-dev -W
+      version: 5.0.x-dev --dev -W
     8.0:
       type: composer
-      version: 5.0.x-dev -W
+      version: 5.0.x-dev --dev -W
     7.4:
       type: composer
-      version: 5.0.x-dev -W
+      version: 5.0.x-dev --dev -W
     7.1:
       type: composer
       version: 3.4.11
@@ -396,7 +396,7 @@ tools_available:
     all:
       type: custom
       command: curl -sS -k -L --fail -L "${PHPCBF_URL}" -o /usr/local/bin/phpcbf
-      pre: PHPCBF_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar"
+      pre: PHPCBF_URL="https://phars.phpcodesniffer.com/phpcbf.phar"
       post: chmod +x /usr/local/bin/phpcbf
   phpcs:
     disabled: []
@@ -404,7 +404,7 @@ tools_available:
     all:
       type: custom
       command: curl -sS -k -L --fail -L "${PHPCS_URL}" -o /usr/local/bin/phpcs
-      pre: PHPCS_URL="https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar"
+      pre: PHPCS_URL="https://phars.phpcodesniffer.com/phpcs.phar"
       post: chmod +x /usr/local/bin/phpcs
   phpmd:
     disabled: []
@@ -740,7 +740,7 @@ tools_available:
           && pip install setuptools==44.1.1 --no-build-isolation \
           && pip install "cython<3.0" --no-build-isolation; \
         fi \
-      build_dep: [python-pip,python-wheel]
+      build_dep: [python-pip, python-wheel]
     7.1:
       type: pip
       pre: |
@@ -750,7 +750,7 @@ tools_available:
           && pip install setuptools==44.1.1 --no-build-isolation \
           && pip install "cython<3.0" --no-build-isolation; \
         fi \
-      build_dep: [python-pip,python-wheel]
+      build_dep: [python-pip, python-wheel]
     7.0:
       type: pip
       pre: |
@@ -760,7 +760,7 @@ tools_available:
           && pip install setuptools==44.1.1 --no-build-isolation \
           && pip install "cython<3.0" --no-build-isolation; \
         fi \
-      build_dep: [python-pip,python-wheel]
+      build_dep: [python-pip, python-wheel]
     5.6:
       type: pip
       flags:
@@ -771,7 +771,7 @@ tools_available:
           && pip install setuptools==44.1.1 --no-build-isolation \
           && pip install "cython<3.0" --no-build-isolation; \
         fi \
-      build_dep: [python-pip,python-wheel]
+      build_dep: [python-pip, python-wheel]
   yq:
     disabled: []
     check: yq --version 2>&1 | grep -E '[0-9][.0-9]+' || (yq --version; false)

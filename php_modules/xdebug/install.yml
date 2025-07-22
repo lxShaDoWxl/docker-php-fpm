@@ -8,9 +8,6 @@
 all:
   type: pecl
 
-8.4:
-  type: pecl
-
 7.4:
   type: pecl
   version: 3.1.6

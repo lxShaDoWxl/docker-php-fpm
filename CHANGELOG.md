@@ -4,6 +4,24 @@
 ## Unreleased
 
 
+## Release 0.153
+
+### Added
+- Added PHP 8.4
+- Updated PHP modules
+- Updated PHP tools
+- Removed wkhtmltopdf
+
+## Release 0.152
+
+### Added
+- Removed PHP versions (5.2-5.5)
+- Add PHP 8.3
+- Updated PHP modules
+- Updated PHP tools
+- Removed laravel-lumen and asgardcms
+
+
 ## Release 0.151
 
 ### Added

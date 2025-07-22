@@ -49,7 +49,7 @@ all:
       && pip install setuptools==44.1.1 --no-build-isolation \
       && pip install "cython<3.0" --no-build-isolation; \
     fi \
-  build_dep: [python-pip,python-wheel]
+  build_dep: [python-pip, python-wheel]
 
 7.1:
   type: pip
@@ -60,7 +60,7 @@ all:
       && pip install setuptools==44.1.1 --no-build-isolation \
       && pip install "cython<3.0" --no-build-isolation; \
     fi \
-  build_dep: [python-pip,python-wheel]
+  build_dep: [python-pip, python-wheel]
 
 7.0:
   type: pip
@@ -71,7 +71,7 @@ all:
       && pip install setuptools==44.1.1 --no-build-isolation \
       && pip install "cython<3.0" --no-build-isolation; \
     fi \
-  build_dep: [python-pip,python-wheel]
+  build_dep: [python-pip, python-wheel]
 
 5.6:
   type: pip
@@ -83,4 +83,4 @@ all:
       && pip install setuptools==44.1.1 --no-build-isolation \
       && pip install "cython<3.0" --no-build-isolation; \
     fi \
-  build_dep: [python-pip,python-wheel]
+  build_dep: [python-pip, python-wheel]

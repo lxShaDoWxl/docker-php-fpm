@@ -187,17 +187,17 @@ base_apt_repositories_available:
     # [Bookworm]
     all:
       type: repo
-      deb: deb http://apt.postgresql.org/pub/repos/apt/ {{ os_release['all'].debian }}-pgdg main
+      deb: deb https://apt.postgresql.org/pub/repos/apt/ {{ os_release['all'].debian }}-pgdg main
       pre: curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add -
     # [Buster]
     7.2:
       type: repo
-      deb: deb http://apt.postgresql.org/pub/repos/apt/ {{ os_release[7.2].debian }}-pgdg main
+      deb: deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[7.2].debian }}-pgdg main
       pre: curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add -
     # [Buster]
     7.1:
       type: repo
-      deb: deb http://apt.postgresql.org/pub/repos/apt/ {{ os_release[7.1].debian }}-pgdg main
+      deb: deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[7.1].debian }}-pgdg main
       pre: curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add -
     # [Stretch]
     7.0:
@@ -417,12 +417,30 @@ base_software_available:
       type: custom
       pre: |
         curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
-        && echo "deb http://apt.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && echo "deb https://apt.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
         && apt-get update \
       command: |
         apt-get install -y --no-install-recommends --no-install-suggests \
           postgresql-client \
       post: rm -rf /var/lib/apt/lists/*
+    7.2:
+      type: custom
+      pre: |
+        curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && apt-get update \
+      command: |
+        apt-get install -y --no-install-recommends --no-install-suggests \
+          postgresql-client \
+    7.1:
+      type: custom
+      pre: |
+        curl -sS -k -L --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add - \
+        && echo "deb https://apt-archive.postgresql.org/pub/repos/apt/ {{ os_release[php_version].debian }}-pgdg main" > /etc/apt/sources.list.d/pgsql.list \
+        && apt-get update \
+      command: |
+        apt-get install -y --no-install-recommends --no-install-suggests \
+          postgresql-client \
     7.0:
       type: custom
       pre: |

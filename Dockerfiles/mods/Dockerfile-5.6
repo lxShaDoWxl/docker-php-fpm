@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:5.6-base as builder
+FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:5.6-base AS builder
 
 
 ###
@@ -422,8 +422,8 @@ ORACLE_HREF="$( \
   | tail -1 \
 )" \
 && ORACLE_VERSION_MAJOR="$( echo "${ORACLE_HREF}" | grep -Eo 'instantclient[.0-9]+' | sed 's/instantclient//g' )" \
-&& ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
-&& ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
+&& ORACLE_VERSION_FULL="$( echo "${ORACLE_HREF}" | grep -Eo 'basiclite-[-.0-9el]+' | sed -e 's/basiclite-//g' -e 's/\.$//g' )" \
+&& ORACLE_VERSION_DEVEL_FULL="$( echo "${ORACLE_DEVEL_HREF}" | grep -Eo 'devel-[-.0-9el]+' | sed -e 's/devel-//g' -e 's/\.$//g' )" \
 \
 && rpm --import http://yum.oracle.com/RPM-GPG-KEY-oracle-ol${OL_VERSION} \
 && curl -sS -o /tmp/oracle-instantclient${ORACLE_VERSION_MAJOR}-basiclite-${ORACLE_VERSION_FULL}.${ARCH}.rpm \
@@ -541,11 +541,6 @@ RUN set -eux \
 
 # -------------------- Installing PHP Extension: redis --------------------
 RUN set -eux \
-	# Generic pre-command
-	&& if [ -f /usr/include/liblzf/lzf.h ]; then \
-  ln -s /usr/include/liblzf/lzf.h /usr/include/; \
-fi \
- \
 	# Installation: Version specific
 	# Type:         PECL extension
 	# Default:      Pecl command
@@ -775,7 +770,7 @@ RUN set -eux \
 
 
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:5.6-base as final
+FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:5.6-base AS final
 MAINTAINER "cytopia" <cytopia@everythingcli.org>
 
 ###

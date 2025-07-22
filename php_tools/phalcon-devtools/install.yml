@@ -44,27 +44,27 @@ all:
 
 8.4:
   type: composer
-  version: 5.0.x-dev -W
+  version: 5.0.x-dev --dev -W
 
 8.3:
   type: composer
-  version: 5.0.x-dev -W
+  version: 5.0.x-dev --dev -W
 
 8.2:
   type: composer
-  version: 5.0.x-dev -W
+  version: 5.0.x-dev --dev -W
 
 8.1:
   type: composer
-  version: 5.0.x-dev -W
+  version: 5.0.x-dev --dev -W
 
 8.0:
   type: composer
-  version: 5.0.x-dev -W
+  version: 5.0.x-dev --dev -W
 
 7.4:
   type: composer
-  version: 5.0.x-dev -W
+  version: 5.0.x-dev --dev -W
 
 7.1:
   type: composer
