@@ -4,7 +4,6 @@
 
 # The following specifies the order in which tools are being installed.
 tools_enabled:
-  - angular-cli
   - asgardcms
   - eslint
   - git
@@ -13,16 +12,10 @@ tools_enabled:
   - awesome-ci
   - codeception
   - git-flow
-  - grunt-cli
-  - gulp
   - jq
-  - laravel-installer
-  - laravel-lumen
   - linkcheck
-  - mdlint
   - mupdf-tools
   - net-tools
-  - phalcon-devtools
   - php-cs-fixer
   - phpcbf
   - phpcs
@@ -32,16 +25,12 @@ tools_enabled:
   - pwncat
   - ssh
   - rsync
-  - sass
   - shellcheck
   - stylelint
   - svn
-  - symfony-cli
   - taskfile
   - tig
   - vim
-  - vue-cli
-  - webpack-cli
   - wkhtmltopdf
   - wp-cli
   - wscat
@@ -52,24 +41,6 @@ tools_enabled:
 
 # The following specifies how tools are being installed.
 tools_available:
-  angular-cli:
-    disabled: [8.4]
-    check: ng version 2>&1 | grep -iE 'Angular CLI:\s*[0-9][.0-9]+' || (ng version; false)
-    all:
-      type: npm
-      package: "@angular/cli"
-      binary: ng
-      version:
-      build_dep: []
-      run_dep: []
-      pre:
-      post:
-    7.0:
-      type: npm
-      version: 16
-    5.6:
-      type: npm
-      version: 16
   asgardcms:
     disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
     check: asgardcms --version 2>/dev/null | grep -Ei 'AsgardCMS\sInstaller\s[0-9][.0-9]+' || (asgardcms --version; false)
@@ -185,77 +156,12 @@ tools_available:
         && cd /tmp/gitflow \
         && make install \
         && cd / && rm -rf /tmp/gitflow \
-  grunt-cli:
-    disabled: [8.4]
-    check: grunt --version | grep -E '[0-9][.0-9]+' || (grunt --version; false)
-    all:
-      type: npm
-      package: "grunt-cli"
-      binary: grunt
-      version:
-      build_dep: []
-      run_dep: []
-      pre:
-      post:
-  gulp:
-    disabled: [8.4]
-    check: gulp --version | grep -E '[0-9][.0-9]+' || (gulp --version; false)
-    all:
-      type: npm
-      package: gulp
-      binary: gulp
-      version:
-      build_dep: []
-      run_dep: []
-      pre:
-      post:
   jq:
     disabled: []
     check: jq --version 2>&1 | grep -E '[0-9][.0-9]+' || (jq --version; false)
     all:
       type: apt
       package: jq
-  laravel-installer:
-    disabled: []
-    check: laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)
-    all:
-      type: composer
-      composer: 2
-      package: laravel/installer
-      # version:
-      flags:
-      binary: bin/laravel
-      build_dep: []
-      run_dep: []
-    7.2:
-      type: composer
-      version: 4.0.0
-    7.1:
-      type: composer
-      binary: laravel
-      version: 2.3.0
-    7.0:
-      type: composer
-      binary: laravel
-      version: 2.2.0
-    5.6:
-      type: composer
-      binary: laravel
-      version: 2.2.0
-  laravel-lumen:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
-    check: lumen --version 2>/dev/null | grep ^Lumen | grep -E '[0-9]\.[0-9]+' || (lumen --version; false)
-    all:
-      type: composer
-      composer: 2
-      package: laravel/lumen-installer
-      # version:
-      flags:
-      binary: lumen
-      build_dep: []
-      run_dep: []
-      # pre:
-      # post:
   linkcheck:
     disabled: []
     check: linkcheck --version | grep -E 'v[0-9][.0-9]+' || (linkcheck --version; false)
@@ -265,18 +171,6 @@ tools_available:
       post: chmod +x /usr/local/bin/linkcheck
       build_dep: []
       run_dep: []
-  mdlint:
-    disabled: [8.4]
-    check: mdlint --version | grep -E '[0-9][.0-9]+' || (mdlint --version; false)
-    all:
-      type: npm
-      package: mdlint
-      binary: mdlint
-      version:
-      build_dep: []
-      run_dep: []
-      pre:
-      post:
   mupdf-tools:
     disabled: []
     check: |
@@ -299,74 +193,6 @@ tools_available:
     all:
       type: apt
       package: net-tools
-  phalcon-devtools:
-    disabled: [8.2, 8.3, 8.4]
-    check: |
-        if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
-          echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
-        fi \
-        && if find /usr/local/lib/php/extensions/ -name psr.so | grep psr; then \
-          echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
-        fi \
-        \
-        \
-        && phalcon commands | grep -E '[0-9][.0-9]+' || (phalcon commands; false) \
-        \
-        \
-        && if [ -f /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini ]; then \
-          rm /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
-        fi \
-        && if [ -f /usr/local/etc/php/conf.d/docker-php-ext-psr.ini ]; then \
-          echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
-        fi \
-    all:
-      type: composer
-      composer: 2
-      package: phalcon/devtools
-      binary: phalcon
-      # Enable phalcon.so (and its requirement psr prior installing)
-      pre: |
-        if find /usr/local/lib/php/extensions/ -name phalcon.so | grep phalcon; then \
-          echo "extension=phalcon.so" > /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
-        fi \
-        && if find /usr/local/lib/php/extensions/ -name psr.so | grep psr; then \
-          echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
-        fi \
-      # Disable phalcon.so (and its requirement psr after installing)
-      post: |
-        if [ -f /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini ]; then \
-          rm /usr/local/etc/php/conf.d/docker-php-ext-phalcon.ini; \
-        fi \
-        && if [ -f /usr/local/etc/php/conf.d/docker-php-ext-psr.ini ]; then \
-          echo "extension=psr.so" > /usr/local/etc/php/conf.d/docker-php-ext-psr.ini; \
-        fi \
-    8.4:
-      type: composer
-      version: 5.0.x-dev --dev -W
-    8.3:
-      type: composer
-      version: 5.0.x-dev --dev -W
-    8.2:
-      type: composer
-      version: 5.0.x-dev --dev -W
-    8.1:
-      type: composer
-      version: 5.0.x-dev --dev -W
-    8.0:
-      type: composer
-      version: 5.0.x-dev --dev -W
-    7.4:
-      type: composer
-      version: 5.0.x-dev --dev -W
-    7.1:
-      type: composer
-      version: 3.4.11
-    7.0:
-      type: composer
-      version: 3.4.11
-    5.6:
-      type: composer
-      version: 3.4.11
   php-cs-fixer:
     disabled: [8.4]
     check: php-cs-fixer --version 2>&1 | grep -E 'Fixer\s+(version\s*)?[-_.0-9]+\s+' || (php-cs-fixer --version; false)
@@ -513,18 +339,6 @@ tools_available:
     all:
       type: apt
       package: rsync
-  sass:
-    disabled: [8.4]
-    check: sass --version | grep -E '[0-9][.0-9]+' || (sass --version; false)
-    all:
-      type: npm
-      package: sass
-      binary: sass
-      version:
-      build_dep: []
-      run_dep: []
-      pre:
-      post:
   shellcheck:
     disabled: []
     check: shellcheck --version | grep -E '[0-9][.0-9]+' || (shellcheck --version; false)
@@ -549,14 +363,6 @@ tools_available:
     all:
       type: apt
       package: subversion
-  symfony-cli:
-    disabled: []
-    check: symfony --no-ansi -V | grep -E 'version [0-9][.0-9]+' || (symfony --no-ansi -V; false)
-    all:
-      type: custom
-      command: curl -sS https://get.symfony.com/cli/installer | bash -s -- --install-dir /usr/local/bin
-      build_dep: []
-      run_dep: []
   taskfile:
     disabled: []
     check: task --version | grep -E '[0-9][.0-9]+' || (task --version; false)
@@ -575,30 +381,6 @@ tools_available:
     all:
       type: apt
       package: vim
-  vue-cli:
-    disabled: [8.4]
-    check: vue --version | grep -E '[0-9][.0-9]+' || (vue --version; false)
-    all:
-      type: npm
-      package: "@vue/cli"
-      binary: vue
-      version:
-      build_dep: []
-      run_dep: []
-      pre:
-      post:
-  webpack-cli:
-    disabled: [8.4]
-    check: webpack-cli --version | grep -E '[0-9][.0-9]+' || (webpack-cli --version; false)
-    all:
-      type: npm
-      package: webpack-cli
-      binary: webpack-cli
-      version:
-      build_dep: []
-      run_dep: []
-      pre:
-      post:
   wkhtmltopdf:
     disabled: []
     check: wkhtmltopdf --version | grep ^wkhtmltopdf | grep -E '[0-9]\.[0-9]+' | grep patched || (wkhtmltopdf --version; false)

@@ -359,14 +359,6 @@ RUN set -eux \
 	&& jq --version 2>&1 | grep -E '[0-9][.0-9]+' || (jq --version; false)	\
 	&& true
 
-# -------------------- (composer) laravel-installer --------------------
-RUN set -eux \
-	&& COMPOSER_HOME="/usr/local/src/composer" COMPOSER_MEMORY_LIMIT=-1 /usr/local/bin/composer-2 global require --no-interaction --no-cache  laravel/installer \
-	&& ln -s /usr/local/src/composer/vendor/laravel/installer/bin/laravel /usr/local/bin/ \
-	&& rm -rf /usr/local/src/composer/cache/* \
-	&& laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)	\
-	&& true
-
 # -------------------- (custom) linkcheck --------------------
 RUN set -eux \
 	&& curl -sS -L --fail -o /usr/local/bin/linkcheck https://raw.githubusercontent.com/cytopia/linkcheck/master/linkcheck	\
@@ -457,12 +449,6 @@ RUN set -eux \
 # -------------------- (apt) svn --------------------
 RUN set -eux \
 	&& svn --version | grep version | grep -E '[0-9]+\.[0-9]+' || (svn --version; false)	\
-	&& true
-
-# -------------------- (custom) symfony-cli --------------------
-RUN set -eux \
-	&& curl -sS https://get.symfony.com/cli/installer | bash -s -- --install-dir /usr/local/bin	\
-	&& symfony --no-ansi -V | grep -E 'version [0-9][.0-9]+' || (symfony --no-ansi -V; false)	\
 	&& true
 
 # -------------------- (custom) taskfile --------------------
@@ -670,11 +656,6 @@ RUN set -eux \
 	&& jq --version 2>&1 | grep -E '[0-9][.0-9]+' || (jq --version; false)	\
 	&& true
 
-# -------------------- (composer) laravel-installer --------------------
-RUN set -eux \
-	&& laravel --version | grep ^Laravel | grep -E '[0-9]\.[0-9]+' || (laravel --version; false)	\
-	&& true
-
 # -------------------- (custom) linkcheck --------------------
 RUN set -eux \
 	&& linkcheck --version | grep -E 'v[0-9][.0-9]+' || (linkcheck --version; false)	\
@@ -743,11 +724,6 @@ RUN set -eux \
 # -------------------- (apt) svn --------------------
 RUN set -eux \
 	&& svn --version | grep version | grep -E '[0-9]+\.[0-9]+' || (svn --version; false)	\
-	&& true
-
-# -------------------- (custom) symfony-cli --------------------
-RUN set -eux \
-	&& symfony --no-ansi -V | grep -E 'version [0-9][.0-9]+' || (symfony --no-ansi -V; false)	\
 	&& true
 
 # -------------------- (custom) taskfile --------------------
