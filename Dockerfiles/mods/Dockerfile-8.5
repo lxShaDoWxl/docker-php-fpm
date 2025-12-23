@@ -1,6 +1,6 @@
 # vi: ft=dockerfile
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:8.4-base AS builder
+FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:8.5-base AS builder
 
 
 ###
@@ -33,7 +33,6 @@ RUN set -eux \
 		libpcre3-dev \
 		libpng-dev \
 		libpq-dev \
-		librabbitmq-dev \
 		librdkafka-dev \
 		libsasl2-dev \
 		libsnmp-dev \
@@ -49,7 +48,6 @@ RUN set -eux \
 		libzip-dev \
 		libzstd-dev \
 		snmp \
-		unixodbc-dev \
 		uuid-dev \
 		zlib1g-dev \
 # Build tools
@@ -90,17 +88,6 @@ RUN set -eux \
 	&& if [ -f /usr/local/etc/php/conf.d/docker-php-ext-ffi.ini ]; then \
 			echo "ffi.enable = 1" >> /usr/local/etc/php/conf.d/docker-php-ext-ffi.ini; \
 		fi
-
-# -------------------- Installing PHP Extension: amqp --------------------
-RUN set -eux \
-	# Installation: Generic
-	# Type:         PECL extension
-	# Custom:       Pecl command
-	&& echo "/usr" | pecl install amqp \
-	# Enabling
-	&& docker-php-ext-enable amqp \
-	&& true
-
 
 # -------------------- Installing PHP Extension: apcu --------------------
 RUN set -eux \
@@ -306,17 +293,6 @@ RUN set -eux \
 	&& true
 
 
-# -------------------- Installing PHP Extension: memcache --------------------
-RUN set -eux \
-	# Installation: Generic
-	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install memcache \
-	# Enabling
-	&& docker-php-ext-enable memcache \
-	&& true
-
-
 # -------------------- Installing PHP Extension: msgpack --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -414,17 +390,6 @@ RUN set -eux \
 	&& true
 
 
-# -------------------- Installing PHP Extension: pdo_sqlsrv --------------------
-RUN set -eux \
-	# Installation: Generic
-	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install pdo_sqlsrv \
-	# Enabling
-	&& docker-php-ext-enable pdo_sqlsrv \
-	&& true
-
-
 # -------------------- Installing PHP Extension: pgsql --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -463,17 +428,6 @@ RUN set -eux \
 	&& pecl install redis \
 	# Enabling
 	&& docker-php-ext-enable redis \
-	&& true
-
-
-# -------------------- Installing PHP Extension: sqlsrv --------------------
-RUN set -eux \
-	# Installation: Generic
-	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install sqlsrv \
-	# Enabling
-	&& docker-php-ext-enable sqlsrv \
 	&& true
 
 
@@ -669,7 +623,7 @@ RUN set -eux \
 
 
 # Auto-generated via Ansible: edit ./ansible/DOCKERFILES/Dockerfile-mods.j2 instead.
-FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:8.4-base AS final
+FROM ghcr.io/lxshadowxl/docker-php-fpm/php-fpm:8.5-base AS final
 MAINTAINER "cytopia" <cytopia@everythingcli.org>
 
 ###
@@ -686,9 +640,9 @@ LABEL "org.opencontainers.image.documentation"="https://github.com/lxShaDoWxl/do
 LABEL "org.opencontainers.image.source"="https://github.com/lxShaDoWxl/docker-php-fpm"
 LABEL "org.opencontainers.image.vendor"="devilbox"
 LABEL "org.opencontainers.image.licenses"="MIT"
-LABEL "org.opencontainers.image.ref.name"="8.4-mods"
-LABEL "org.opencontainers.image.title"="PHP-FPM 8.4-mods"
-LABEL "org.opencontainers.image.description"="PHP-FPM 8.4-mods"
+LABEL "org.opencontainers.image.ref.name"="8.5-mods"
+LABEL "org.opencontainers.image.title"="PHP-FPM 8.5-mods"
+LABEL "org.opencontainers.image.description"="PHP-FPM 8.5-mods"
 
 
 ###
@@ -713,7 +667,6 @@ RUN set -eux \
 	libmemcachedutil2 \
 	libpng16-16 \
 	libpq5 \
-	librabbitmq4 \
 	librdkafka1 \
 	libsybdb5 \
 	libtidy5deb1 \
@@ -725,7 +678,6 @@ RUN set -eux \
 	libzip4 \
 	libzstd1 \
 	snmp \
-	unixodbc \
 	uuid \
 	ca-certificates \
 	&& rm -rf /var/lib/apt/lists/* \
@@ -767,7 +719,7 @@ RUN set -eux \
 ###
 RUN set -eux \
 	&& echo "date.timezone=UTC" > /usr/local/etc/php/php.ini \
-	&& php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^8.4' \
+	&& php -v | grep -oE 'PHP\s[.0-9]+' | grep -oE '[.0-9]+' | grep '^8.5' \
 	&& /usr/local/sbin/php-fpm --test \
 	\
 	&& PHP_ERROR="$( php -v 2>&1 1>/dev/null )" \
@@ -781,8 +733,6 @@ RUN set -eux \
 	&& if [ -n "${PHP_FPM_ERROR}" ]; then echo "${PHP_FPM_ERROR}"; false; fi \
 	&& rm -f /usr/local/etc/php/php.ini \
 	\
-	&& php -m | grep -oiE '^amqp$' \
-	&& php-fpm -m | grep -oiE '^amqp$' \
 	&& php -m | grep -oiE '^apcu$' \
 	&& php-fpm -m | grep -oiE '^apcu$' \
 	&& php -m | grep -oiE '^bcmath$' \
@@ -839,8 +789,6 @@ RUN set -eux \
 	&& php-fpm -m | grep -oiE '^lz4$' \
 	&& php -m | grep -oiE '^lzf$' \
 	&& php-fpm -m | grep -oiE '^lzf$' \
-	&& php -m | grep -oiE '^memcache$' \
-	&& php-fpm -m | grep -oiE '^memcache$' \
 	&& php -m | grep -oiE '^msgpack$' \
 	&& php-fpm -m | grep -oiE '^msgpack$' \
 	&& php -m | grep -oiE '^memcached$' \
@@ -873,8 +821,6 @@ RUN set -eux \
 	&& php-fpm -m | grep -oiE '^pdo_pgsql$' \
 	&& php -m | grep -oiE '^pdo_sqlite$' \
 	&& php-fpm -m | grep -oiE '^pdo_sqlite$' \
-	&& php -m | grep -oiE '^pdo_sqlsrv$' \
-	&& php-fpm -m | grep -oiE '^pdo_sqlsrv$' \
 	&& php -m | grep -oiE '^pgsql$' \
 	&& php-fpm -m | grep -oiE '^pgsql$' \
 	&& php -m | grep -oiE '^psr$' \
@@ -885,8 +831,6 @@ RUN set -eux \
 	&& php-fpm -m | grep -oiE '^redis$' \
 	&& php -m | grep -oiE '^sqlite3$' \
 	&& php-fpm -m | grep -oiE '^sqlite3$' \
-	&& php -m | grep -oiE '^sqlsrv$' \
-	&& php-fpm -m | grep -oiE '^sqlsrv$' \
 	&& php -m | grep -oiE '^phar$' \
 	&& php-fpm -m | grep -oiE '^phar$' \
 	&& php -m | grep -oiE '^posix$' \

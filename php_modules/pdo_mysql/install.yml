@@ -11,6 +11,10 @@ all:
   run_dep: [libmariadbd19]
   build_dep: [zlib1g-dev, libmariadb-dev]
 
+8.5:
+  type: builtin
+  configure:
+
 8.4:
   type: builtin
   configure:

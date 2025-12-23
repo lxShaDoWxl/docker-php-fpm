@@ -42,7 +42,7 @@ tools_enabled:
 # The following specifies how tools are being installed.
 tools_available:
   asgardcms:
-    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+    disabled: [5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2, 8.3, 8.4, 8.5]
     check: asgardcms --version 2>/dev/null | grep -Ei 'AsgardCMS\sInstaller\s[0-9][.0-9]+' || (asgardcms --version; false)
     all:
       type: composer
@@ -75,7 +75,7 @@ tools_available:
       type: apt
       package: git
   jsonlint:
-    disabled: [8.4]
+    disabled: [8.4, 8.5]
     check: jsonlint --version | grep -E '[0-9][.0-9]+' || (jsonlint --version; false)
     all:
       type: npm
@@ -133,7 +133,7 @@ tools_available:
       # moreutils: isutf8
       run_dep: [dos2unix, file, moreutils]
   codeception:
-    disabled: []
+    disabled: [8.5]
     check: codecept --version 2>/dev/null | grep -E '^Codeception(\sversion)?\s[0-9][.0-9]+$' || (codecept --version; false)
     all:
       type: composer
@@ -194,7 +194,7 @@ tools_available:
       type: apt
       package: net-tools
   php-cs-fixer:
-    disabled: [8.4]
+    disabled: [8.4, 8.5]
     check: php-cs-fixer --version 2>&1 | grep -E 'Fixer\s+(version\s*)?[-_.0-9]+\s+' || (php-cs-fixer --version; false)
     all:
       type: custom
@@ -283,7 +283,7 @@ tools_available:
       type: custom
       pre: PHP_UNIT_VERSION="5"
   pm2:
-    disabled: [8.4]
+    disabled: [8.4, 8.5]
     check: pm2 --no-daemon --version | tail -1 | grep -E '[0-9][.0-9]+' || (pm2 --no-daemon --version; false)
     all:
       type: npm
@@ -306,6 +306,9 @@ tools_available:
       pre:
       post: |
         ln -s pwncat /usr/local/bin/netcat \
+    8.5:
+      type: pip
+      flags: --break-system-packages
     8.4:
       type: pip
       flags: --break-system-packages
@@ -346,7 +349,7 @@ tools_available:
       type: apt
       package: shellcheck
   stylelint:
-    disabled: [8.4]
+    disabled: [8.4, 8.5]
     check: stylelint --version | grep -E '[0-9][.0-9]+' || (stylelint --version; false)
     all:
       type: npm
@@ -470,7 +473,7 @@ tools_available:
       pre: WPCLI_URL="https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
       post: chmod +x /usr/local/bin/wp
   wscat:
-    disabled: [8.4]
+    disabled: [8.4, 8.5]
     check: wscat --version | grep -E '[0-9][.0-9]+' || (wscat --version; false)
     all:
       type: npm
@@ -492,6 +495,9 @@ tools_available:
       flags:
       # pre:
       # post:
+    8.5:
+      type: pip
+      flags: --break-system-packages
     8.4:
       type: pip
       flags: --break-system-packages
@@ -565,6 +571,9 @@ tools_available:
       flags:
       pre:
       post:
+    8.5:
+      type: pip
+      flags: --break-system-packages
     8.4:
       type: pip
       flags: --break-system-packages
