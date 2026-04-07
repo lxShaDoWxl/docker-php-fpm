@@ -14,7 +14,6 @@ RUN set -eux \
 		ghostscript \
 		libavif-dev \
 		libbz2-dev \
-		libc-ares-dev \
 		libc-client-dev \
 		libcurl4-openssl-dev \
 		libenchant-2-dev \
@@ -33,7 +32,6 @@ RUN set -eux \
 		libmagickwand-dev \
 		libmariadb-dev \
 		libmemcached-dev \
-		libnghttp2-dev \
 		libpcre3-dev \
 		libpng-dev \
 		libpq-dev \
@@ -55,7 +53,6 @@ RUN set -eux \
 		libzstd-dev \
 		re2c \
 		snmp \
-		unixodbc-dev \
 		uuid-dev \
 		zlib1g-dev \
 # Build tools
@@ -442,17 +439,6 @@ RUN set -eux \
 	&& true
 
 
-# -------------------- Installing PHP Extension: pdo_sqlsrv --------------------
-RUN set -eux \
-	# Installation: Generic
-	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install pdo_sqlsrv \
-	# Enabling
-	&& docker-php-ext-enable pdo_sqlsrv \
-	&& true
-
-
 # -------------------- Installing PHP Extension: pgsql --------------------
 RUN set -eux \
 	# Installation: Generic
@@ -491,17 +477,6 @@ RUN set -eux \
 	&& pecl install redis \
 	# Enabling
 	&& docker-php-ext-enable redis \
-	&& true
-
-
-# -------------------- Installing PHP Extension: sqlsrv --------------------
-RUN set -eux \
-	# Installation: Generic
-	# Type:         PECL extension
-	# Default:      Pecl command
-	&& pecl install sqlsrv \
-	# Enabling
-	&& docker-php-ext-enable sqlsrv \
 	&& true
 
 
@@ -606,17 +581,6 @@ RUN set -eux \
 	# Custom:       configure command
 	&& docker-php-ext-configure zip --with-zip \
 	&& docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) zip \
-	&& true
-
-
-# -------------------- Installing PHP Extension: swoole --------------------
-RUN set -eux \
-	# Installation: Version specific
-	# Type:         PECL extension
-	# Custom:       Pecl command
-	&& pecl install -D 'enable-sockets="no" enable-openssl="yes" enable-http2="yes" enable-mysqlnd="yes" enable-swoole-json="no" enable-swoole-curl=" " enable-cares="yes" with-postgres="yes"' swoole \
-	# Enabling
-	&& docker-php-ext-enable swoole \
 	&& true
 
 
@@ -776,7 +740,6 @@ RUN set -eux \
 	ghostscript \
 	libaspell15 \
 	libavif15 \
-	libc-ares2 \
 	libc-client2007e \
 	libenchant-2-2 \
 	libevent-2.1-7 \
@@ -790,7 +753,6 @@ RUN set -eux \
 	libmagickwand-6.q16-6 \
 	libmariadbd19 \
 	libmemcachedutil2 \
-	libnghttp2-14 \
 	libpng16-16 \
 	libpq5 \
 	librabbitmq4 \
@@ -805,7 +767,6 @@ RUN set -eux \
 	libzip4 \
 	libzstd1 \
 	snmp \
-	unixodbc \
 	uuid \
 	ca-certificates \
 	&& rm -rf /var/lib/apt/lists/* \
@@ -955,8 +916,6 @@ RUN set -eux \
 	&& php-fpm -m | grep -oiE '^pdo_pgsql$' \
 	&& php -m | grep -oiE '^pdo_sqlite$' \
 	&& php-fpm -m | grep -oiE '^pdo_sqlite$' \
-	&& php -m | grep -oiE '^pdo_sqlsrv$' \
-	&& php-fpm -m | grep -oiE '^pdo_sqlsrv$' \
 	&& php -m | grep -oiE '^pgsql$' \
 	&& php-fpm -m | grep -oiE '^pgsql$' \
 	&& php -m | grep -oiE '^psr$' \
@@ -967,8 +926,6 @@ RUN set -eux \
 	&& php-fpm -m | grep -oiE '^redis$' \
 	&& php -m | grep -oiE '^sqlite3$' \
 	&& php-fpm -m | grep -oiE '^sqlite3$' \
-	&& php -m | grep -oiE '^sqlsrv$' \
-	&& php-fpm -m | grep -oiE '^sqlsrv$' \
 	&& php -m | grep -oiE '^phalcon$' \
 	&& php-fpm -m | grep -oiE '^phalcon$' \
 	&& php -m | grep -oiE '^phar$' \
@@ -1004,8 +961,6 @@ RUN set -eux \
 	&& php-fpm -m | grep -oiE '^xml$' \
 	&& php -m | grep -oiE '^zip$' \
 	&& php-fpm -m | grep -oiE '^zip$' \
-	&& php -m | grep -oiE '^swoole$' \
-	&& php-fpm -m | grep -oiE '^swoole$' \
 	&& php -m | grep -oiE '^sysvmsg$' \
 	&& php-fpm -m | grep -oiE '^sysvmsg$' \
 	&& php -m | grep -oiE '^sysvsem$' \

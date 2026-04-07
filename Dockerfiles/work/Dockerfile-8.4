@@ -344,16 +344,6 @@ RUN set -eux \
 	&& codecept --version 2>/dev/null | grep -E '^Codeception(\sversion)?\s[0-9][.0-9]+$' || (codecept --version; false)	\
 	&& true
 
-# -------------------- (custom) git-flow --------------------
-RUN set -eux \
-	&& git clone --depth=1 --single-branch https://github.com/CJ-Systems/gitflow-cjs /tmp/gitflow \
-	&& cd /tmp/gitflow \
-	&& make install \
-	&& cd / && rm -rf /tmp/gitflow \
-	\
-	&& git-flow version 2>&1 | grep -E '[0-9][.0-9]+' || (git-flow version; false)	\
-	&& true
-
 # -------------------- (apt) jq --------------------
 RUN set -eux \
 	&& jq --version 2>&1 | grep -E '[0-9][.0-9]+' || (jq --version; false)	\
@@ -644,11 +634,6 @@ RUN set -eux \
 # -------------------- (composer) codeception --------------------
 RUN set -eux \
 	&& codecept --version 2>/dev/null | grep -E '^Codeception(\sversion)?\s[0-9][.0-9]+$' || (codecept --version; false)	\
-	&& true
-
-# -------------------- (custom) git-flow --------------------
-RUN set -eux \
-	&& git-flow version 2>&1 | grep -E '[0-9][.0-9]+' || (git-flow version; false)	\
 	&& true
 
 # -------------------- (apt) jq --------------------
